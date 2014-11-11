@@ -2,9 +2,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>pl.edu.wat.inz</groupId>
   <artifactId>Inzynierka</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>inz</name>
-  <description>inzynierka</description>
+  <version>0.0.1</version>
+  <name>Inzynierka</name>
+  <description>Inzynierka Maven Webapp</description>
   <build>
     <plugins>
       <plugin>
@@ -14,7 +14,11 @@
           <source>1.7</source>
           <target>1.7</target>
         </configuration>
-      </plugin>
+     	</plugin>
+          <plugin>
+            <groupId>org.wildfly.plugins</groupId>
+        	<artifactId>wildfly-maven-plugin</artifactId>
+		</plugin>
     </plugins>
   </build>
   <url>http://maven.apache.org</url>
@@ -106,4 +110,5 @@
             <version>3.12.1.GA</version>
         </dependency>
     </dependencies>
+    
 </project>

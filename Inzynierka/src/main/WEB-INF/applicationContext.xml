@@ -13,7 +13,7 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
         destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/journaldev" />
+        <property name="url" value="jdbc:mysql://localhost:3306/" />
         <property name="username" value="root" />
         <property name="password" value="root" />
     </bean>
@@ -21,11 +21,16 @@
     <bean id="sessionFactory"
         class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
+       
+       
+       <!-- CZY WAYWALIĆ?????? -->
         <property name="mappingResources">
             <list>
-                <value>domain-classes.hbm.xml</value>
+            	<class>"pl.edu.wat.inz.hibernate.data.Cat"</class>
             </list>
         </property>
+        
+        
         <property name="configLocation">
             <value>classpath:hibernate.cfg.xml</value>
         </property>
