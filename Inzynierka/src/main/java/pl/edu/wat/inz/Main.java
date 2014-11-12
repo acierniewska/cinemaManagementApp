@@ -23,7 +23,7 @@ public class Main {
 		session.getTransaction().begin();
 
 		Cat cat = new Cat();
-		cat.setName("Danjel");
+		cat.setName("Danjeleq");
 		session.save(cat);
 
 		session.getTransaction().commit();

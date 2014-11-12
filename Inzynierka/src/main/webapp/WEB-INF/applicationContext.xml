@@ -8,38 +8,39 @@
     <!-- Enable Spring Annotation Configuration -->
     <context:annotation-config />
     <!-- Scan for all of Spring components such as Spring Service -->
-    <context:component-scan base-package="com.journaldev.spring.service"></context:component-scan>
-    <!-- Create Data Source bean -->
+    <context:component-scan base-package="pl.edu.wat.inz.spring.service"></context:component-scan>
+   
+   <tx:annotation-driven transaction-manager="transactionManager"/> 
+   
+    <!-- Create Data Source bean --> 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
         destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/" />
+        <property name="url" value="jdbc:mysql://localhost:3306/foundation_test" />
         <property name="username" value="root" />
         <property name="password" value="root" />
     </bean>
+    
     <!-- Define SessionFactory bean -->
     <bean id="sessionFactory"
-        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-       
-       
-       <!-- CZY WAYWALIĆ?????? -->
-        <property name="mappingResources">
+        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />      
+        <property name="annotatedClasses">
             <list>
-            	<class>"pl.edu.wat.inz.hibernate.data.Cat"</class>
+                <value>pl.edu.wat.inz.hibernate.data.Cat</value>
             </list>
-        </property>
-        
-        
+        </property>  
         <property name="configLocation">
             <value>classpath:hibernate.cfg.xml</value>
         </property>
     </bean>
+    
     <!-- Transaction Manager -->
     <bean id="transactionManager"
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
+    
     <!-- Detect @Transactional Annotation -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

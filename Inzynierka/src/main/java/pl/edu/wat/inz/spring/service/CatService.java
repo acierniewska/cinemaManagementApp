@@ -10,6 +10,7 @@ import pl.edu.wat.inz.hibernate.data.Cat;
 
 @Component
 public class CatService {
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -23,9 +24,7 @@ public class CatService {
 
 	@Transactional
 	public void register(Cat cat) {
-		// Acquire session
 		Session session = sessionFactory.getCurrentSession();
-		// Save employee, saving behavior get done in a transactional manner
 		session.save(cat);
 	}
 }
