@@ -37,14 +37,12 @@
 		  <version>2.1.13</version>
 		  <scope>compile</scope>
 		</dependency>
-		
 		<dependency>
 		  <groupId>com.sun.faces</groupId>
 		  <artifactId>jsf-impl</artifactId>
 		  <version>2.1.13</version>
 		  <scope>compile</scope>
 		</dependency>
-		
 		<dependency>
 		  <groupId>javax.servlet</groupId>
 		  <artifactId>javax.servlet-api</artifactId>
@@ -96,9 +94,62 @@
         <!-- Spring Web -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
+            <artifactId>spring-web</artifactId>
             <version>4.0.3.RELEASE</version>
         </dependency>
+         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.0.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.0.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.0.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.0.3.RELEASE</version>
+        </dependency>
+         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>4.0.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.0.3.RELEASE</version>
+        </dependency>
+        
+	    <!-- Spring Security -->
+	    <dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-web</artifactId>
+	        <version>3.2.5.RELEASE</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-taglibs</artifactId>
+	        <version>3.2.5.RELEASE</version>
+	    </dependency>
+  		<dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-core</artifactId>
+	        <version>3.2.5.RELEASE</version>
+	    </dependency>
+		<dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-config</artifactId>
+	        <version>3.2.5.RELEASE</version>
+	    </dependency>
+
         <!-- Required By Hibernate -->
         <dependency>
             <groupId>commons-dbcp</groupId>

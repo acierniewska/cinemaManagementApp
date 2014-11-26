@@ -19,7 +19,7 @@ public class RegisterCat {
 	private Cat cat = new Cat();
 
 	public String register() {
-		catService.register(cat);
+		// catService.register(cat);
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage("The cat " + this.cat.getName()

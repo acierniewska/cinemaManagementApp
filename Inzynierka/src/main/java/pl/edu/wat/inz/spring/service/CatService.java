@@ -1,30 +1,49 @@
 package pl.edu.wat.inz.spring.service;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.edu.wat.inz.hibernate.data.Cat;
+import pl.edu.wat.inz.spring.dao.CatDAO;
 
-@Component
+@Service("CatService")
+@Transactional(readOnly = true)
 public class CatService {
 
 	@Autowired
-	private SessionFactory sessionFactory;
+	CatDAO catDAO;
 
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
+	@Transactional(readOnly = false)
+	public void addCat(Cat Cat) {
+		getCatDAO().addCat(Cat);
 	}
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
+	@Transactional(readOnly = false)
+	public void deleteCat(Cat Cat) {
+		getCatDAO().deleteCat(Cat);
 	}
 
-	@Transactional
-	public void register(Cat cat) {
-		Session session = sessionFactory.getCurrentSession();
-		session.save(cat);
+	@Transactional(readOnly = false)
+	public void updateCat(Cat Cat) {
+		getCatDAO().updateCat(Cat);
+	}
+
+	public Cat getCatById(int id) {
+		return getCatDAO().getCatById(id);
+	}
+
+	public List<Cat> getCats() {
+		return getCatDAO().getCats();
+	}
+
+	public CatDAO getCatDAO() {
+		return catDAO;
+	}
+
+	public void setCatDAO(CatDAO CatDAO) {
+		this.catDAO = CatDAO;
 	}
 }
