@@ -13,10 +13,10 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 import org.springframework.dao.DataAccessException;
 
-import pl.edu.wat.inz.hibernate.data.Cat;
-import pl.edu.wat.inz.spring.service.CatService;
+import pl.edu.wat.inz.hibernate.data.Animal;
+import pl.edu.wat.inz.spring.service.AnimalService;
 
-@ManagedBean(name = "catMB")
+@ManagedBean(name = "animalMB")
 @RequestScoped
 public class CustomerManagedBean implements Serializable {
 
@@ -24,20 +24,19 @@ public class CustomerManagedBean implements Serializable {
 	private static final String SUCCESS = "success";
 	private static final String ERROR = "error";
 
-	@ManagedProperty(value = "#{CatService}")
-	CatService catService;
+	@ManagedProperty(value = "#{AnimalService}")
+	AnimalService animalService;
 
-	List<Cat> catList;
+	List<Animal> animalList;
 
 	private int id;
 	private String name;
-	private String surname;
 
-	public String addCat() {
+	public String addAnimal() {
 		try {
-			Cat Cat = new Cat();
-			Cat.setName(getName());
-			getCatService().addCat(Cat);
+			Animal Animal = new Animal();
+			Animal.setAnimalName(getName());
+			getAnimalService().addAnimal(Animal);
 			reset();
 			return SUCCESS;
 		} catch (DataAccessException e) {
@@ -46,9 +45,9 @@ public class CustomerManagedBean implements Serializable {
 		return ERROR;
 	}
 
-	public String updateCat(Cat Cat) {
+	public String updateAnimal(Animal Animal) {
 		try {
-			getCatService().updateCat(Cat);
+			getAnimalService().updateAnimal(Animal);
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -56,11 +55,11 @@ public class CustomerManagedBean implements Serializable {
 		return ERROR;
 	}
 
-	public String deleteCat(Cat Cat) {
+	public String deleteAnimal(Animal animal) {
 		try {
-			getCatService().deleteCat(Cat);
-			catList = null;
-			getCatList();
+			getAnimalService().deleteAnimal(animal);
+			animalList = null;
+			getAnimalList();
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -71,7 +70,7 @@ public class CustomerManagedBean implements Serializable {
 	public void onEdit(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Item Edited");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		updateCat((Cat) event.getObject());
+		updateAnimal((Animal) event.getObject());
 	}
 
 	public void onCancel(RowEditEvent event) {
@@ -82,27 +81,26 @@ public class CustomerManagedBean implements Serializable {
 	public void reset() {
 		this.setId(0);
 		this.setName("");
-		this.setSurname("");
 	}
 
-	public List<Cat> getCatList() {
-		if (catList == null) {
-			catList = new ArrayList<Cat>();
-			catList.addAll(getCatService().getCats());
+	public List<Animal> getAnimalList() {
+		if (animalList == null) {
+			animalList = new ArrayList<Animal>();
+			animalList.addAll(getAnimalService().getAnimals());
 		}
-		return catList;
+		return animalList;
 	}
 
-	public CatService getCatService() {
-		return catService;
+	public AnimalService getAnimalService() {
+		return animalService;
 	}
 
-	public void setCatService(CatService CatService) {
-		this.catService = CatService;
+	public void setAnimalService(AnimalService AnimalService) {
+		this.animalService = AnimalService;
 	}
 
-	public void setCatList(List<Cat> CatList) {
-		this.catList = CatList;
+	public void setAnimalList(List<Animal> AnimalList) {
+		this.animalList = AnimalList;
 	}
 
 	public int getId() {
@@ -119,14 +117,6 @@ public class CustomerManagedBean implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
 	}
 
 }

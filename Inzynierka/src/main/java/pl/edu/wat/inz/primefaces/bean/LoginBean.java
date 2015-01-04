@@ -37,6 +37,10 @@ public class LoginBean {
 		return null;
 	}
 
+	public String register() {
+		return "";
+	}
+
 	public String logout() {
 		SecurityContextHolder.clearContext();
 		return "loggedout";

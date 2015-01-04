@@ -21,6 +21,11 @@
             <from-outcome>incorrect</from-outcome>
             <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+        	<from-action>#{loginMgmtBean.register}</from-action>
+        	<from-outcome>""</from-outcome>
+        	<to-view-id>pages/unsecure/register.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
   
     <!-- navigation-rule for list.xhtml -->

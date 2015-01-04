@@ -1,5 +1,7 @@
 package pl.edu.wat.inz.hibernate.data;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,7 +9,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "animal_feature")
-public class AnimalFeature {
+public class AnimalFeature implements Serializable {
+	private static final long serialVersionUID = 137328522749656439L;
 
 	@Column(name = "ANIMAL_ID", nullable = false)
 	@Id

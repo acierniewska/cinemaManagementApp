@@ -1,5 +1,6 @@
 package pl.edu.wat.inz.hibernate.data;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,11 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ROLE")
+@Table(name = "role")
 public class Role {
 
 	@Id
@@ -26,8 +28,15 @@ public class Role {
 	private String roleType;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "USER_ROLES", joinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") })
-	private Set<User> userRoles;
+	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID") })
+	private Set<User> userRoles = new HashSet<User>();
+
+	@ManyToMany(targetEntity = Event.class)
+	@org.hibernate.annotations.Cascade({
+			org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+			org.hibernate.annotations.CascadeType.LOCK })
+	@JoinTable(name = "event_for_role", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "EVENT_ID") })
+	private Set<Event> event = new HashSet<Event>();
 
 	public Integer getId() {
 		return roleId;

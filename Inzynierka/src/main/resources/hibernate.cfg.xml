@@ -6,24 +6,30 @@
 <hibernate-configuration>
  
     <session-factory>
- 
+     <!-- SQL dialect -->
+     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  	 <!-- Show SQL -->
+     <property name="hibernate.show_sql">true</property>
+         </session-factory>
+</hibernate-configuration>
+
+
+
         <!-- Database connection settings -->
+        <!-- 
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/foundation_test</property>
         <property name="hibernate.connection.username">root</property>
  		<property name="hibernate.connection.password">root</property>
- 
-        <!-- SQL dialect -->
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+ 		 -->
+
+    
         <!-- Specify session context -->
      <!--   <property name="hibernate.current_session_context_class">thread</property> --> 
   <!-- <property name="hibernate.current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property> -->   
-        <!-- Show SQL -->
-        <property name="hibernate.show_sql">true</property>
-
+       
+<!-- 
         <mapping class="pl.edu.wat.inz.hibernate.data.Cat"/>
         <mapping class="pl.edu.wat.inz.hibernate.data.User"/>
         <mapping class="pl.edu.wat.inz.hibernate.data.Role"/>
-        
-    </session-factory>
-</hibernate-configuration>
+         -->

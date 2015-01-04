@@ -6,6 +6,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
     	
 	<import resource="securityContext.xml"/>
+	
     <!-- Enable Spring Annotation Configuration -->
     <context:annotation-config />
     <!-- Scan for all of Spring components such as Spring Service -->
@@ -15,7 +16,7 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
         destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/foundation_test" />
+        <property name="url" value="jdbc:mysql://localhost:3306/inz" />
         <property name="username" value="root" />
         <property name="password" value="root" />
     </bean>
@@ -23,26 +24,31 @@
     <!-- Define SessionFactory bean -->
     <bean id="sessionFactory"
         class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />      
-        <property name="annotatedClasses">
+        <property name="dataSource" ref="dataSource" />   
+       
+        <property name="packagesToScan" value="pl.edu.wat.inz.hibernate.data"/>   
+        <!-- <property name="annotatedClasses">
             <list>
                 <value>pl.edu.wat.inz.hibernate.data.Cat</value>
+                <value>pl.edu.wat.inz.hibernate.data.Role</value>
+                
             </list>
-        </property>
+        </property> -->
+        
         <property name="configLocation">
             <value>classpath:hibernate.cfg.xml</value>
         </property>
     </bean>
     
-    <!-- Transaction Manager -->
+    <!-- Detect @Transactional Annotation -->
     <tx:annotation-driven transaction-manager="transactionManager"/> 
-       
+    <!-- Transaction Manager --> 
     <bean id="transactionManager"
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
-    <!-- Detect @Transactional Annotation -->
+
    	<!--<tx:annotation-driven transaction-manager="transactionManager" />--> 
  
 </beans>

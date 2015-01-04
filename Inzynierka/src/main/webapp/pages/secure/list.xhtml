@@ -6,17 +6,25 @@
    
 <h:head>
     <title>Welcome</title>
+    <link rel="stylesheet" href="../css/default.css" type="text/css" />
+     <link href="development/prime-ui-0.9.5.css" rel="stylesheet"/>
+<link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"
+      rel="stylesheet"/>
+<link href="http://www.primefaces.org/prime-ui/demo/css/aristo/theme.css"
+      rel="stylesheet"/>
+<link href="http://www.primefaces.org/prime-ui/demo/css/sh.css"
+      rel="stylesheet"/>
+<link href="http://www.primefaces.org/css/all.css" rel="stylesheet"/>
 </h:head>
 
 <h:body>
-
     <!-- View element level Spring Security : only can view for who has the role 'ROLE_ADMIN' -->
     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
     <h:form id="form2">
         <table>
             <tr>
                 <td><h:outputLabel for="id" value="Id : "/></td>
-                <td><p:inputText id="id" value="#{catMB.id}">
+                <td><p:inputText id="id" value="#{animalMB.id}">
                     <f:converter converterId="javax.faces.Integer"/>
                     <p:ajax event="blur" update="idMsg"/>
                 </p:inputText>
@@ -25,7 +33,7 @@
             </tr>
             <tr>
                 <td><h:outputLabel for="name" value="Name : "/></td>
-                <td><p:inputText id="name" value="#{catMB.name}">
+                <td><p:inputText id="name" value="#{animalMB.name}">
                     <f:validateLength minimum="1"/>
                     <p:ajax event="blur" update="nameMsg"/>
                 </p:inputText>
@@ -33,17 +41,8 @@
                 </td>
             </tr>
             <tr>
-                <td><h:outputLabel for="surname" value="Surname : "/></td>
-                <td><p:inputText id="surname" value="#{catMB.surname}">
-                    <f:validateLength minimum="1"/>
-                    <p:ajax event="blur" update="surnameMsg"/>
-                </p:inputText>
-                    <p:message id="surnameMsg" for="surname" display="icon"/>
-                </td>
-            </tr>
-            <tr>
-                <td><p:commandButton id="addUser" value="Add" action="#{catMB.addCat}" ajax="false"/></td>
-                <td><p:commandButton id="reset" value="Reset" action="#{catMB.reset}" ajax="false"/></td>
+                <td><p:commandButton id="addUser" value="Add" action="#{animalMB.addAnimal}" ajax="false"/></td>
+                <td><p:commandButton id="reset" value="Reset" action="#{animalMB.reset}" ajax="false"/></td>
             </tr>
         </table>
     </h:form>
@@ -53,31 +52,28 @@
  
     <h:form id="form1">
         <p:growl id="messages" showDetail="true"/>
-        <p:dataTable id="cats" var="cat" value="#{catMB.catList}" style="width: 10%" editable="true">  
-            <p:ajax event="rowEdit" listener="#{catMB.onEdit}" update=":form1:messages"/>
-            <p:ajax event="rowEditCancel" listener="#{catMB.onCancel}" update=":form1:messages"/>             
-            <p:column headerText="ID">
-                <h:outputText value="#{cat.id}"/>
-            </p:column>
+        <p:dataTable id="animals" var="animal" value="#{animalMB.animalList}" style="width:20%" editable="true">  
+            <p:ajax event="rowEdit" listener="#{animalMB.onEdit}" update=":form1:messages"/>
+            <p:ajax event="rowEditCancel" listener="#{animalMB.onCancel}" update=":form1:messages"/>             
             <p:column headerText="Name">
                 <f:facet name="header">
                     <h:outputText value="Name"/>
                 </f:facet>
                 <p:cellEditor>
                       <f:facet name="output">
-                        <h:outputText value="#{cat.name}"/>
+                        <h:outputText value="#{animal.name}"/>
                     </f:facet>
                     <f:facet name="input">
-                           <p:inputText value="#{cat.name}" label="name"/>
+                           <p:inputText value="#{animal.name}" label="name"/>
                     </f:facet>             
                 </p:cellEditor>
             </p:column>
             <sec:authorize access="hasAnyRole('ROLE_ADMIN')">         
             <p:column>
                 <f:facet name="header">Delete</f:facet>
-                <h:commandLink value="Delete" action="#{CatMB.deleteCat(cat)}"/>
+                <h:commandLink value="Delete" action="#{AnimalMB.deleteAnimal(animal)}"/>
             </p:column>
-            <p:column style="width:20%">
+            <p:column style="width:25%">
                 <f:facet name="header">Update</f:facet>
                 <p:rowEditor/>
             </p:column>           
