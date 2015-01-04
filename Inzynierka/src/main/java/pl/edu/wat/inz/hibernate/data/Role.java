@@ -3,6 +3,7 @@ package pl.edu.wat.inz.hibernate.data;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,33 +14,35 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ROLES")
+@Table(name = "ROLE")
 public class Role {
 
 	@Id
+	@Column(name = "ROLE_ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Integer roleId;
 
-	private String role;
+	@Column(name = "ROLE_TYPE", nullable = false, length = 32)
+	private String roleType;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "USER_ROLES", joinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") })
 	private Set<User> userRoles;
 
 	public Integer getId() {
-		return id;
+		return roleId;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.roleId = id;
 	}
 
-	public String getRole() {
-		return role;
+	public String getRoleType() {
+		return roleType;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoleType(String role) {
+		this.roleType = role;
 	}
 
 	public Set<User> getUserRoles() {
