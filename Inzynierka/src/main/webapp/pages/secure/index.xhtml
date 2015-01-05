@@ -5,20 +5,15 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:sec="http://www.springframework.org/security/tags">
    
-<h:head>
-    <link rel="stylesheet" href="../css/default.css" type="text/css" />
-</h:head>
-
 <h:body>
     <ui:composition template="../template/template.xhtml">
 		<ui:define name="content">
-			<p:panel>
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 				<h1>Witaj na stronie głównej systemu wspierającego działania Fundacji "Kociarnia"</h1>
-				<h:outputLabel id="userName" value="#{loginMgmtBean.userName}"/>
-			</p:panel>
+				<p:outputLabel value="Login to: #{loginMgmtBean.userName}"/>
+			</sec:authorize>
     	</ui:define>
     </ui:composition>
-    
 </h:body>
 
 </html>

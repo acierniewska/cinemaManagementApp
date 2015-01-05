@@ -37,6 +37,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 				enabled, accountNonExpired, credentialsNonExpired,
 				accountNonLocked, getAuthorities(domainUser.getRole().getId()));
 	}
+	
+	
 
 	public Collection<? extends GrantedAuthority> getAuthorities(Integer role) {
 		List<GrantedAuthority> authList = getGrantedAuthorities(getRoles(role));

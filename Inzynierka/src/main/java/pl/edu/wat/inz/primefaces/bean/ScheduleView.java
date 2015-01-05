@@ -19,7 +19,9 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
+import org.springframework.scheduling.annotation.Async;
 
+@Async
 @ManagedBean
 @ViewScoped
 public class ScheduleView implements Serializable {
@@ -33,6 +35,8 @@ public class ScheduleView implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		if (eventModel != null)
+			return;
 		eventModel = new DefaultScheduleModel();
 		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match",
 				previousDay8Pm(), previousDay11Pm()));

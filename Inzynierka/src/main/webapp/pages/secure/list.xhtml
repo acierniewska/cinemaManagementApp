@@ -14,6 +14,7 @@
     <ui:composition template="../template/template.xhtml">
 		<ui:define name="content">
     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+    <p:outputLabel value="Login to: #{loginMgmtBean.getUserName()}"/>
     <h:form id="form2">
         <table>
             <tr>
@@ -35,8 +36,8 @@
                 </td>
             </tr>
             <tr>
-                <td><p:commandButton id="addUser" value="Add" action="#{animalMB.addAnimal}" ajax="false"/></td>
-                <td><p:commandButton id="reset" value="Reset" action="#{animalMB.reset}" ajax="false"/></td>
+                <td><p:commandButton id="addUser" value="Add" action="#{animalMB.addAnimal}"/></td>
+                <td><p:commandButton id="reset" value="Reset" action="#{animalMB.reset}" /></td>
             </tr>
         </table>
     </h:form>
@@ -74,11 +75,9 @@
                </sec:authorize>           
         </p:dataTable>
         <br/>
-                  
     </h:form>
     		</ui:define>
     </ui:composition>
-    
 </h:body>
 
 </html>

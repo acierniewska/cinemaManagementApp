@@ -15,22 +15,26 @@
 					<p:graphicImage url="../pic/logo.png"/>
 					<h:outputText value="Fundacja kociarnia"/>
 				</div>
-			 	<div align="right" style="float:right;width:10%;overflow: hidden">
+			 	<div align="right" style="float:right;width:10%">
 			 		<p:commandButton value="Logout" id="logout" action="#{loginMgmtBean.logout}" icon="ui-icon-extlink"/> 
 			 	</div>
 	      	</div>
-
-			<p:menubar>
+		   	<div align="left">
+		   		<p:outputLabel value="Zalogowany użytkownik "/>
+		   		<p:outputLabel value="#{loginMgmtBean.getUserName()}" style="font-weight:bold"/>
+		   	</div>
+		    <h:form>
+			<p:menubar activeIndex="#{naviBean.activeindex}">
                <!-- EWIDENCJA -->
-                      <p:submenu label= "Ewidencja" >
+                      <p:submenu label= "Ewidencja" ajax="true">
                             <p:submenu label= "Ewidencja zwierząt" >
-                                   <p:menuitem value= "Ewidencja kotów" url = "#"/>
-                                   <p:menuitem value= "Ewidencja pozostałych zwierząt" url= "#"/>
-                            </p:submenu>
+                                   <p:menuitem value="Ewidencja kotów" action="#{naviBean.navigate(1)}"/>
+                                   <p:menuitem value= "Ewidencja pozostałych zwierząt" action="#{naviBean.navigate(2)}"/>
+                                    </p:submenu>
                             <p:submenu label= "Ewidencja budynków i lokali" >
-                                   <p:menuitem value= "Ewidencja azyli" url = "#"/>
-                                   <p:menuitem value= "Ewidencja przytulisk" url ="#" />
-                                   <p:menuitem value= "Ewidencja Domów Tymczasowych" url ="#" />
+                                   <p:menuitem value= "Ewidencja azyli" url ="../secure/list.xhtml" />
+                                   <p:menuitem value= "Ewidencja przytulisk" url ="../secure/list.xhtml" />
+                                   <p:menuitem value= "Ewidencja Domów Tymczasowych" url ="../secure/list.xhtml" />
                             </p:submenu>
                             <p:submenu label= "Ewidencja osób" >
                                    <p:submenu label= "Ewidencja organów" >
@@ -115,7 +119,7 @@
                </p:submenu>
               
         </p:menubar>
-			
+		</h:form>	
 				
 	    </ui:composition>
     </body>

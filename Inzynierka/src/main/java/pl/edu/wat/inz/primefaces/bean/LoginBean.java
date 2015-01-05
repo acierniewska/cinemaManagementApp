@@ -38,7 +38,7 @@ public class LoginBean {
 	}
 
 	public String register() {
-		return "";
+		return "register";
 	}
 
 	public String logout() {
@@ -56,6 +56,13 @@ public class LoginBean {
 	}
 
 	public String getUserName() {
+		if (userName == null) {
+			String name = SecurityContextHolder.getContext()
+					.getAuthentication().getName();
+			if (!name.equals("anonymousUser")) {
+				userName = name;
+			}
+		}
 		return userName;
 	}
 
