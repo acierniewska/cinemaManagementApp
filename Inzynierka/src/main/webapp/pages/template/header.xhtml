@@ -6,20 +6,17 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
-    	<link rel="stylesheet" href="../css/default.css" type="text/css" />
-    </h:head>
-    
+     
     <body>
 	    <ui:composition>
 
 			<div style="overflow: hidden;width:100%">
 				<div align="left" style="float:left;width:30% ">
-					<h:outputLabel value="Fundacja kociarnia"/>
-					<p:graphicImage url=""/>
+					<p:graphicImage url="../pic/logo.png"/>
+					<h:outputText value="Fundacja kociarnia"/>
 				</div>
 			 	<div align="right" style="float:right;width:10%;overflow: hidden">
-			 		<p:commandButton value="Logout" id="logout" action="#{loginMgmtBean.logout}"/> 
+			 		<p:commandButton value="Logout" id="logout" action="#{loginMgmtBean.logout}" icon="ui-icon-extlink"/> 
 			 	</div>
 	      	</div>
 
