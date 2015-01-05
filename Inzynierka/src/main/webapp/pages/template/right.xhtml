@@ -9,7 +9,8 @@
 
     <body>
 	    <ui:composition>
-		    <script type="text/javascript">
+	    		<!-- RZECZY DO SCHEDULE -->
+			<script type="text/javascript">
 	            PrimeFaces.locales['pl'] = {
 	            closeText: 'Zamknij',
 	            prevText: 'Poprzedni',
@@ -61,7 +62,9 @@
 		            <p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
 		        </h:panelGrid>
 		    </p:dialog>   
+		    <!-- KONIEC RZECZY DO SCHEDULE -->
 		    
+		    <!-- TU SIĘ ZACZYNAJĄ PANELE -->
         	<p:panel id="rightPanel">
 	        	<p:panel id="info" header="Praca inżynierska" style="margin-bottom:10px">
 	        		<h:outputText value="
@@ -87,20 +90,9 @@
 						        <h:graphicImage url="../pic/cat_programmer.jpg" style="height: 77px; width: 100px" /> 
 						    </h:outputLink>
 						   </p:lightBox>
-						    
-		            	
 	    		</p:panel>
-	 
 	    	</p:panel>
-        
-		
-			
-				
 	    </ui:composition>
-    </body>
-    
-    
-        
-   
+    </body>   
 </html>
 
