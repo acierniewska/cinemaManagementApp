@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    	<link rel="stylesheet" href="../css/default.css" type="text/css" />
+    </h:head>
+    
+    <body>
+	    <ui:composition>
+
+			<div style="overflow: hidden;width:100%">
+				<div align="left" style="float:left;width:30% ">
+					<h:outputLabel value="Fundacja kociarnia"/>
+					<p:graphicImage url=""/>
+				</div>
+			 	<div align="right" style="float:right;width:10%;overflow: hidden">
+			 		<p:commandButton value="Logout" id="logout" action="#{loginMgmtBean.logout}"/> 
+			 	</div>
+	      	</div>
+
+			<p:menubar>
+               <!-- EWIDENCJA -->
+                      <p:submenu label= "Ewidencja" >
+                            <p:submenu label= "Ewidencja zwierząt" >
+                                   <p:menuitem value= "Ewidencja kotów" url = "#"/>
+                                   <p:menuitem value= "Ewidencja pozostałych zwierząt" url= "#"/>
+                            </p:submenu>
+                            <p:submenu label= "Ewidencja budynków i lokali" >
+                                   <p:menuitem value= "Ewidencja azyli" url = "#"/>
+                                   <p:menuitem value= "Ewidencja przytulisk" url ="#" />
+                                   <p:menuitem value= "Ewidencja Domów Tymczasowych" url ="#" />
+                            </p:submenu>
+                            <p:submenu label= "Ewidencja osób" >
+                                   <p:submenu label= "Ewidencja organów" >
+                                          <p:menuitem value= "Ewidencja Zarządu" url ="#" />
+                                          <p:menuitem value= "Ewidencja Rady" url ="#" />
+                                   </p:submenu>
+                                   <p:menuitem value= "Ewidencja pracowników" url ="#" />
+                                   <p:menuitem value= "Ewidencja wolontariuszy" url ="#" />
+                                   <p:menuitem value= "Ewidencja osób prowadzących Domy Tymczasowe" url= "#" />
+                                   <p:menuitem value= "Ewidencja osób adoptyujących" url ="#" />
+                                   <p:menuitem value= "Ewidencja osób adoptujących wirtualnie" url= "#"/>
+                            </p:submenu>
+                      </p:submenu>
+              
+               <!--ADOPCJA-->
+               <p:submenu label= "Adopcje" >
+                      <p:submenu label= "Przeglądaj zwierzęta do adopcji" >
+                            <p:submenu label= "Koty" >
+                                   <p:menuitem value= "Koty młode" url = "#"/>
+                                   <p:menuitem value= "Koty dorosłe" url = "#"/>
+                                   <p:menuitem value= "Koty stare lub chore" url ="#" />
+                            </p:submenu>
+                            <p:submenu label= "Inne zwierzęta" >
+                                   <p:menuitem value= "Inne zwierzęta młode" url ="#" />
+                                   <p:menuitem value= "Inne zwierzęta dorosłe" url ="#" />
+                                   <p:menuitem value= "Inne zwierzęta stare lub chore" url= "#"/>
+                            </p:submenu>
+                      </p:submenu>
+                      <p:menuitem value= "Dopasuj zwierzę" url="#"/>
+               </p:submenu>
+                           
+               <!--E-wnioski-->
+               <p:submenu label= "E-wnioski" >
+                      <p:menuitem value= "Złóż e-wniosek" url="#"/>
+                      <p:menuitem value= "Spis moich e-wniosków" url="#"/>
+                            <p:menuitem value= "Spis wszystkich e-wniosków" url="#"/>
+               </p:submenu>
+              
+               <!--Sprawozdania-->
+               <p:submenu label= "Sprawozdania" >
+                      <p:menuitem value= "Spis wszystkich sprawozdań" url="#"/>
+                            <p:menuitem value= "Generuj sprawozdanie" url="#"/>
+               </p:submenu>
+              
+               <!--Umowy-->
+               <p:submenu label= "Umowy" >
+                      <p:menuitem value= "Spis moich umów" url="#"/>
+                      <p:menuitem value= "Spis wszystkich umów" url="#"/>
+                            <p:menuitem value= "Generuj umowę" url="#"/>
+               </p:submenu>
+              
+               <!--Wizyty wet-->
+                      <p:submenu label= "Wizyty weterynaryjne" >
+                            <p:menuitem value= "Spis wizyt odbytych" url="#"/>
+                            <p:menuitem value= "Spis wizyt zaplanowanych" url="#"/>
+                      </p:submenu>
+              
+               <!-- Moje zwierzęta -->
+               <p:submenu label= "Moje zwierzęta" >
+                      <p:menuitem value= "Spis zwierząt zaadoptowanych" url= "#"/>
+                      <p:menuitem value= "Spis zwierząt zaadoptowanych wirtualnie" url ="#" />
+                      <p:menuitem value= "Spis zwierząt w moich Domu Tymczasowym" url ="#" />
+               </p:submenu>
+              
+               <!-- Funkcje specjalne -->
+               <p:submenu label= "Funkcje specjalistyczne" >
+                            <p:menuitem value= "Eksport przelewów" url= "#"/>
+                            <p:menuitem value= "Import przelewów" url= "#"/>
+                            <p:menuitem value= "Spis aukcji" url = "#"/>
+               </p:submenu>
+              
+               <!-- Wiadomościa -->
+               <p:submenu label= "Wiadomości" >
+                      <p:menuitem value= "Wiadomości odebrane" url= "#"/>
+                      <p:menuitem value= "Wiadomości wysłane" url= "#"/>
+               </p:submenu>
+              
+               <!-- Administracyjne -->
+               <p:submenu label= "Funkcje administracyjne" >
+                      <p:menuitem value= "Modyfikuj profil" url = "#"/>
+                            <p:menuitem value= "Zarządzaj użytkownikami" url= "#"/>
+               </p:submenu>
+              
+        </p:menubar>
+			
+				
+	    </ui:composition>
+    </body>
+</html>
+
+

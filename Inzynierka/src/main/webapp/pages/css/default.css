@@ -1,3 +1,30 @@
 .ui-widget, .ui-widget .ui-widget {
-     font-size: 75% !important;
+     font-size: 90% !important;
+}
+
+#page{
+	width: 1350px;
+	margin: 0 auto;
+}
+
+#header{
+	height:100px;
+	margin-bottom: 16px;
+}
+
+#wrapper{
+	width: 100%;
+	overflow: hidden; 
+}
+
+#content{
+	float: left;
+	width: 75%;
+	text-align: center;
+}
+
+#right{
+	float: right;
+	width: 25%;
+	overflow: hidden;
 }
