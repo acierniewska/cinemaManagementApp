@@ -28,3 +28,7 @@
 	width: 25%;
 	overflow: hidden;
 }
+
+.centered {
+    margin: 0px auto;
+}

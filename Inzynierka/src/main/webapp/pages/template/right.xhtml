@@ -75,22 +75,25 @@
 	        	</p:panel>
 	        	
 	        	<p:panel id="sch" header="Kalendarz" style="margin-bottom:10px">
-		            	<p:schedule id="schedue" leftHeaderTemplate="prev" rightHeaderTemplate="next" view="month" locale="pl" value="#{scheduleView.eventModel}" >
-		            		<p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-           					<p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-            				<p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="messages" />
-            				<p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="messages" />
+		            	<p:schedule id="schedue" leftHeaderTemplate="prev" rightHeaderTemplate="next" view="month" locale="pl" value="#{scheduleView.eventModel}" ajax="true" >
+		            		<p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" ajax="true" />
+           					<p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" ajax="true" />
+            				<p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="messages" ajax="true" />
+            				<p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="messages" ajax="true" />
 		            	</p:schedule>
 	    		</p:panel>
 	    		
 	    		<!-- To jest strasznie z dupy, do poprawienia!!!!!!! -->
-	    		<p:panel id="allegro" header="Zobacz nasze aukcje!" style="margin-bottom:10px">
-		            	<p:lightBox styleClass="imagebox" id="lighbox1">  
-						    <h:outputLink value="../pic/cat_programmer.jpg" title="Koteł 1">  
-						        <h:graphicImage url="../pic/cat_programmer.jpg" style="height: 77px; width: 100px" /> 
-						    </h:outputLink>
-						   </p:lightBox>
-	    		</p:panel>
+	    		<p:panel  id="allegro" header="Zobacz nasze aukcje!" style="margin-bottom:10px">
+					<h:panelGrid id="itemThings" columns="1" cellpadding="2" style="align:center"  ajax="true" styleClass="centered">
+          					<p:link id="item" href="#{allegroBean.getAllegroSandboxUrl()}" style="font-size:100px" value="#{allegroBean.getItemName()}"/>
+          					<div align="center">
+          						<p:graphicImage value="#{allegroBean.getThumbUrl()}" style="border-style:solid; border-width:1px"/>
+       						</div>
+       				</h:panelGrid>
+						<p:commandButton action="#{allegroBean.decrementUserNr()}" update="itemThings" id="decrement" ajax="true" icon="ui-icon-circle-triangle-w"/>
+						<p:commandButton action="#{allegroBean.incrementUserNr()}" update="itemThings" id="increment" ajax="true" icon="ui-icon-circle-triangle-e"/>
+				</p:panel>
 	    	</p:panel>
 	    </ui:composition>
     </body>   
