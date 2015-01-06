@@ -50,4 +50,9 @@ public class AnimalDAO {
 				.createQuery("from Animal").list();
 		return list;
 	}
+
+	public List<Animal> getCatsOnly() {
+
+		return null;
+	}
 }

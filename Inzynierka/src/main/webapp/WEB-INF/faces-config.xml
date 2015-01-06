@@ -33,29 +33,29 @@
         <from-view-id>/pages/secure/list.xhtml</from-view-id>
         <!-- navigation case for method addCustomer() -->
         <navigation-case>
-               <from-action>#{customerMB.addCustomer}</from-action>
+               <from-action>#{animalMB.addCustomer}</from-action>
                <from-outcome>success</from-outcome>
                <to-view-id>/pages/secure/list.xhtml</to-view-id>
         </navigation-case>
         <!-- navigation cases for method updateCustomer(customer) -->
         <navigation-case>
-               <from-action>#{customerMB.updateCustomer(customer)}</from-action>
+               <from-action>#{animalMB.updateCustomer(customer)}</from-action>
                <from-outcome>success</from-outcome>
                <to-view-id>/pages/secure/list.xhtml</to-view-id>
          </navigation-case>
          <navigation-case>
-              <from-action>#{customerMB.updateCustomer(customer)}</from-action>
+              <from-action>#{animalMB.updateCustomer(customer)}</from-action>
                <from-outcome>error</from-outcome>
                <to-view-id>/pages/unsecure/error.xhtml</to-view-id>
          </navigation-case>
          <!-- navigation-cases for method deleteCustomer(customer) -->    
          <navigation-case>
-               <from-action>#{customerMB.deleteCustomer(customer)}</from-action>
+               <from-action>#{animalMB.deleteCustomer(customer)}</from-action>
                <from-outcome>success</from-outcome>
                <to-view-id>/pages/secure/list.xhtml</to-view-id>
          </navigation-case>
          <navigation-case>
-              <from-action>#{customerMB.deleteC1ustomer(customer)}</from-action>
+              <from-action>#{animalMB.deleteC1ustomer(customer)}</from-action>
                <from-outcome>error</from-outcome>
                <to-view-id>/pages/unsecure/error.xhtml</to-view-id>
          </navigation-case>

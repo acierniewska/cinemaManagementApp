@@ -8,10 +8,8 @@
 <h:body>
     <ui:composition template="../template/template.xhtml">
 		<ui:define name="content">
-			<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 				<h1>Witaj na stronie głównej systemu wspierającego działania Fundacji "Kociarnia"</h1>
-				<p:outputLabel value="Login to: #{loginMgmtBean.userName}"/>
-			</sec:authorize>
+				<p:outputLabel value="Login to: #{loginMgmtBean.userName}" rendered="#{securityBean.isUserAdmin}" />
     	</ui:define>
     </ui:composition>
 </h:body>

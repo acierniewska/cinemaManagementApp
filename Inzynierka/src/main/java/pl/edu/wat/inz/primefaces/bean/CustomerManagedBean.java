@@ -28,7 +28,6 @@ public class CustomerManagedBean implements Serializable {
 	AnimalService animalService;
 
 	List<Animal> animalList;
-
 	private int id;
 	private String name;
 

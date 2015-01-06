@@ -4,6 +4,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:sec="http://www.springframework.org/security/tags">
+      
    
 <h:head>
     <title>Welcome</title>
@@ -13,33 +14,10 @@
 <h:body>
     <ui:composition template="../template/template.xhtml">
 		<ui:define name="content">
-    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-    <p:outputLabel value="Login to: #{loginMgmtBean.getUserName()}"/>
+    <sec:authorize hasAnyRole='ROLE_ADMIN'>
     <h:form id="form2">
-        <table>
-            <tr>
-                <td><h:outputLabel for="id" value="Id : "/></td>
-                <td><p:inputText id="id" value="#{animalMB.id}">
-                    <f:converter converterId="javax.faces.Integer"/>
-                    <p:ajax event="blur" update="idMsg"/>
-                </p:inputText>
-                    <p:message id="idMsg" for="id" display="icon"/>
-                </td>
-            </tr>
-            <tr>
-                <td><h:outputLabel for="name" value="Name : "/></td>
-                <td><p:inputText id="name" value="#{animalMB.name}">
-                    <f:validateLength minimum="1"/>
-                    <p:ajax event="blur" update="nameMsg"/>
-                </p:inputText>
-                    <p:message id="nameMsg" for="name" display="icon"/>
-                </td>
-            </tr>
-            <tr>
-                <td><p:commandButton id="addUser" value="Add" action="#{animalMB.addAnimal}"/></td>
-                <td><p:commandButton id="reset" value="Reset" action="#{animalMB.reset}" /></td>
-            </tr>
-        </table>
+                <p:commandButton id="addUser" value="Dodaj" action="#{animalMB.addAnimal}"/>
+                <p:commandButton id="reset" value="Wyczyść" type="reset" />
     </h:form>
     </sec:authorize>
   
@@ -56,10 +34,10 @@
                 </f:facet>
                 <p:cellEditor>
                       <f:facet name="output">
-                        <h:outputText value="#{animal.name}"/>
+                        <h:outputText value="#{animal.animalName}"/>
                     </f:facet>
                     <f:facet name="input">
-                           <p:inputText value="#{animal.name}" label="name"/>
+                           <p:inputText value="#{animal.animalName}" label="name"/>
                     </f:facet>             
                 </p:cellEditor>
             </p:column>

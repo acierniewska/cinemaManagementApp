@@ -27,17 +27,17 @@ public class Animal {
 
 	@ManyToOne(targetEntity = TempHouse.class)
 	@Cascade({ org.hibernate.annotations.CascadeType.LOCK })
-	@JoinColumns({ @JoinColumn(name = "TEMP_HOUSE_ID", referencedColumnName = "TEMP_HOUSE_ID", nullable = false) })
+	@JoinColumns({ @JoinColumn(name = "TEMP_HOUSE_ID", referencedColumnName = "TEMP_HOUSE_ID") })
 	private TempHouse tempHouse;
 
 	@ManyToOne(targetEntity = Asylum.class)
 	@org.hibernate.annotations.Cascade({ org.hibernate.annotations.CascadeType.LOCK })
-	@JoinColumns({ @JoinColumn(name = "ASYLIUM_ID", referencedColumnName = "ASYLIUM_ID", nullable = false) })
+	@JoinColumns({ @JoinColumn(name = "ASYLIUM_ID", referencedColumnName = "ASYLIUM_ID") })
 	private Asylum asylium;
 
 	@ManyToOne(targetEntity = AnimalRepo.class)
 	@org.hibernate.annotations.Cascade({ org.hibernate.annotations.CascadeType.LOCK })
-	@JoinColumns({ @JoinColumn(name = "ANIMAL_REPO_ID", referencedColumnName = "ANIMAL_REPO_ID", nullable = false) })
+	@JoinColumns({ @JoinColumn(name = "ANIMAL_REPO_ID", referencedColumnName = "ANIMAL_REPO_ID") })
 	private AnimalRepo animalRepo;
 
 	@ManyToOne(targetEntity = Person.class)
@@ -68,6 +68,12 @@ public class Animal {
 
 	@Column(name = "IS_HANDICAPED", nullable = false)
 	private boolean isHandicapte;
+
+	@Column(name = "IS_ADOPTED", nullable = false)
+	private boolean isAdopted;
+
+	@Column(name = "IS_VIRTUAL_ADOPTED", nullable = false)
+	private boolean isVirtualAdopted;
 
 	public long getAnimalId() {
 		return animalId;
@@ -155,6 +161,22 @@ public class Animal {
 
 	public void setHandicapte(boolean isHandicapte) {
 		this.isHandicapte = isHandicapte;
+	}
+
+	public boolean isAdopted() {
+		return isAdopted;
+	}
+
+	public void setAdopted(boolean isAdopted) {
+		this.isAdopted = isAdopted;
+	}
+
+	public boolean isVirtualAdopted() {
+		return isVirtualAdopted;
+	}
+
+	public void setVirtualAdopted(boolean isVirtualAdopted) {
+		this.isVirtualAdopted = isVirtualAdopted;
 	}
 
 }
