@@ -18,7 +18,7 @@ import pl.edu.wat.inz.spring.service.AnimalService;
 
 @ManagedBean(name = "animalMB")
 @RequestScoped
-public class CustomerManagedBean implements Serializable {
+public class AnimalManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final String SUCCESS = "success";
