@@ -65,7 +65,7 @@ public class Person {
 	private String secondName;
 
 	@Column(name = "SURNAME", nullable = false, length = 64)
-	private String surName;
+	private String surname;
 
 	@Column(name = "PERSON_BIRTHDAY", nullable = false)
 	@Temporal(TemporalType.DATE)
@@ -190,12 +190,12 @@ public class Person {
 		this.secondName = secondName;
 	}
 
-	public String getSurName() {
-		return surName;
+	public String getSurname() {
+		return surname;
 	}
 
-	public void setSurName(String surName) {
-		this.surName = surName;
+	public void setSurname(String surName) {
+		this.surname = surName;
 	}
 
 	public java.util.Date getPersonBirthday() {

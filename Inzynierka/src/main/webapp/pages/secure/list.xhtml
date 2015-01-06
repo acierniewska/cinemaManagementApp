@@ -14,48 +14,110 @@
 <h:body>
     <ui:composition template="../template/template.xhtml">
 		<ui:define name="content">
-    <sec:authorize hasAnyRole='ROLE_ADMIN'>
-    <h:form id="form2">
-                <p:commandButton id="addUser" value="Dodaj" action="#{animalMB.addAnimal}"/>
-                <p:commandButton id="reset" value="Wyczyść" type="reset" />
-    </h:form>
-    </sec:authorize>
-  
-    <br/>
- 
-    <h:form id="form1">
-        <p:growl id="messages" showDetail="true"/>
-        <p:dataTable id="animals" var="animal" value="#{animalMB.animalList}" style="width:20%" editable="true">  
-            <p:ajax event="rowEdit" listener="#{animalMB.onEdit}" update=":form1:messages"/>
-            <p:ajax event="rowEditCancel" listener="#{animalMB.onCancel}" update=":form1:messages"/>             
-            <p:column headerText="Name">
-                <f:facet name="header">
-                    <h:outputText value="Name"/>
-                </f:facet>
-                <p:cellEditor>
-                      <f:facet name="output">
-                        <h:outputText value="#{animal.animalName}"/>
-                    </f:facet>
-                    <f:facet name="input">
-                           <p:inputText value="#{animal.animalName}" label="name"/>
-                    </f:facet>             
-                </p:cellEditor>
+		
+		<h:form id="meh">
+		
+		<h:panelGrid id="buttons" columns="3" style="text-align:left;margin-bottom:10px">
+			<p:commandButton id="add" update="animals" title="Dodaj pozycję" ajax="true" icon="ui-icon-plusthick" onclick="PF('addDialog').show();"/>
+			<p:commandButton id="modify" update="animals" title="Modyfikuj zaznaczoną pozycję" ajax="true" icon="ui-icon-pencil" disabled="#{animalMB.selectedAnimal == null}"/>
+			<p:commandButton id="delete" update="animals" title="Usuń zaznaczoną pozycję" ajax="true" icon="ui-icon-minusthick" disabled="#{animalMB.selectedAnimal == null}"/>
+		</h:panelGrid>
+		
+        <p:dataTable  widhetVar="animalTable" id="animals" selectionMode="single"  
+      					selection="#{animalMB.selectedAnimal}" dblClickSelect="true"  onRowDblselectComplete="addDialog.show()"
+       					var="animal" rowKey="#{animal.animalName}" value="#{animalMB.animalList}" editable="true">  
+            <p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}" update=":meh:buttons"/> 
+            <p:ajax event="rowUnselect" listener="#{animalMB.onUserRowUnselect}" update=":meh:buttons"/>
+           	<p:ajax event="rowDblselect" immediate="true" process="@this" oncomplete="PF('addDialog').show()" />
+            
+            <p:column headerText="Imię">
+                   <h:outputText value="#{animal.animalName}"/>
             </p:column>
-            <sec:authorize access="hasAnyRole('ROLE_ADMIN')">         
-            <p:column>
-                <f:facet name="header">Delete</f:facet>
-                <h:commandLink value="Delete" action="#{AnimalMB.deleteAnimal(animal)}"/>
+            
+            <p:column headerText="Gatunek">
+                   <h:outputText value="#{animal.breed.species.speciesName}"/>
             </p:column>
-            <p:column style="width:25%">
-                <f:facet name="header">Update</f:facet>
-                <p:rowEditor/>
-            </p:column>           
-               </sec:authorize>           
+            
+            <p:column headerText="Specjalnej troski">
+		        <p:graphicImage value="../pic/ok.png" rendered="#{animal.isHandicapte}"/>
+   				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.isHandicapte}"/>
+		    </p:column>
+		    
+            <p:column headerText="Azyl">
+                	<h:outputText value="#{animal.asylium.asyliumName}"/>
+		    </p:column>
+		 
+		    <p:column headerText="Przytułek">
+		        <h:outputText value="#{animal.animalRepo.animalRepoName}" />
+		    </p:column>
+		    
+		    <p:column headerText="Dom Tymczasowy">
+		        <h:outputText value="#{animal.tempHouse.tempHouseId}" />
+		    </p:column>
+		 
+		    <p:column headerText="Osoba">
+		        <h:outputText value="#{animal.person.personName} #{animal.person.surname}" />
+		    </p:column>
+		 	    
+		    <p:column headerText="Zaadoptowany">
+		    	<p:graphicImage value="../pic/ok.png" rendered="#{animal.isAdopted}"/>
+   				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.isAdopted}"/>
+		    </p:column>
+		    
+		    <p:column headerText="Zaadoptowany wirtualnie">
+		    	<p:graphicImage value="../pic/ok.png" rendered="#{animal.isVirtualAdopted}"/>
+   				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.isVirtualAdopted}"/>
+		    </p:column>
         </p:dataTable>
-        <br/>
-    </h:form>
-    		</ui:define>
+        
+        
+        <p:dialog widgetVar="addDialog" header="Dodaj zwierzę" showEffect="clip" hideEffect="clip">
+			        <h:panelGrid id="eventDetails" columns="2">
+			            <h:outputLabel for="title" value="Title:" />
+			            <p:inputText id="title" value="#{scheduleView.event.title}" required="true" />
+			 
+			            <h:outputLabel for="from" value="From:" />
+			            <p:inputMask id="from" value="#{scheduleView.event.startDate}" mask="99/99/9999">
+			                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2"/>
+			            </p:inputMask>
+			 
+			            <h:outputLabel for="to" value="To:" />
+			            <p:inputMask id="to" value="#{scheduleView.event.endDate}" mask="99/99/9999">
+			                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2"/>
+			            </p:inputMask>
+
+			     <p:commandButton type="reset" value="Reset" />
+			    <p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}" oncomplete="PF('animal').update();PF('addDialog').hide();" />
+			</h:panelGrid>
+		</p:dialog> 
+        
+        
+        
+        
+        </h:form>
+        
+        </ui:define>
     </ui:composition>
 </h:body>
+<!-- 
 
+            <p:column headerText="I">
+                   <h:outputText value="#{animal.breed.breedName}"/>
+            </p:column>
+            
+		    <p:column headerText="Color">
+		        <h:outputText value="#{animal.fur.furColour} #{animal.fur.furLength}" />
+		    </p:column>
+		    
+		    <p:column headerText="Brand">
+		        <h:outputText value="#{animal.animalBirthdayDay}" />
+		    </p:column>
+		 
+		    <p:column headerText="Color">
+		        <h:outputText value="#{animal.animalRescueDate}" />
+		    </p:column>
+
+
+
+ -->
 </html>

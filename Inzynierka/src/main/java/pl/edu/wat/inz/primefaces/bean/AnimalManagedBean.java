@@ -11,6 +11,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 import org.springframework.dao.DataAccessException;
 
 import pl.edu.wat.inz.hibernate.data.Animal;
@@ -24,12 +26,29 @@ public class AnimalManagedBean implements Serializable {
 	private static final String SUCCESS = "success";
 	private static final String ERROR = "error";
 
+	private Animal selectedAnimal;
 	@ManagedProperty(value = "#{AnimalService}")
-	AnimalService animalService;
+	private AnimalService animalService;
 
 	List<Animal> animalList;
 	private int id;
 	private String name;
+
+	public Animal getSelectedAnimal() {
+		return selectedAnimal;
+	}
+
+	public void setSelectedAnimal(Animal selectedAnimal) {
+		this.selectedAnimal = selectedAnimal;
+	}
+
+	public void onUserRowUnselect(UnselectEvent event) {
+		setSelectedAnimal(null);
+	}
+
+	public void onCompRowSelect(SelectEvent event) {
+		setSelectedAnimal((Animal) event.getObject());
+	}
 
 	public String addAnimal() {
 		try {

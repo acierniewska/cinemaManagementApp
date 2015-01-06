@@ -84,7 +84,7 @@ public class Animal {
 	}
 
 	public TempHouse getTempHouse() {
-		return tempHouse;
+		return tempHouse == null ? new TempHouse() : tempHouse;
 	}
 
 	public void setTempHouse(TempHouse tempHouse) {
@@ -92,7 +92,7 @@ public class Animal {
 	}
 
 	public Asylum getAsylium() {
-		return asylium;
+		return asylium == null ? new Asylum() : asylium;
 	}
 
 	public void setAsylium(Asylum asylium) {
@@ -100,7 +100,7 @@ public class Animal {
 	}
 
 	public AnimalRepo getAnimalRepo() {
-		return animalRepo;
+		return animalRepo == null ? new AnimalRepo() : animalRepo;
 	}
 
 	public void setAnimalRepo(AnimalRepo animalRepo) {
@@ -108,7 +108,7 @@ public class Animal {
 	}
 
 	public Person getPerson() {
-		return person;
+		return person == null ? new Person() : person;
 	}
 
 	public void setPerson(Person person) {
@@ -116,7 +116,7 @@ public class Animal {
 	}
 
 	public Fur getFur() {
-		return fur;
+		return fur == null ? new Fur() : fur;
 	}
 
 	public void setFur(Fur fur) {
@@ -124,7 +124,7 @@ public class Animal {
 	}
 
 	public Breed getBreed() {
-		return breed;
+		return breed == null ? new Breed() : breed;
 	}
 
 	public void setBreed(Breed breed) {
@@ -155,7 +155,7 @@ public class Animal {
 		this.animalRescueDate = animalRescueDate;
 	}
 
-	public boolean isHandicapte() {
+	public boolean getIsHandicapte() {
 		return isHandicapte;
 	}
 
@@ -163,7 +163,7 @@ public class Animal {
 		this.isHandicapte = isHandicapte;
 	}
 
-	public boolean isAdopted() {
+	public boolean getIsAdopted() {
 		return isAdopted;
 	}
 
@@ -171,7 +171,7 @@ public class Animal {
 		this.isAdopted = isAdopted;
 	}
 
-	public boolean isVirtualAdopted() {
+	public boolean getIsVirtualAdopted() {
 		return isVirtualAdopted;
 	}
 

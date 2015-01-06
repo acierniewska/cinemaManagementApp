@@ -1,5 +1,5 @@
 .ui-widget, .ui-widget .ui-widget {
-     font-size: 90%;
+     font-size: 12px;
 }
 
 #page{
@@ -19,7 +19,7 @@
 
 #content{
 	float: left;
-	width: 75%;
+	width: 73%;
 	text-align: center;
 }
 

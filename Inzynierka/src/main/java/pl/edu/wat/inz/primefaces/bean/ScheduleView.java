@@ -20,10 +20,10 @@ import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
-@ManagedBean
+@ManagedBean(name = "scheduleView")
 @ViewScoped
 public class ScheduleView implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6788743225281253117L;
 
 	private ScheduleModel eventModel;
 
@@ -33,8 +33,6 @@ public class ScheduleView implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		if (eventModel != null)
-			return;
 		eventModel = new DefaultScheduleModel();
 		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match",
 				previousDay8Pm(), previousDay11Pm()));
@@ -47,7 +45,7 @@ public class ScheduleView implements Serializable {
 				fourDaysLater3pm()));
 
 		lazyEventModel = new LazyScheduleModel() {
-			private static final long serialVersionUID = 1L;
+			private static final long serialVersionUID = 884212963710008132L;
 
 			@Override
 			public void loadEvents(Date start, Date end) {

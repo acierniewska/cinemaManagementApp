@@ -32,4 +32,36 @@ public class Breed {
 	@Column(name = "BREED_DESC", nullable = true, length = 255)
 	private String breedDesc;
 
+	public long getBreedId() {
+		return breedId;
+	}
+
+	public void setBreedId(long breedId) {
+		this.breedId = breedId;
+	}
+
+	public Species getSpecies() {
+		return species;
+	}
+
+	public void setSpecies(Species species) {
+		this.species = species;
+	}
+
+	public String getBreedName() {
+		return breedName;
+	}
+
+	public void setBreedName(String breedName) {
+		this.breedName = breedName;
+	}
+
+	public String getBreedDesc() {
+		return breedDesc;
+	}
+
+	public void setBreedDesc(String breedDesc) {
+		this.breedDesc = breedDesc;
+	}
+
 }

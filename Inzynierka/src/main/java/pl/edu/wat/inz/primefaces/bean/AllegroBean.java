@@ -3,13 +3,12 @@ package pl.edu.wat.inz.primefaces.bean;
 import static pl.edu.wat.inz.basic.allegro.AllegroConst.COUNTRY_CODE;
 import static pl.edu.wat.inz.basic.allegro.AllegroConst.WEB_KEY;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 import pl.edu.wat.inz.spring.service.AllegroService;
 import SandboxWebApi.DoGetUserItemsRequest;
@@ -18,10 +17,8 @@ import SandboxWebApi.ServiceBindingStub;
 import SandboxWebApi.UserItemList;
 
 @ManagedBean(name = "allegroBean")
-@ViewScoped
-public class AllegroBean implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+@SessionScoped
+public class AllegroBean {
 	@ManagedProperty("#{AllegroService}")
 	private AllegroService service;
 
