@@ -1,0 +1,14 @@
+.centeredPanel {
+    margin: 0px auto;
+}
+
+.allegroLink {
+	font-size: 110% !important;
+	font-weight: bold !important;
+	color: blue !important;
+}
+
+.buyNow {
+	font-weight: bold !important;
+	color: orange;
+}

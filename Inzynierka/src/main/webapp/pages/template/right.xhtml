@@ -6,7 +6,6 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-
     <body>
 	    <ui:composition>
 	    		<!-- RZECZY DO SCHEDULE -->
@@ -83,16 +82,17 @@
 		            	</p:schedule>
 	    		</p:panel>
 	    		
-	    		<!-- To jest strasznie z dupy, do poprawienia!!!!!!! -->
 	    		<p:panel  id="allegro" header="Zobacz nasze aukcje!" style="margin-bottom:10px">
-					<h:panelGrid id="itemThings" columns="1" cellpadding="2" style="align:center"  ajax="true" styleClass="centered">
-          					<p:link id="item" href="#{allegroBean.getAllegroSandboxUrl()}" style="font-size:100px" value="#{allegroBean.getItemName()}"/>
-          					<div align="center">
-          						<p:graphicImage value="#{allegroBean.getThumbUrl()}" style="border-style:solid; border-width:1px"/>
-       						</div>
+					<h:panelGrid id="itemThings" columns="1" cellpadding="2" style="text-align:center;"  ajax="true" styleClass="centeredPanel">
+          				<p:graphicImage value="#{allegroBean.getThumbUrl()}"/>
+          				<p:link id="item" href="#{allegroBean.getAllegroSandboxUrl()}" styleClass="allegroLink" value="#{allegroBean.getItemName()}"/>
+          				<h:panelGrid columns="2" style="text-align:center;">
+       						<p:outputLabel value="kup teraz" styleClass="buyNow"/>
+       						<p:outputLabel value="#{allegroBean.getPrice()}0 zł"/>
+       					</h:panelGrid>
        				</h:panelGrid>
-						<p:commandButton action="#{allegroBean.decrementUserNr()}" update="itemThings" id="decrement" ajax="true" icon="ui-icon-circle-triangle-w"/>
-						<p:commandButton action="#{allegroBean.incrementUserNr()}" update="itemThings" id="increment" ajax="true" icon="ui-icon-circle-triangle-e"/>
+					<p:commandButton action="#{allegroBean.decrementUserNr()}" update="itemThings" id="decrement" ajax="true" icon="ui-icon-circle-triangle-w"/>
+					<p:commandButton action="#{allegroBean.incrementUserNr()}" update="itemThings" id="increment" ajax="true" icon="ui-icon-circle-triangle-e"/>
 				</p:panel>
 	    	</p:panel>
 	    </ui:composition>

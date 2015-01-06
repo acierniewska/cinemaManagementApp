@@ -81,7 +81,7 @@ public class AllegroBean implements Serializable {
 	}
 
 	public float getPrice() {
-		return item.getItPrice();
+		return item.getItBuyNowPrice();
 	}
 
 	public void incrementUserNr() {
