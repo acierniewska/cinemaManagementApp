@@ -25,11 +25,6 @@ public class Animal {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long animalId;
 
-	@ManyToOne(targetEntity = TempHouse.class)
-	@Cascade({ org.hibernate.annotations.CascadeType.LOCK })
-	@JoinColumns({ @JoinColumn(name = "TEMP_HOUSE_ID", referencedColumnName = "TEMP_HOUSE_ID") })
-	private TempHouse tempHouse;
-
 	@ManyToOne(targetEntity = Asylium.class)
 	@org.hibernate.annotations.Cascade({ org.hibernate.annotations.CascadeType.LOCK })
 	@JoinColumns({ @JoinColumn(name = "ASYLIUM_ID", referencedColumnName = "ASYLIUM_ID") })
@@ -75,20 +70,23 @@ public class Animal {
 	@Column(name = "IS_VIRTUAL_ADOPTED", nullable = false)
 	private boolean isVirtualAdopted;
 
+	@Column(name = "IS_IN_TEMP_HOUSE", nullable = false)
+	private boolean isInTempHouse;
+
+	public boolean isInTempHouse() {
+		return isInTempHouse;
+	}
+
+	public void setInTempHouse(boolean isInTempHouse) {
+		this.isInTempHouse = isInTempHouse;
+	}
+
 	public long getAnimalId() {
 		return animalId;
 	}
 
 	public void setAnimalId(long animalId) {
 		this.animalId = animalId;
-	}
-
-	public TempHouse getTempHouse() {
-		return tempHouse == null ? new TempHouse() : tempHouse;
-	}
-
-	public void setTempHouse(TempHouse tempHouse) {
-		this.tempHouse = tempHouse;
 	}
 
 	public Asylium getAsylium() {

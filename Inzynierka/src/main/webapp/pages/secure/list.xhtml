@@ -24,6 +24,9 @@
             			<h:outputText value="Imię:"/>
             			<h:inputText value="#{animalMB.selectedAnimal.animalName}"/>
             			
+            			<h:outputText value="Specjalnej troski:"/>
+					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isHandicapte}"/>
+					    
             			<!-- dodać selectonemenu-->
             			<h:outputText value="Gatunek:"/>
             			<h:inputText value="#{animalMB.selectedAnimal.breed.species.speciesName}"/>
@@ -50,27 +53,30 @@
             			
             			<h:outputText value="Osoba:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
             			<p:selectOneMenu id="personSelect" value="#{animalMB.selectedAnimal.person.personId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
+					     	<f:selectItem itemLabel="(puste)" itemValue=""/>
 					     	<f:selectItems value="#{personMB.personList}" var="person" itemLabel="#{person.personName} #{person.surname}" itemValue="#{person.personId}"/>
-					    	<f:selectItem itemLabel="(puste)" itemValue=""/>
 					    </p:selectOneMenu>
 					    
 					    <h:outputText value="Azyl:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
             			<p:selectOneMenu id="asyliumSelect" value="#{animalMB.selectedAnimal.asylium.asyliumId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
+					     	<f:selectItem itemLabel="(puste)" itemValue=""/>
 					     	<f:selectItems value="#{asyliumMB.asyliumList}" var="asylium" itemLabel="#{asylium.name}" itemValue="#{asylium.asyliumId}"/>
-					    	<f:selectItem itemLabel="(puste)" itemValue=""/>
 					    </p:selectOneMenu>
 					    
-					    <h:outputText value="W Domu Tymczasowym osoby:"/>
-					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isHandicapte}" />
+					    <h:outputText value="Przytulisko:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
+            			<p:selectOneMenu id="animalRepo" value="#{animalMB.selectedAnimal.animalRepo.animalRepoId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
+					     	<f:selectItem itemLabel="(puste)" itemValue=""/>
+					     	<f:selectItems value="#{animalRepoMB.animalRepoList}" var="animalRepo" itemLabel="#{animalRepo.name}" itemValue="#{animalRepo.animalRepoId}"/>
+					    </p:selectOneMenu>
 					    
-					    <h:outputText value="Specjalnej troski:"/>
-					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isHandicapte}" />
+					    <h:outputText value="W Domu Tymczasowym:"/>
+					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isInTempHouse}" disabled="#{animalMB.selectedAnimal.person == 0" />
 					    
 					    <h:outputText value="Zaadoptowany:"/>
-					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isAdopted}" />
+					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isAdopted}" disabled="#{animalMB.selectedAnimal.person == 0" />
 					    
 					    <h:outputText value="Zaadoptowany wirtualnie:"/>
-					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isVirtualAdopted}" />
+					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isVirtualAdopted}" disabled="#{animalMB.selectedAnimal.person == 0" />
 					    
 			</h:panelGrid>
 			</p:tab>
@@ -106,20 +112,20 @@
    				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.isHandicapte}"/>
 		    </p:column>
             <p:column headerText="Azyl">
-            		<p:graphicImage value="../pic/ok.png" rendered="#{animal.asylium.asyliumName.isEmpty()}"/>
-   					<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.asylium.asyliumName.isEmpty()}"/>
+            	<h:outputText value="#{animal.asylium.asyliumName}"/>
+   				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.asylium.asyliumName.isEmpty()}"/>
 		    </p:column>
 		    <p:column headerText="Przytułek">
-		        <p:graphicImage value="../pic/ok.png" rendered="#{animal.animalRepo.animalRepoName.isEmpty()}"/>
+		        <h:outputText value="#{animal.animalRepo.animalRepoName}"/>
    				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.animalRepo.animalRepoName.isEmpty()}"/>
-		    </p:column>
-		    <p:column headerText="Dom Tymczasowy">
-		    	<p:graphicImage value="../pic/ok.png" rendered="#{animal.tempHouse.tempHouseId != 0}"/>
-   				<p:graphicImage value="../pic/nope.png"  rendered="#{animal.tempHouse.tempHouseId == 0}"/>
 		    </p:column>
 		    <p:column headerText="Osoba">
 		        <h:outputText value="#{animal.person.personName} #{animal.person.surname}" />
 		    </p:column>
+		     <p:column headerText="Dom Tymczasowy">
+		    	<p:graphicImage value="../pic/ok.png" rendered="#{animal.isInTempHouse}"/>
+   				<p:graphicImage value="../pic/nope.png"  rendered=" not #{animal.isInTempHouse}"/>
+   			</p:column>
 		    <p:column headerText="Zaadoptowany">
 		    	<p:graphicImage value="../pic/ok.png" rendered="#{animal.isAdopted}"/>
    				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.isAdopted}"/>
