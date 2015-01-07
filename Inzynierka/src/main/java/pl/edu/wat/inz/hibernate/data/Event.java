@@ -80,7 +80,7 @@ public class Event {
 	}
 
 	public void setEventType(EventType eventType) {
-		this.eventType = eventType.getIntVal();
+		this.eventType = eventType.getIntValue();
 	}
 
 	public String getEventDesc() {

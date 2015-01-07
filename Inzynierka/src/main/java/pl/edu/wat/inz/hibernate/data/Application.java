@@ -72,6 +72,6 @@ public class Application {
 	}
 
 	public void setAnimalContractType(ApplicationType at) {
-		this.applicationType = at.getIntVal();
+		this.applicationType = at.getIntValue();
 	}
 }

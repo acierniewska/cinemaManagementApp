@@ -28,7 +28,7 @@ public enum EventType {
 		return name;
 	}
 
-	public int getIntVal() {
+	public int getIntValue() {
 		return intValue;
 	}
 

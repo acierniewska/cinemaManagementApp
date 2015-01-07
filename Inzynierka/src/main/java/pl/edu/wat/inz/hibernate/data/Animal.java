@@ -30,10 +30,10 @@ public class Animal {
 	@JoinColumns({ @JoinColumn(name = "TEMP_HOUSE_ID", referencedColumnName = "TEMP_HOUSE_ID") })
 	private TempHouse tempHouse;
 
-	@ManyToOne(targetEntity = Asylum.class)
+	@ManyToOne(targetEntity = Asylium.class)
 	@org.hibernate.annotations.Cascade({ org.hibernate.annotations.CascadeType.LOCK })
 	@JoinColumns({ @JoinColumn(name = "ASYLIUM_ID", referencedColumnName = "ASYLIUM_ID") })
-	private Asylum asylium;
+	private Asylium asylium;
 
 	@ManyToOne(targetEntity = AnimalRepo.class)
 	@org.hibernate.annotations.Cascade({ org.hibernate.annotations.CascadeType.LOCK })
@@ -91,11 +91,11 @@ public class Animal {
 		this.tempHouse = tempHouse;
 	}
 
-	public Asylum getAsylium() {
-		return asylium == null ? new Asylum() : asylium;
+	public Asylium getAsylium() {
+		return asylium == null ? new Asylium() : asylium;
 	}
 
-	public void setAsylium(Asylum asylium) {
+	public void setAsylium(Asylium asylium) {
 		this.asylium = asylium;
 	}
 

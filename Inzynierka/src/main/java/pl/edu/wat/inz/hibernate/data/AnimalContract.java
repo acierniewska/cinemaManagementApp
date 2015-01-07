@@ -97,7 +97,7 @@ public class AnimalContract {
 	}
 
 	public void setAnimalContractType(AnimalContractType act) {
-		this.animalContractType = act.getIntVal();
+		this.animalContractType = act.getIntValue();
 	}
 
 }

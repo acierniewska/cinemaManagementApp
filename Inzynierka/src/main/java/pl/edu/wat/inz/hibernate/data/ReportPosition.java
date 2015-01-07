@@ -72,7 +72,7 @@ public class ReportPosition {
 	}
 
 	public void setReportPositionType(ReportPositionType reportPositionType) {
-		this.reportPositionType = reportPositionType.getIntVal();
+		this.reportPositionType = reportPositionType.getIntValue();
 	}
 
 	public String getStringValue() {

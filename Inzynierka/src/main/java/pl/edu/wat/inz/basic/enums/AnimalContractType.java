@@ -27,7 +27,7 @@ public enum AnimalContractType {
 		return name;
 	}
 
-	public int getIntVal() {
+	public int getIntValue() {
 		return intValue;
 	}
 

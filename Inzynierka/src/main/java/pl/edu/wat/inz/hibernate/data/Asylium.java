@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @org.hibernate.annotations.Proxy(lazy = false)
 @Table(name = "asylum")
-public class Asylum {
+public class Asylium {
 	@Column(name = "ASYLIUM_ID", nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -24,37 +24,54 @@
             			<h:outputText value="Imię:"/>
             			<h:inputText value="#{animalMB.selectedAnimal.animalName}"/>
             			
-            			<h:outputText value="Gatunek"/>
+            			<!-- dodać selectonemenu-->
+            			<h:outputText value="Gatunek:"/>
             			<h:inputText value="#{animalMB.selectedAnimal.breed.species.speciesName}"/>
             			
+            			<!-- dodać selectonemenu -->
             			<h:outputText value="Rasa:"/>
             			<h:inputText value="#{animalMB.selectedAnimal.breed.breedName}"/>
             			
-            			<h:outputText value="Długość futra:"/>
-            			<h:outputText value="#{furEnumBean.length} #{animalMB.selectedAnimal.fur.furColour} #{animalMB.selectedAnimal.fur.furLength}" />
-				    	
-				    	<h:outputText value="Kolor futra"/>
-				        <h:outputText value="#{animalMB.selectedAnimal.fur.furColour} #{animalMB.selectedAnimal.fur.furLength}" />
+            			<h:outputText value="Kolor futra:"/>
+            			<p:selectOneMenu id="furColourSelect" value="#{animalMB.selectedAnimal.fur.furColour}"  effect="fade" filter="true"  filterMatchMode="startsWith">
+					     	<f:selectItems value="#{furEB.colours}" var="fur" itemLabel="#{FurEnumBean.getColour(fur.intValue)}" itemValue="#{fur.intValue}"/>
+					    </p:selectOneMenu>
+					    
+					    <h:outputText value="Długość futra:"/>
+					    <p:selectOneMenu id="furLengthSelect" value="#{animalMB.selectedAnimal.fur.furLength}"  effect="fade" filter="true"  filterMatchMode="startsWith">
+					     	<f:selectItems value="#{furEB.lengths}" var="fur" itemLabel="#{FurEnumBean.getLength(fur.intValue)}" itemValue="#{fur.intValue}"/>
+					    </p:selectOneMenu>
             			
             			<h:outputText value="Data urodzenia:"/>
-            			<h:inputText value="#{animalMB.selectedAnimal.animalBirthdayDay}" />
+            			<p:calendar value="#{animalMB.selectedAnimal.animalBirthdayDay}" pattern="yyyy-MM-dd" mask="true" showOn="button"/>
 				 
-				 		<h:outputText value="Pod opieką Fundacji oddd: "/>
-				        <h:inputText value="#{animalMB.selectedAnimal.animalRescueDate}" />
+				 		<h:outputText value="Pod opieką Fundacji od:"/>
+				        <p:calendar value="#{animalMB.selectedAnimal.animalRescueDate}" pattern="yyyy-MM-dd" mask="true" showOn="button"/>
             			
-            			<h:inputText value="#{animalMB.selectedAnimalPerson}" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
+            			<h:outputText value="Osoba:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
             			<p:selectOneMenu id="personSelect" value="#{animalMB.selectedAnimal.person.personId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
 					     	<f:selectItems value="#{personMB.personList}" var="person" itemLabel="#{person.personName} #{person.surname}" itemValue="#{person.personId}"/>
+					    	<f:selectItem itemLabel="(puste)" itemValue=""/>
 					    </p:selectOneMenu>
-            			 
-            			 
-				        <p:outputLabel value="#{animalMB.selectedAnimal.animalBirthdayDay}" />
-				 
-				        <p:outputLabel value="#{animalMB.selectedAnimal.animalRescueDate}" />
-			            
-			  <!--   <p:commandButton type="reset" value="Reset" />
-			    <p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}" oncomplete="PF('animal').update();PF('addDialog').hide();" />
-				 -->
+					    
+					    <h:outputText value="Azyl:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
+            			<p:selectOneMenu id="asyliumSelect" value="#{animalMB.selectedAnimal.asylium.asyliumId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
+					     	<f:selectItems value="#{asyliumMB.asyliumList}" var="asylium" itemLabel="#{asylium.name}" itemValue="#{asylium.asyliumId}"/>
+					    	<f:selectItem itemLabel="(puste)" itemValue=""/>
+					    </p:selectOneMenu>
+					    
+					    <h:outputText value="W Domu Tymczasowym osoby:"/>
+					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isHandicapte}" />
+					    
+					    <h:outputText value="Specjalnej troski:"/>
+					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isHandicapte}" />
+					    
+					    <h:outputText value="Zaadoptowany:"/>
+					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isAdopted}" />
+					    
+					    <h:outputText value="Zaadoptowany wirtualnie:"/>
+					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isVirtualAdopted}" />
+					    
 			</h:panelGrid>
 			</p:tab>
 			
