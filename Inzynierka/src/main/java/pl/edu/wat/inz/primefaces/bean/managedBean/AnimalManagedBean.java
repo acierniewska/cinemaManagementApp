@@ -1,4 +1,7 @@
-package pl.edu.wat.inz.primefaces.bean;
+package pl.edu.wat.inz.primefaces.bean.managedBean;
+
+import static pl.edu.wat.inz.basic.AppConst.ERROR;
+import static pl.edu.wat.inz.basic.AppConst.SUCCESS;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,7 +10,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
@@ -19,14 +22,13 @@ import pl.edu.wat.inz.hibernate.data.Animal;
 import pl.edu.wat.inz.spring.service.AnimalService;
 
 @ManagedBean(name = "animalMB")
-@RequestScoped
+@ViewScoped
 public class AnimalManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String SUCCESS = "success";
-	private static final String ERROR = "error";
 
-	private Animal selectedAnimal;
+	private Animal selectedAnimal = new Animal();
+
 	@ManagedProperty(value = "#{AnimalService}")
 	private AnimalService animalService;
 
@@ -136,5 +138,4 @@ public class AnimalManagedBean implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 }

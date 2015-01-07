@@ -246,4 +246,9 @@ public class Person {
 		this.isVolounteer = isVolounteer;
 	}
 
+	@Override
+	public String toString() {
+		return getPersonName() + " " + getSurname();
+	}
+
 }
