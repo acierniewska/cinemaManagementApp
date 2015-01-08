@@ -33,6 +33,8 @@ public class ScheduleView implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		if (eventModel != null)
+			return;
 		eventModel = new DefaultScheduleModel();
 		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match",
 				previousDay8Pm(), previousDay11Pm()));

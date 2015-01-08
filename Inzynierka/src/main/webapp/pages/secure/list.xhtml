@@ -15,11 +15,8 @@
     <ui:composition template="../template/template.xhtml">
 		<ui:define name="content">
 		
-		<h:form id="meh">
+		<h:form id="mainForm">
 			<p:dialog widgetVar="addDialog" header="Edytuj zwierzę" showEffect="clip" hideEffect="clip">
-				<p:tabView id="tabview">
-				
-				<p:tab id="tab1" title="Podstawowe">
 				<h:panelGrid id="dialogDetail" columns="2" style="text-align:left">
             			<h:outputText value="Imię:"/>
             			<h:inputText value="#{animalMB.selectedAnimal.animalName}"/>
@@ -27,13 +24,20 @@
             			<h:outputText value="Specjalnej troski:"/>
 					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isHandicapte}"/>
 					    
-            			<!-- dodać selectonemenu-->
-            			<h:outputText value="Gatunek:"/>
-            			<h:inputText value="#{animalMB.selectedAnimal.breed.species.speciesName}"/>
-            			
+					    <h:outputText value="Gatunek:"/>
+            			<p:selectOneMenu id="speciesSelect" value="#{animalMB.selectedAnimal.breed.species.speciesId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
+					     	<f:selectItems value="#{speciesMB.speciesList}" var="species" itemLabel="#{species.speciesName}" itemValue="#{species.speciesId}"/>
+					    </p:selectOneMenu>
+					    
+					    
             			<!-- dodać selectonemenu -->
             			<h:outputText value="Rasa:"/>
-            			<h:inputText value="#{animalMB.selectedAnimal.breed.breedName}"/>
+            			<p:selectOneMenu id="breedSelect" value="#{animalMB.selectedAnimal.breed.breedId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
+					     	<f:selectItems value="#{breedMB.getBreedListForSpecies(species.speciesId)}" var="breed" itemLabel="#{breed.breedName}" itemValue="#{breed.breedId}"/>
+					    </p:selectOneMenu>
+            			
+            			
+            			<!-- TU KONIEC -->
             			
             			<h:outputText value="Kolor futra:"/>
             			<p:selectOneMenu id="furColourSelect" value="#{animalMB.selectedAnimal.fur.furColour}"  effect="fade" filter="true"  filterMatchMode="startsWith">
@@ -70,21 +74,16 @@
 					    </p:selectOneMenu>
 					    
 					    <h:outputText value="W Domu Tymczasowym:"/>
-					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isInTempHouse}" disabled="#{animalMB.selectedAnimal.person == 0" />
+					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isInTempHouse}" disabled="#{animalMB.selectedAnimal.person == null}" />
 					    
 					    <h:outputText value="Zaadoptowany:"/>
-					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isAdopted}" disabled="#{animalMB.selectedAnimal.person == 0" />
+					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isAdopted}" disabled="#{animalMB.selectedAnimal.person == null}" />
 					    
 					    <h:outputText value="Zaadoptowany wirtualnie:"/>
-					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isVirtualAdopted}" disabled="#{animalMB.selectedAnimal.person == 0" />
+					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isVirtualAdopted}" disabled="#{animalMB.selectedAnimal.person == null}" />
 					    
 			</h:panelGrid>
-			</p:tab>
 			
-			<p:tab>
-				<p:outputLabel value="mehssas"/>
-			</p:tab>
-		</p:tabView>	
 		</p:dialog> 
 		
 		<!-- Buttony -->
@@ -98,8 +97,8 @@
         <p:dataTable  widhetVar="animalTable" id="animals"  selectionMode="single" selection="#{animalMB.selectedAnimal}" dblClickSelect="true"  onRowDblselectComplete="addDialog.show()"
        					var="animal" rowKey="#{animal.animalName}" value="#{animalMB.animalList}" editable="true"
        					paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rows="10">  
-            <p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}" update=":meh:buttons, :meh:tabview:dialogDetail"/> 
-            <p:ajax event="rowUnselect" listener="#{animalMB.onUserRowUnselect}" update=":meh:buttons"/>
+            <p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}" update=":mainForm:buttons, :mainForm:dialogDetail"/> 
+            <p:ajax event="rowUnselect" listener="#{animalMB.onUserRowUnselect}" update=":mainForm:buttons"/>
            	<p:ajax event="rowDblselect" immediate="true" process="@this" oncomplete="PF('addDialog').show()" />
             <p:column headerText="Imię">
                    <h:outputText value="#{animal.animalName}"/>

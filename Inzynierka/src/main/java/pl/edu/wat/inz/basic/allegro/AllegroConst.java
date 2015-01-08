@@ -10,4 +10,5 @@ public final class AllegroConst {
 	public static final String PASSWORD = "669ce9b035bb44c2";
 	public static final int COUNTRY_CODE = 1;
 	public static final int SYSVAR = 1;
+	public static final int USER_ID = 39800168;
 }

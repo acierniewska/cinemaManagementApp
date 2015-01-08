@@ -10,7 +10,7 @@
 	    <ui:composition>
 	    
 		    <!-- TU SIĘ ZACZYNAJĄ PANELE -->
-        	<p:panel id="rightPanel">
+        	<p:panel id="rightPanel" ajax="true">
 	        	<p:panel id="info" header="Praca inżynierska" style="margin-bottom:10px">
 	        		<h:outputText value="
 	        		Autor: Anna Cierniewska &lt;br /&gt;
@@ -20,18 +20,16 @@
 	        	</p:panel>
 	        	
 	        	<!-- SCHEDULE -->
-	        	<h:form>
-	        	<p:growl id="messages" showDetail="true" />
-	        	<p:panel id="sch" header="Kalendarz" style="margin-bottom:10px">
-		            	<p:schedule id="myschedule" leftHeaderTemplate="prev" rightHeaderTemplate="next" view="month" locale="pl"  widgetVar="myschedule" value="#{scheduleView.eventModel}" >
+	        	<p:panel id="sch" header="Kalendarz" style="margin-bottom:10px" ajax="true">
+		            	<p:schedule id="myschedule" leftHeaderTemplate="prev" rightHeaderTemplate="next" view="month" locale="pl" ajax="true" widgetVar="myschedule" value="#{scheduleView.eventModel}" >
 			            	<p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
 				            <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-				            <p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="messages" />
-				            <p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="messages" />
+				            <p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" />
+				            <p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" />
 		            	</p:schedule>
 	    		</p:panel>
 	    		
-	    		<p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+	    		<p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip" ajax="true">
 			        <h:panelGrid id="eventDetails" columns="2">
 			            <h:outputLabel for="title" value="Title:" />
 			            <p:inputText id="title" value="#{scheduleView.event.title}" required="true" />
@@ -53,7 +51,6 @@
 			            <p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
 			        </h:panelGrid>
 			    </p:dialog> 
-	    		</h:form>
 	    		<script type="text/javascript">
 			            PrimeFaces.locales['pl'] = {
 			            closeText: 'Zamknij',
@@ -86,9 +83,9 @@
 	        
 	        
 	    		<!-- ALLEGRO -->
-	    		<p:panel  id="allegro" header="Zobacz nasze aukcje!" style="margin-bottom:10px">
+	    		<p:panel  id="allegro" header="Zobacz nasze aukcje!" style="margin-bottom:10px;txt-align:center" ajax="true">
 					<h:panelGrid id="itemThings" columns="1" cellpadding="2" style="text-align:center;"  ajax="true" styleClass="centeredPanel">
-          				<p:graphicImage value="#{allegroBean.getThumbUrl()}"/>
+          				<p:graphicImage value="#{allegroBean.getThumbUrl()}" ajax="true"/>
           				<p:link id="item" href="#{allegroBean.getAllegroSandboxUrl()}" styleClass="allegroLink" value="#{allegroBean.getItemName()}"/>
           				<h:panelGrid columns="2" style="text-align:center;">
        						<p:outputLabel value="kup teraz" styleClass="buyNow"/>

@@ -73,7 +73,7 @@ public class Animal {
 	@Column(name = "IS_IN_TEMP_HOUSE", nullable = false)
 	private boolean isInTempHouse;
 
-	public boolean isInTempHouse() {
+	public boolean getIsInTempHouse() {
 		return isInTempHouse;
 	}
 

@@ -1,6 +1,7 @@
 package pl.edu.wat.inz.primefaces.bean;
 
 import static pl.edu.wat.inz.basic.allegro.AllegroConst.COUNTRY_CODE;
+import static pl.edu.wat.inz.basic.allegro.AllegroConst.USER_ID;
 import static pl.edu.wat.inz.basic.allegro.AllegroConst.WEB_KEY;
 
 import java.rmi.RemoteException;
@@ -38,7 +39,7 @@ public class AllegroBean {
 
 		if (itemList == null) {
 			DoGetUserItemsRequest userItems = new DoGetUserItemsRequest(
-					39800168, WEB_KEY, COUNTRY_CODE, null, null);
+					USER_ID, WEB_KEY, COUNTRY_CODE, null, null);
 			try {
 				DoGetUserItemsResponse userItemResponse = proxy
 						.doGetUserItems(userItems);
