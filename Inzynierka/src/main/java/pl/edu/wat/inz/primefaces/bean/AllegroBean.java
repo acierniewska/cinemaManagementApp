@@ -22,12 +22,11 @@ import SandboxWebApi.UserItemList;
 public class AllegroBean {
 	@ManagedProperty("#{AllegroService}")
 	private AllegroService service;
-
-	private int itemNr;
-	private UserItemList item;
-	private long userId = -1;
 	private ServiceBindingStub proxy;
 	private UserItemList[] itemList;
+	private UserItemList item;
+	private long userId = -1;
+	private int itemNr;
 
 	@PostConstruct
 	public void init() {
@@ -49,9 +48,7 @@ public class AllegroBean {
 			}
 		}
 
-		if (itemList.length == 0) {
-
-		} else {
+		if (itemList.length > 0) {
 			itemNr = 0;
 			item = itemList[itemNr];
 		}

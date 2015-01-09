@@ -16,7 +16,11 @@
 		<ui:define name="content">
 		
 		<h:form id="mainForm">
-			<p:dialog widgetVar="addDialog" header="Edytuj zwierzę" showEffect="clip" hideEffect="clip">
+			<p:dialog widgetVar="addDialog" header="Edytuj zwierzę" showEffect="clip" hideEffect="clip" height="550">
+				<h:panelGrid id="pic" columns="1">
+					<h:graphicImage value="#{animalMB.selectedAnimal.picPath}" height="200" width="200"/>
+					<p:commandButton value="Modyfikuj zdjęcie"/>
+				</h:panelGrid>
 				<h:panelGrid id="dialogDetail" columns="2" style="text-align:left">
             			<h:outputText value="Imię:"/>
             			<h:inputText value="#{animalMB.selectedAnimal.animalName}"/>
@@ -25,19 +29,14 @@
 					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isHandicapte}"/>
 					    
 					    <h:outputText value="Gatunek:"/>
-            			<p:selectOneMenu id="speciesSelect" value="#{animalMB.selectedAnimal.breed.species.speciesId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
+            			<p:selectOneMenu id="speciesSelect"  value="#{animalMB.selectedAnimal.breed.species.speciesId}" effect="fade" filter="true"  filterMatchMode="startsWith">
 					     	<f:selectItems value="#{speciesMB.speciesList}" var="species" itemLabel="#{species.speciesName}" itemValue="#{species.speciesId}"/>
 					    </p:selectOneMenu>
 					    
-					    
-            			<!-- dodać selectonemenu -->
             			<h:outputText value="Rasa:"/>
             			<p:selectOneMenu id="breedSelect" value="#{animalMB.selectedAnimal.breed.breedId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
-					     	<f:selectItems value="#{breedMB.getBreedListForSpecies(species.speciesId)}" var="breed" itemLabel="#{breed.breedName}" itemValue="#{breed.breedId}"/>
+					     	<f:selectItems value="#{breedMB.getBreedListForSpecies(1)}" var="breed" itemLabel="#{breed.breedName}" itemValue="#{breed.breedId}"/>
 					    </p:selectOneMenu>
-            			
-            			
-            			<!-- TU KONIEC -->
             			
             			<h:outputText value="Kolor futra:"/>
             			<p:selectOneMenu id="furColourSelect" value="#{animalMB.selectedAnimal.fur.furColour}"  effect="fade" filter="true"  filterMatchMode="startsWith">
@@ -97,7 +96,7 @@
         <p:dataTable  widhetVar="animalTable" id="animals"  selectionMode="single" selection="#{animalMB.selectedAnimal}" dblClickSelect="true"  onRowDblselectComplete="addDialog.show()"
        					var="animal" rowKey="#{animal.animalName}" value="#{animalMB.animalList}" editable="true"
        					paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rows="10">  
-            <p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}" update=":mainForm:buttons, :mainForm:dialogDetail"/> 
+            <p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}" update=":mainForm:buttons, :mainForm:dialogDetail, :mainForm:pic"/> 
             <p:ajax event="rowUnselect" listener="#{animalMB.onUserRowUnselect}" update=":mainForm:buttons"/>
            	<p:ajax event="rowDblselect" immediate="true" process="@this" oncomplete="PF('addDialog').show()" />
             <p:column headerText="Imię">

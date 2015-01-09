@@ -36,6 +36,11 @@ public class SpeciesManagedBean implements Serializable {
 	private int id;
 	private String name;
 
+	public void handleChange() {
+		id++;
+		System.out.println(id);
+	}
+
 	public Species getSelectedSpecies() {
 		return selectedSpecies;
 	}

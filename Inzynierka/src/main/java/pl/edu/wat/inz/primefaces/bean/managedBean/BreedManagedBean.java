@@ -24,17 +24,23 @@ import pl.edu.wat.inz.spring.service.BreedService;
 @ManagedBean(name = "breedMB")
 @ViewScoped
 public class BreedManagedBean implements Serializable {
-
 	private static final long serialVersionUID = 1L;
-
-	private Breed selectedBreed = new Breed();
 
 	@ManagedProperty(value = "#{BreedService}")
 	private BreedService breedService;
+	private Breed selectedBreed = new Breed();
 
 	List<Breed> breedList;
 	private int id;
 	private String name;
+
+	public List<Breed> getBreedList() {
+		if (breedList == null) {
+			breedList = new ArrayList<Breed>();
+			breedList.addAll(getBreedService().getBreeds());
+		}
+		return breedList;
+	}
 
 	public Breed getSelectedBreed() {
 		return selectedBreed;
@@ -101,14 +107,6 @@ public class BreedManagedBean implements Serializable {
 	public void reset() {
 		this.setId(0);
 		this.setName("");
-	}
-
-	public List<Breed> getBreedList() {
-		if (breedList == null) {
-			breedList = new ArrayList<Breed>();
-			breedList.addAll(getBreedService().getBreeds());
-		}
-		return breedList;
 	}
 
 	public List<Breed> getBreedListForSpecies(long speciesId) {

@@ -73,6 +73,17 @@ public class Animal {
 	@Column(name = "IS_IN_TEMP_HOUSE", nullable = false)
 	private boolean isInTempHouse;
 
+	@Column(name = "PIC_PATH", nullable = false)
+	private String picPath;
+
+	public String getPicPath() {
+		return picPath;
+	}
+
+	public void setPicPath(String picPath) {
+		this.picPath = picPath;
+	}
+
 	public boolean getIsInTempHouse() {
 		return isInTempHouse;
 	}

@@ -41,7 +41,7 @@ public class Breed {
 	}
 
 	public Species getSpecies() {
-		return species;
+		return species == null ? new Species() : species;
 	}
 
 	public void setSpecies(Species species) {
