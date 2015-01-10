@@ -4,11 +4,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
  
     <h:head>
     	<link rel="stylesheet" href="../css/default.css" type="text/css" />
     	<link rel="stylesheet" href="../css/right.css" type="text/css" />
+    	<style type="text/css">
+		        .ui-layout-north {
+		            z-index:20 !important;
+		            overflow:visible !important;;
+		        }
+		
+		        .ui-layout-north .ui-layout-unit-content {
+		            overflow:visible !important;
+		        }
+		        </style>
     </h:head>
  
     <h:body>
@@ -27,6 +38,17 @@
 			    <div id="right" align="center">
 			    	  <ui:include src="/pages/template/right.xhtml" />
 		    	</div>
+		    </div>
+		    
+		    <div id="footter">
+		    <p:toolbar style="text-align:center">
+        <f:facet name="left">
+			    	<p:outputLabel value="Praca inżynierska Autor: Anna Cierniewska
+						Promotor: dr inż. Irena Skórska &lt;br /&gt;" escape="false" style="text-align:center; margin-left: 400px"/>
+					<p:outputLabel value="Wojskowa Akademia Techniczna im. Jarosława Dąbrowskiego &lt;br
+						2014-2015" escape="false" style="text-align:center; margin-left: 320px"/>
+					</f:facet>
+		    	</p:toolbar>
 		    </div>
 		</div>
     </h:body>

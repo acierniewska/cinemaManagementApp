@@ -31,8 +31,6 @@ public class BreedManagedBean implements Serializable {
 	private Breed selectedBreed = new Breed();
 
 	List<Breed> breedList;
-	private int id;
-	private String name;
 
 	public List<Breed> getBreedList() {
 		if (breedList == null) {
@@ -60,9 +58,7 @@ public class BreedManagedBean implements Serializable {
 
 	public String addBreed() {
 		try {
-			Breed Breed = new Breed();
-			Breed.setBreedName(getName());
-			getBreedService().addBreed(Breed);
+			getBreedService().addBreed(selectedBreed);
 			reset();
 			return SUCCESS;
 		} catch (DataAccessException e) {
@@ -105,8 +101,7 @@ public class BreedManagedBean implements Serializable {
 	}
 
 	public void reset() {
-		this.setId(0);
-		this.setName("");
+		this.selectedBreed = new Breed();
 	}
 
 	public List<Breed> getBreedListForSpecies(long speciesId) {
@@ -127,19 +122,4 @@ public class BreedManagedBean implements Serializable {
 		this.breedList = BreedList;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 }

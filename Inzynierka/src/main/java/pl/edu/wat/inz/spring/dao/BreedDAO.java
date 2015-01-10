@@ -34,11 +34,12 @@ public class BreedDAO {
 		sessionFactory.getCurrentSession().update(breed);
 	}
 
-	public void addBreed(Breed breed) {
+	public boolean addBreed(Breed breed) {
 		sessionFactory.getCurrentSession().save(breed);
+		return true;
 	}
 
-	public Breed getBreedById(int id) {
+	public Breed getBreedById(long id) {
 		List list = getSessionFactory().getCurrentSession()
 				.createQuery("from Breed where id=?").setParameter(0, id)
 				.list();

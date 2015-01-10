@@ -3,12 +3,10 @@
 }
 
 #page{
-	width: 1320px;
 	margin: 0 auto;
 }
 
 #header{
-	height:116px;
 	margin-bottom: 16px;
 }
 
@@ -19,7 +17,7 @@
 
 #content{
 	float: left;
-	width: 73%;
+	width: 74%;
 	text-align: center;
 }
 
@@ -27,4 +25,14 @@
 	float: right;
 	width: 25%;
 	overflow: hidden;
+}
+
+#footter{
+	height: 15%;
+	width: 100%
+}
+
+h1{
+	font-family: Open sans;
+	color: #2e90bd;
 }

@@ -9,45 +9,45 @@
      
     <body>
 	    <ui:composition>
-
+		
 			<div style="overflow: hidden;width:100%">
-				<div align="left" style="float:left;width:30% ">
-					<p:graphicImage url="../pic/logo.png"/>
-					<h:outputText value="Fundacja kociarnia"/>
+				<div align="left" style="float:left;width:20%">
+					<p:graphicImage value="../pic/logo.png"/>
 				</div>
-			 	<div align="right" style="float:right;width:10%">
-			 		<p:commandButton value="Logout" id="logout" action="#{loginMgmtBean.logout}" icon="ui-icon-extlink"/> 
+			 	<div align="right" style="float:right;width:50%">
+			 		<p:outputLabel value="Zalogowany użytkownik: "/>
+		   			<p:outputLabel value="#{loginMgmtBean.getUserName()}" style="font-weight:bold"/> 
 			 	</div>
 	      	</div>
-		   	<div align="left">
-		   		<p:outputLabel value="Zalogowany użytkownik "/>
-		   		<p:outputLabel value="#{loginMgmtBean.getUserName()}" style="font-weight:bold"/>
-		   	</div>
 		    <h:form>
-			<p:menubar activeIndex="#{naviBean.activeindex}">
+			<p:megaMenu activeIndex="#{naviBean.activeindex}">
+               <p:submenu id="ewidencja" label= "Ewidencja" ajax="true" tabindex = "1">
+               <p:column>
                <!-- EWIDENCJA -->
-                      <p:submenu label= "Ewidencja" ajax="true">
                             <p:submenu label= "Ewidencja zwierząt" >
                                    <p:menuitem value="Ewidencja kotów" action="#{naviBean.navigate(1)}"/>
                                    <p:menuitem value= "Ewidencja pozostałych zwierząt" action="#{naviBean.navigate(2)}"/>
                                     </p:submenu>
+                             </p:column>
+                             <p:column>
                             <p:submenu label= "Ewidencja budynków i lokali" >
                                    <p:menuitem value= "Ewidencja azyli" url ="../secure/list.xhtml" />
                                    <p:menuitem value= "Ewidencja przytulisk" url ="../secure/list.xhtml" />
                                    <p:menuitem value= "Ewidencja Domów Tymczasowych" url ="../secure/list.xhtml" />
                             </p:submenu>
+                            </p:column>
+                             <p:column>
                             <p:submenu label= "Ewidencja osób" >
-                                   <p:submenu label= "Ewidencja organów" >
-                                          <p:menuitem value= "Ewidencja Zarządu" url ="#" />
-                                          <p:menuitem value= "Ewidencja Rady" url ="#" />
-                                   </p:submenu>
+                                   <p:menuitem value= "Ewidencja Zarządu" url ="#" />
+                                   <p:menuitem value= "Ewidencja Rady" url ="#" />
                                    <p:menuitem value= "Ewidencja pracowników" url ="#" />
                                    <p:menuitem value= "Ewidencja wolontariuszy" url ="#" />
                                    <p:menuitem value= "Ewidencja osób prowadzących Domy Tymczasowe" url= "#" />
                                    <p:menuitem value= "Ewidencja osób adoptyujących" url ="#" />
                                    <p:menuitem value= "Ewidencja osób adoptujących wirtualnie" url= "#"/>
                             </p:submenu>
-                      </p:submenu>
+					</p:column>                     
+				</p:submenu>
               
                <!--ADOPCJA-->
                <p:submenu label= "Adopcje" >
@@ -117,10 +117,11 @@
                       <p:menuitem value= "Modyfikuj profil" url = "#"/>
                             <p:menuitem value= "Zarządzaj użytkownikami" url= "#"/>
                </p:submenu>
-              
-        </p:menubar>
-		</h:form>	
-				
+               <f:facet name="options">
+          			<p:commandButton value="Logout" id="logout" action="#{loginMgmtBean.logout}" icon="ui-icon-extlink"/>
+               </f:facet>
+        </p:megaMenu>
+		</h:form>		
 	    </ui:composition>
     </body>
 </html>

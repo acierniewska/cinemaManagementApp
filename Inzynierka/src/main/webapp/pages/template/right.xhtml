@@ -8,18 +8,9 @@
       xmlns:p="http://primefaces.org/ui">
     <body>
 	    <ui:composition>
-	    
-		    <!-- TU SIĘ ZACZYNAJĄ PANELE -->
-	        	<p:panel id="info" header="Praca inżynierska" style="margin-bottom:10px">
-	        		<h:outputText value="
-	        		Autor: Anna Cierniewska &lt;br /&gt;
-					Promotor: dr inż. Irena Skórska &lt;br /&gt; &lt;br /&gt;
-					Wojskowa Akademia Techniczna im. Jarosława Dąbrowskiego &lt;br /&gt;
-					2014" escape="false"/>
-	        	</p:panel>
-	        	
+	  
 	        	<!-- SCHEDULE -->
-	        	<p:panel id="sch" header="Kalendarz" style="margin-bottom:10px" ajax="true">
+	        	<p:panel id="sch" header="Kalendarz" style="margin-bottom:10px;" ajax="true">
 		            	<p:schedule id="myschedule" leftHeaderTemplate="prev" rightHeaderTemplate="next" view="month" locale="pl" ajax="true" widgetVar="myschedule" value="#{scheduleView.eventModel}" >
 			            	<p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
 				            <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
@@ -27,29 +18,6 @@
 				            <p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" />
 		            	</p:schedule>
 	    		</p:panel>
-	    		
-	    		<p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip" ajax="true">
-			        <h:panelGrid id="eventDetails" columns="2">
-			            <h:outputLabel for="title" value="Title:" />
-			            <p:inputText id="title" value="#{scheduleView.event.title}" required="true" />
-			 
-			            <h:outputLabel for="from" value="From:" />
-			            <p:inputMask id="from" value="#{scheduleView.event.startDate}" mask="99/99/9999">
-			                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2"/>
-			            </p:inputMask>
-			 
-			            <h:outputLabel for="to" value="To:" />
-			            <p:inputMask id="to" value="#{scheduleView.event.endDate}" mask="99/99/9999">
-			                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2"/>
-			            </p:inputMask>
-			 
-			            <h:outputLabel for="allDay" value="All Day:" />
-			            <h:selectBooleanCheckbox id="allDay" value="#{scheduleView.event.allDay}" />
-			 
-			            <p:commandButton type="reset" value="Reset" />
-			            <p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
-			        </h:panelGrid>
-			    </p:dialog> 
 	    		<script type="text/javascript">
 			            PrimeFaces.locales['pl'] = {
 			            closeText: 'Zamknij',
@@ -79,7 +47,29 @@
 			            allDayText : 'Cały dzień'
 			        };
 			        </script>
-	        
+	    		<p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip" ajax="true">
+			        <h:panelGrid id="eventDetails" columns="2">
+			            <h:outputLabel for="title" value="Title:" />
+			            <p:inputText id="title" value="#{scheduleView.event.title}" required="true" />
+			 
+			            <h:outputLabel for="from" value="From:" />
+			            <p:inputMask id="from" value="#{scheduleView.event.startDate}" mask="99/99/9999">
+			                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2"/>
+			            </p:inputMask>
+			 
+			            <h:outputLabel for="to" value="To:" />
+			            <p:inputMask id="to" value="#{scheduleView.event.endDate}" mask="99/99/9999">
+			                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2"/>
+			            </p:inputMask>
+			 
+			            <h:outputLabel for="allDay" value="All Day:" />
+			            <h:selectBooleanCheckbox id="allDay" value="#{scheduleView.event.allDay}" />
+			 
+			            <p:commandButton type="reset" value="Reset" />
+			            <p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+			        </h:panelGrid>
+			    </p:dialog> 
+	    		
 	        
 	    		<!-- ALLEGRO -->
 	    		<p:panel  id="allegro" header="Zobacz nasze aukcje!" style="margin-bottom:10px;txt-align:center" ajax="true">

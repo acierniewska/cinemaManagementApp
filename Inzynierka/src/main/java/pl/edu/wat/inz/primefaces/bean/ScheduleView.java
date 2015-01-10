@@ -16,7 +16,6 @@ import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
-import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
@@ -26,8 +25,6 @@ public class ScheduleView implements Serializable {
 	private static final long serialVersionUID = -6788743225281253117L;
 
 	private ScheduleModel eventModel;
-
-	private ScheduleModel lazyEventModel;
 
 	private ScheduleEvent event = new DefaultScheduleEvent();
 
@@ -45,21 +42,6 @@ public class ScheduleView implements Serializable {
 		eventModel.addEvent(new DefaultScheduleEvent(
 				"Plant the new garden stuff", theDayAfter3Pm(),
 				fourDaysLater3pm()));
-
-		lazyEventModel = new LazyScheduleModel() {
-			private static final long serialVersionUID = 884212963710008132L;
-
-			@Override
-			public void loadEvents(Date start, Date end) {
-				Date random = getRandomDate(start);
-				addEvent(new DefaultScheduleEvent("Lazy Event 1", random,
-						random));
-
-				random = getRandomDate(start);
-				addEvent(new DefaultScheduleEvent("Lazy Event 2", random,
-						random));
-			}
-		};
 	}
 
 	public Date getRandomDate(Date base) {
@@ -82,10 +64,6 @@ public class ScheduleView implements Serializable {
 
 	public ScheduleModel getEventModel() {
 		return eventModel;
-	}
-
-	public ScheduleModel getLazyEventModel() {
-		return lazyEventModel;
 	}
 
 	private Calendar today() {
