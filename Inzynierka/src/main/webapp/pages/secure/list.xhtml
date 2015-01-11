@@ -28,7 +28,7 @@
             			<h:outputText value="Specjalnej troski:"/>
 					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isHandicapte}"/>
 					    
-					    <h:outputText value="Gatunek:"/>
+					   <h:outputText value="Gatunek:"/>
             			<p:selectOneMenu id="speciesSelect"  value="#{animalMB.selectedAnimal.breed.species.speciesId}" effect="fade" filter="true"  filterMatchMode="startsWith">
 					     	<f:selectItems value="#{speciesMB.speciesList}" var="species" itemLabel="#{species.speciesName}" itemValue="#{species.speciesId}"/>
 					    </p:selectOneMenu>

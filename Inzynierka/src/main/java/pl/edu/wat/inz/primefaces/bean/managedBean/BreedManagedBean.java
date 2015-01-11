@@ -28,9 +28,9 @@ public class BreedManagedBean implements Serializable {
 
 	@ManagedProperty(value = "#{BreedService}")
 	private BreedService breedService;
-	private Breed selectedBreed = new Breed();
 
 	List<Breed> breedList;
+	private Breed selectedBreed = new Breed();
 
 	public List<Breed> getBreedList() {
 		if (breedList == null) {
