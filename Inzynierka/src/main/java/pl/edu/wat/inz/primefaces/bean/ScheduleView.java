@@ -34,14 +34,14 @@ public class ScheduleView implements Serializable {
 			return;
 		eventModel = new DefaultScheduleModel();
 		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match",
-				previousDay8Pm(), previousDay11Pm()));
+				previousDay8Pm(), previousDay11Pm(), "emp1"));
 		eventModel.addEvent(new DefaultScheduleEvent("Birthday Party",
-				today1Pm(), today6Pm()));
+				today1Pm(), today6Pm(), "emp2"));
 		eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys",
-				nextDay9Am(), nextDay11Am()));
+				nextDay9Am(), nextDay11Am(), "emp3"));
 		eventModel.addEvent(new DefaultScheduleEvent(
 				"Plant the new garden stuff", theDayAfter3Pm(),
-				fourDaysLater3pm()));
+				fourDaysLater3pm(), "emp4"));
 	}
 
 	public Date getRandomDate(Date base) {
@@ -153,12 +153,15 @@ public class ScheduleView implements Serializable {
 	}
 
 	public void addEvent(ActionEvent actionEvent) {
-		if (event.getId() == null)
+		if (event.getId() == null) {
 			eventModel.addEvent(event);
-		else
+			System.out.println(event.getTitle());
+		} else
 			eventModel.updateEvent(event);
 
 		event = new DefaultScheduleEvent();
+
+		event.getDescription();
 	}
 
 	public void onEventSelect(SelectEvent selectEvent) {

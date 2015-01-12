@@ -16,63 +16,101 @@
 		<h1>Ewidencja zwierząt - koty </h1>
 		
 		<h:form id="mainForm">
-			<p:dialog widgetVar="addDialog" header="Edytuj zwierzę" showEffect="clip" hideEffect="clip" height="550">
-				<h:panelGrid id="pic" columns="1">
-					<h:graphicImage value="#{animalMB.selectedAnimal.picPath}" height="200" width="200"/>
-					<p:commandButton value="Modyfikuj zdjęcie"/>
+			<p:dialog widgetVar="addDialog" header="Edytuj zwierzę" showEffect="clip" resizable="false" hideEffect="clip" height="515" width="635">
+				<p:tabView id="tabView" style="margin-bottom:5px">
+					<p:tab title="Podstawowe">
+					<h:panelGrid id="pic" columns="2" cellpadding="5" cellspacing="3">
+						<h:graphicImage value="#{animalMB.selectedAnimal.picPath}" height="215" width="215"/>
+						
+						<h:panelGrid id="animalBasic" columns="2" style="text-align:left">
+	            			<h:outputText value="Imię:"/>
+	            			<p:inputText value="#{animalMB.selectedAnimal.animalName}" size="24"/>
+	            			
+	            			<h:outputText value="Specjalnej troski:"/>
+						    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isHandicapte}"/>
+						    
+						   <h:outputText value="Gatunek:"/>
+	            			<p:selectOneMenu id="speciesSelect" value="#{animalMB.selectedAnimal.breed.species.speciesId}" effect="fade" filter="true"  filterMatchMode="startsWith" style="width:195px">
+						     	<f:selectItems value="#{speciesMB.speciesList}" var="species" itemLabel="#{species.speciesName}" itemValue="#{species.speciesId}"/>
+						    </p:selectOneMenu>
+						    
+	            			<h:outputText value="Rasa:"/>
+	            			<p:selectOneMenu id="breedSelect" value="#{animalMB.selectedAnimal.breed.breedId}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:195px">
+						     	<f:selectItems value="#{breedMB.getBreedListForSpecies(1)}" var="breed" itemLabel="#{breed.breedName}" itemValue="#{breed.breedId}"/>
+						    </p:selectOneMenu>
+	            			
+	            			<h:outputText value="Kolor futra:"/>
+	            			<p:selectOneMenu id="furColourSelect" value="#{animalMB.selectedAnimal.fur.furColour}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:195px">
+						     	<f:selectItems value="#{furEB.colours}" var="fur" itemLabel="#{FurEnumBean.getColour(fur.intValue)}" itemValue="#{fur.intValue}"/>
+						    </p:selectOneMenu>
+						    
+						    <h:outputText value="Długość futra:"/>
+						    <p:selectOneMenu id="furLengthSelect" value="#{animalMB.selectedAnimal.fur.furLength}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:195px">
+						     	<f:selectItems value="#{furEB.lengths}" var="fur" itemLabel="#{FurEnumBean.getLength(fur.intValue)}" itemValue="#{fur.intValue}"/>
+						    </p:selectOneMenu>
+	            			
+	            			<h:outputText value="Data urodzenia:"/>
+	            			<p:calendar size="20" value="#{animalMB.selectedAnimal.animalBirthdayDay}" pattern="yyyy-MM-dd" mask="true" showOn="button"/>
+					 
+					 		<h:outputText value="W Fundacji od:"/>
+					        <p:calendar size="20" value="#{animalMB.selectedAnimal.animalRescueDate}" pattern="yyyy-MM-dd" mask="true" showOn="button"/>
+					        </h:panelGrid>
+					</h:panelGrid>
+					
+	            	<h:panelGrid id="animalBasicDetail" columns="2" style="text-align:left">
+	            			<h:outputText value="Osoba adoptująca:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
+	            			<p:selectOneMenu id="personSelect" value="#{animalMB.selectedAnimal.person.personId}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:307px">
+						     	<f:selectItem itemLabel="(puste)" itemValue=""/>
+						     	<f:selectItems value="#{personMB.personList}" var="person" itemLabel="#{person.personName} #{person.surname}" itemValue="#{person.personId}"/>
+						    </p:selectOneMenu>
+						    
+						    <h:outputText value="Osoba prowadząca Dom Tymczasowy:"/>
+	            			<p:selectOneMenu id="personTHSelect" value="#{animalMB.selectedAnimal.tempHousePerson.personId}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:307px">
+						     	<f:selectItem itemLabel="(puste)" itemValue=""/>
+						     	<f:selectItems value="#{personMB.personList}" var="person" itemLabel="#{person.personName} #{person.surname}" itemValue="#{person.personId}"/>
+						    </p:selectOneMenu>
+						    
+						    <h:outputText value="Osoba adoptująca wirtualnie:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
+	            			<p:selectOneMenu id="personVSelect" value="#{animalMB.selectedAnimal.virtualPerson.personId}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:307px">
+						     	<f:selectItem itemLabel="(puste)" itemValue=""/>
+						     	<f:selectItems value="#{personMB.personList}" var="person" itemLabel="#{person.personName} #{person.surname}" itemValue="#{person.personId}"/>
+						    </p:selectOneMenu>
+						    
+						    <h:outputText value="Azyl:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
+	            			<p:selectOneMenu id="asyliumSelect" value="#{animalMB.selectedAnimal.asylium.asyliumId}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:307px">
+						     	<f:selectItem itemLabel="(puste)" itemValue=""/>
+						     	<f:selectItems value="#{asyliumMB.asyliumList}" var="asylium" itemLabel="#{asylium.name}" itemValue="#{asylium.asyliumId}"/>
+						    </p:selectOneMenu>
+						    
+						    <h:outputText value="Przytulisko:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
+	            			<p:selectOneMenu id="animalRepo" value="#{animalMB.selectedAnimal.animalRepo.animalRepoId}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:307px">
+						     	<f:selectItem itemLabel="(puste)" itemValue=""/>
+						     	<f:selectItems value="#{animalRepoMB.animalRepoList}" var="animalRepo" itemLabel="#{animalRepo.name}" itemValue="#{animalRepo.animalRepoId}"/>
+						    </p:selectOneMenu>
 				</h:panelGrid>
-				<h:panelGrid id="dialogDetail" columns="2" style="text-align:left">
-            			<h:outputText value="Imię:"/>
-            			<h:inputText value="#{animalMB.selectedAnimal.animalName}"/>
-            			
-            			<h:outputText value="Specjalnej troski:"/>
-					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isHandicapte}"/>
-					    
-					   <h:outputText value="Gatunek:"/>
-            			<p:selectOneMenu id="speciesSelect"  value="#{animalMB.selectedAnimal.breed.species.speciesId}" effect="fade" filter="true"  filterMatchMode="startsWith">
-					     	<f:selectItems value="#{speciesMB.speciesList}" var="species" itemLabel="#{species.speciesName}" itemValue="#{species.speciesId}"/>
-					    </p:selectOneMenu>
-					    
-            			<h:outputText value="Rasa:"/>
-            			<p:selectOneMenu id="breedSelect" value="#{animalMB.selectedAnimal.breed.breedId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
-					     	<f:selectItems value="#{breedMB.getBreedListForSpecies(1)}" var="breed" itemLabel="#{breed.breedName}" itemValue="#{breed.breedId}"/>
-					    </p:selectOneMenu>
-            			
-            			<h:outputText value="Kolor futra:"/>
-            			<p:selectOneMenu id="furColourSelect" value="#{animalMB.selectedAnimal.fur.furColour}"  effect="fade" filter="true"  filterMatchMode="startsWith">
-					     	<f:selectItems value="#{furEB.colours}" var="fur" itemLabel="#{FurEnumBean.getColour(fur.intValue)}" itemValue="#{fur.intValue}"/>
-					    </p:selectOneMenu>
-					    
-					    <h:outputText value="Długość futra:"/>
-					    <p:selectOneMenu id="furLengthSelect" value="#{animalMB.selectedAnimal.fur.furLength}"  effect="fade" filter="true"  filterMatchMode="startsWith">
-					     	<f:selectItems value="#{furEB.lengths}" var="fur" itemLabel="#{FurEnumBean.getLength(fur.intValue)}" itemValue="#{fur.intValue}"/>
-					    </p:selectOneMenu>
-            			
-            			<h:outputText value="Data urodzenia:"/>
-            			<p:calendar value="#{animalMB.selectedAnimal.animalBirthdayDay}" pattern="yyyy-MM-dd" mask="true" showOn="button"/>
-				 
-				 		<h:outputText value="Pod opieką Fundacji od:"/>
-				        <p:calendar value="#{animalMB.selectedAnimal.animalRescueDate}" pattern="yyyy-MM-dd" mask="true" showOn="button"/>
-            			
-            			<h:outputText value="Osoba:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
-            			<p:selectOneMenu id="personSelect" value="#{animalMB.selectedAnimal.person.personId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
-					     	<f:selectItem itemLabel="(puste)" itemValue=""/>
-					     	<f:selectItems value="#{personMB.personList}" var="person" itemLabel="#{person.personName} #{person.surname}" itemValue="#{person.personId}"/>
-					    </p:selectOneMenu>
-					    
-					    <h:outputText value="Azyl:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
-            			<p:selectOneMenu id="asyliumSelect" value="#{animalMB.selectedAnimal.asylium.asyliumId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
-					     	<f:selectItem itemLabel="(puste)" itemValue=""/>
-					     	<f:selectItems value="#{asyliumMB.asyliumList}" var="asylium" itemLabel="#{asylium.name}" itemValue="#{asylium.asyliumId}"/>
-					    </p:selectOneMenu>
-					    
-					    <h:outputText value="Przytulisko:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
-            			<p:selectOneMenu id="animalRepo" value="#{animalMB.selectedAnimal.animalRepo.animalRepoId}"  effect="fade" filter="true"  filterMatchMode="startsWith">
-					     	<f:selectItem itemLabel="(puste)" itemValue=""/>
-					     	<f:selectItems value="#{animalRepoMB.animalRepoList}" var="animalRepo" itemLabel="#{animalRepo.name}" itemValue="#{animalRepo.animalRepoId}"/>
-					    </p:selectOneMenu>
-					    
-					    <h:outputText value="W Domu Tymczasowym:"/>
+				</p:tab>
+				
+				<p:tab title= "Wizyty weterynaryjne">
+					
+				</p:tab>
+				
+				<p:tab title= "Dotacje">
+				</p:tab>
+				
+				<p:tab title="Inne">
+					<h:panelGrid id="animalOtherDetail" columns="2" style="text-align:left">
+						<h:outputText value="Zdjęcie:"/>
+		            	<h:inputText value="#{animalMB.selectedAnimal.picPath}"/>
+		            </h:panelGrid>
+				</p:tab>
+			</p:tabView>
+			
+			<p:panel style="text-align:right">
+				<p:button value="Ok" style="width:40px"/>
+				<p:button value="Anuluj"/>	
+			</p:panel>
+			</p:dialog> 		
+					  <!--   <h:outputText value="W Domu Tymczasowym:"/>
 					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isInTempHouse}" disabled="#{animalMB.selectedAnimal.person == null}" />
 					    
 					    <h:outputText value="Zaadoptowany:"/>
@@ -80,10 +118,10 @@
 					    
 					    <h:outputText value="Zaadoptowany wirtualnie:"/>
 					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isVirtualAdopted}" disabled="#{animalMB.selectedAnimal.person == null}" />
-					    
-			</h:panelGrid>
+ -->					    
 			
-		</p:dialog> 
+			
+		
 		
 		<!-- Buttony -->
 		<h:panelGrid id="buttons" columns="3" style="text-align:left;margin-bottom:10px">
@@ -96,7 +134,7 @@
         <p:dataTable  widhetVar="animalTable" id="animals"  selectionMode="single" selection="#{animalMB.selectedAnimal}" dblClickSelect="true"  onRowDblselectComplete="addDialog.show()"
        					var="animal" rowKey="#{animal.animalName}" value="#{animalMB.animalList}" editable="true"
        					paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rows="10">  
-            <p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}" update=":mainForm:buttons, :mainForm:dialogDetail, :mainForm:pic"/> 
+            <p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}" update=":mainForm:buttons, :mainForm:tabView"/> 
             <p:ajax event="rowUnselect" listener="#{animalMB.onUserRowUnselect}" update=":mainForm:buttons"/>
            	<p:ajax event="rowDblselect" immediate="true" process="@this" oncomplete="PF('addDialog').show()" />
             <p:column headerText="Imię">
@@ -117,20 +155,17 @@
 		        <h:outputText value="#{animal.animalRepo.animalRepoName}"/>
    				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.animalRepo.animalRepoName.isEmpty()}"/>
 		    </p:column>
-		    <p:column headerText="Osoba">
-		        <h:outputText value="#{animal.person.personName} #{animal.person.surname}" />
-		    </p:column>
 		     <p:column headerText="Dom Tymczasowy">
-		    	<p:graphicImage value="../pic/ok.png" rendered="#{animal.isInTempHouse}"/>
-   				<p:graphicImage value="../pic/nope.png"  rendered=" not #{animal.isInTempHouse}"/>
+		    	<p:graphicImage value="../pic/ok.png" rendered="#{animal.tempHousePerson.personId > 0}"/>
+   				<p:graphicImage value="../pic/nope.png"  rendered="#{animal.tempHousePerson.personId == 0}"/>
    			</p:column>
 		    <p:column headerText="Zaadoptowany">
-		    	<p:graphicImage value="../pic/ok.png" rendered="#{animal.isAdopted}"/>
-   				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.isAdopted}"/>
+		    	<p:graphicImage value="../pic/ok.png" rendered="#{animal.person.personId > 0}"/>
+   				<p:graphicImage value="../pic/nope.png"  rendered="#{animal.person.personId == 0}"/>
 		    </p:column>
 		    <p:column headerText="Zaadoptowany wirtualnie">
-		    	<p:graphicImage value="../pic/ok.png" rendered="#{animal.isVirtualAdopted}"/>
-   				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.isVirtualAdopted}"/>
+		 		<p:graphicImage value="../pic/ok.png" rendered="#{animal.virtualPerson.personId > 0}"/>
+   				<p:graphicImage value="../pic/nope.png"  rendered="#{animal.virtualPerson.personId == 0}"/>
 		    </p:column>
         </p:dataTable>
         
@@ -138,6 +173,8 @@
         
         </ui:define>
     </ui:composition>
+    
+	
 </h:body>
 </html>
 

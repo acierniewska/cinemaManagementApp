@@ -21,10 +21,10 @@
 	      	</div>
 		    <h:form>
 			<p:megaMenu activeIndex="#{naviBean.activeindex}">
-               <p:submenu id="ewidencja" label= "Ewidencja" ajax="true" tabindex = "1">
-               <p:column>
                <!-- EWIDENCJA -->
-                            <p:submenu label= "Ewidencja zwierząt" >
+               <p:submenu id="ewidencja" label= "Ewidencja" ajax="true" tabindex = "1" icon="ui-icon-person">
+               		<p:column>
+                            <p:submenu label= "Ewidencja zwierząt">
                                    <p:menuitem value="Ewidencja kotów" action="#{naviBean.navigate(1)}"/>
                                    <p:menuitem value= "Ewidencja pozostałych zwierząt" action="#{naviBean.navigate(2)}"/>
                                     </p:submenu>
@@ -50,7 +50,7 @@
 				</p:submenu>
               
                <!--ADOPCJA-->
-               <p:submenu label= "Adopcje" >
+               <p:submenu label= "Adopcje" icon="ui-icon-heart">
                       <p:submenu label= "Przeglądaj zwierzęta do adopcji" >
                             <p:submenu label= "Koty" >
                                    <p:menuitem value= "Koty młode" url = "#"/>
@@ -67,58 +67,57 @@
                </p:submenu>
                            
                <!--E-wnioski-->
-               <p:submenu label= "E-wnioski" >
+               <p:submenu label= "E-wnioski" icon="ui-icon-folder-open">
                       <p:menuitem value= "Złóż e-wniosek" url="#"/>
                       <p:menuitem value= "Spis moich e-wniosków" url="#"/>
                             <p:menuitem value= "Spis wszystkich e-wniosków" url="#"/>
                </p:submenu>
               
                <!--Sprawozdania-->
-               <p:submenu label= "Sprawozdania" >
+               <p:submenu label= "Sprawozdania" icon="ui-icon-document">
                       <p:menuitem value= "Spis wszystkich sprawozdań" url="#"/>
                             <p:menuitem value= "Generuj sprawozdanie" url="#"/>
                </p:submenu>
               
                <!--Umowy-->
-               <p:submenu label= "Umowy" >
+               <p:submenu label= "Umowy" icon="ui-icon-contact">
                       <p:menuitem value= "Spis moich umów" url="#"/>
                       <p:menuitem value= "Spis wszystkich umów" url="#"/>
                             <p:menuitem value= "Generuj umowę" url="#"/>
                </p:submenu>
               
                <!--Wizyty wet-->
-                      <p:submenu label= "Wizyty weterynaryjne" >
+                      <p:submenu label= "Wizyty weterynaryjne" icon="ui-icon-calendar">
                             <p:menuitem value= "Spis wizyt odbytych" url="#"/>
                             <p:menuitem value= "Spis wizyt zaplanowanych" url="#"/>
                       </p:submenu>
               
                <!-- Moje zwierzęta -->
-               <p:submenu label= "Moje zwierzęta" >
+               <p:submenu label= "Moje zwierzęta" icon="ui-icon-home">
                       <p:menuitem value= "Spis zwierząt zaadoptowanych" url= "#"/>
                       <p:menuitem value= "Spis zwierząt zaadoptowanych wirtualnie" url ="#" />
                       <p:menuitem value= "Spis zwierząt w moich Domu Tymczasowym" url ="#" />
                </p:submenu>
-              
-               <!-- Funkcje specjalne -->
-               <p:submenu label= "Funkcje specjalistyczne" >
-                            <p:menuitem value= "Eksport przelewów" url= "#"/>
-                            <p:menuitem value= "Import przelewów" url= "#"/>
-                            <p:menuitem value= "Spis aukcji" url = "#"/>
-               </p:submenu>
-              
-               <!-- Wiadomościa -->
-               <p:submenu label= "Wiadomości" >
+               
+               <!-- Wiadomości -->
+               <p:submenu label= "Wiadomości" icon="ui-icon-mail-closed">
                       <p:menuitem value= "Wiadomości odebrane" url= "#"/>
                       <p:menuitem value= "Wiadomości wysłane" url= "#"/>
                </p:submenu>
               
-               <!-- Administracyjne -->
-               <p:submenu label= "Funkcje administracyjne" >
-                      <p:menuitem value= "Modyfikuj profil" url = "#"/>
+               <!-- Funkcje specjalne -->
+               <p:submenu label= "Funkcje specjalistyczne" icon="ui-icon-wrench">
+                            <p:menuitem value= "Eksport przelewów" url= "#"/>
+                            <p:menuitem value= "Import przelewów" url= "#"/>
+                            <p:menuitem value= "Spis aukcji" url = "#"/>
+                             <p:submenu label= "Funkcje administracyjne" >
+                    			  <p:menuitem value= "Modyfikuj profil" url = "#"/>
                             <p:menuitem value= "Zarządzaj użytkownikami" url= "#"/>
                </p:submenu>
+               </p:submenu>
+              
                <f:facet name="options">
-          			<p:commandButton value="Logout" id="logout" action="#{loginMgmtBean.logout}" icon="ui-icon-extlink"/>
+          			<p:commandButton value="Wyloguj" id="logout" action="#{loginMgmtBean.logout}" icon="ui-icon-extlink"/>
                </f:facet>
         </p:megaMenu>
 		</h:form>		

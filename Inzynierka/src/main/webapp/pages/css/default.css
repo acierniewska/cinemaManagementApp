@@ -36,3 +36,32 @@ h1{
 	font-family: Open sans;
 	color: #2e90bd;
 }
+
+.emp1 .fc-event-inner  {
+    background: #2e90bd;
+    border-color: ##2e90bd;
+}
+.emp2 .fc-event-inner  {
+   background: #91c05f;
+   border-color: #91c05f;
+ }
+ .emp3 .fc-event-inner  {
+    background: #72b9d7;
+    border-color: #72b9d7;
+}
+.emp4 .fc-event-inner  {
+   background: orange;
+   border-color: orange;
+ }
+ .emp5 .fc-event-inner  {
+   background: green;
+   border-color: Yellow;
+ }
+ .emp6 .fc-event-inner  {
+    background: red;
+    border-color: Yellow;
+}
+.emp7 .fc-event-inner  {
+   background: green;
+   border-color: Yellow;
+ }

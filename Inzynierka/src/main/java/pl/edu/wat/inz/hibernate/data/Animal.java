@@ -40,6 +40,16 @@ public class Animal {
 	@JoinColumns({ @JoinColumn(name = "PERSON_ID", referencedColumnName = "PERSON_ID") })
 	private Person person;
 
+	@ManyToOne(targetEntity = Person.class)
+	@org.hibernate.annotations.Cascade({ org.hibernate.annotations.CascadeType.LOCK })
+	@JoinColumns({ @JoinColumn(name = "VIRTUAL_PERSON_ID", referencedColumnName = "PERSON_ID") })
+	private Person virtualPerson;
+
+	@ManyToOne(targetEntity = Person.class)
+	@org.hibernate.annotations.Cascade({ org.hibernate.annotations.CascadeType.LOCK })
+	@JoinColumns({ @JoinColumn(name = "TEMP_HOUSE_PERSON_ID", referencedColumnName = "PERSON_ID") })
+	private Person tempHousePerson;
+
 	@ManyToOne(targetEntity = Fur.class)
 	@org.hibernate.annotations.Cascade({ org.hibernate.annotations.CascadeType.LOCK })
 	@JoinColumns({ @JoinColumn(name = "FUR_ID", referencedColumnName = "FUR_ID", nullable = false) })
@@ -64,15 +74,6 @@ public class Animal {
 	@Column(name = "IS_HANDICAPED", nullable = false)
 	private boolean isHandicapte;
 
-	@Column(name = "IS_ADOPTED", nullable = false)
-	private boolean isAdopted;
-
-	@Column(name = "IS_VIRTUAL_ADOPTED", nullable = false)
-	private boolean isVirtualAdopted;
-
-	@Column(name = "IS_IN_TEMP_HOUSE", nullable = false)
-	private boolean isInTempHouse;
-
 	@Column(name = "PIC_PATH", nullable = false)
 	private String picPath;
 
@@ -82,14 +83,6 @@ public class Animal {
 
 	public void setPicPath(String picPath) {
 		this.picPath = picPath;
-	}
-
-	public boolean getIsInTempHouse() {
-		return isInTempHouse;
-	}
-
-	public void setInTempHouse(boolean isInTempHouse) {
-		this.isInTempHouse = isInTempHouse;
 	}
 
 	public long getAnimalId() {
@@ -172,20 +165,20 @@ public class Animal {
 		this.isHandicapte = isHandicapte;
 	}
 
-	public boolean getIsAdopted() {
-		return isAdopted;
+	public Person getVirtualPerson() {
+		return virtualPerson == null ? new Person() : virtualPerson;
 	}
 
-	public void setAdopted(boolean isAdopted) {
-		this.isAdopted = isAdopted;
+	public void setVirtualPerson(Person virtualPerson) {
+		this.virtualPerson = virtualPerson;
 	}
 
-	public boolean getIsVirtualAdopted() {
-		return isVirtualAdopted;
+	public Person getTempHousePerson() {
+		return tempHousePerson == null ? new Person() : tempHousePerson;
 	}
 
-	public void setVirtualAdopted(boolean isVirtualAdopted) {
-		this.isVirtualAdopted = isVirtualAdopted;
+	public void setTempHousePerson(Person tempHousePerson) {
+		this.tempHousePerson = tempHousePerson;
 	}
 
 }
