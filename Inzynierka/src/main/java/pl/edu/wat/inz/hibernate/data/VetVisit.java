@@ -26,7 +26,7 @@ public class VetVisit {
 	@JoinColumns({ @JoinColumn(name = "ANIMAL_ID", referencedColumnName = "ANIMAL_ID", nullable = false) })
 	private Animal animal;
 
-	@Column(name = "VET_VISIT_ID_DATE", nullable = false)
+	@Column(name = "VET_VISIT_DATE", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private java.util.Date vetVisitDate;
 
@@ -41,4 +41,61 @@ public class VetVisit {
 
 	@Column(name = "DETAILS", nullable = true, length = 128)
 	private String details;
+
+	public long getVetVisitId() {
+		return vetVisitId;
+	}
+
+	public void setVetVisitId(long vetVisitId) {
+		this.vetVisitId = vetVisitId;
+	}
+
+	public Animal getAnimal() {
+		return animal;
+	}
+
+	public void setAnimal(Animal animal) {
+		this.animal = animal;
+	}
+
+	public java.util.Date getVetVisitDate() {
+		return vetVisitDate;
+	}
+
+	public void setVetVisitDate(java.util.Date vetVisitDate) {
+		this.vetVisitDate = vetVisitDate;
+	}
+
+	public java.sql.Time getVetVisitTime() {
+		return vetVisitTime;
+	}
+
+	public void setVetVisitTime(java.sql.Time vetVisitTime) {
+		this.vetVisitTime = vetVisitTime;
+	}
+
+	public boolean getPlanned() {
+		return planned;
+	}
+
+	public void setPlanned(boolean planned) {
+		this.planned = planned;
+	}
+
+	public java.math.BigDecimal getFoundationPayment() {
+		return foundationPayment;
+	}
+
+	public void setFoundationPayment(java.math.BigDecimal foundationPayment) {
+		this.foundationPayment = foundationPayment;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
+	}
+
 }

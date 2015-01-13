@@ -16,6 +16,7 @@
 		<h1>Ewidencja zwierząt - koty </h1>
 		
 		<h:form id="mainForm">
+	
 			<p:dialog widgetVar="addDialog" header="Edytuj zwierzę" showEffect="clip" resizable="false" hideEffect="clip" height="515" width="635">
 				<p:tabView id="tabView" style="margin-bottom:5px">
 					<p:tab title="Podstawowe">
@@ -90,8 +91,28 @@
 				</h:panelGrid>
 				</p:tab>
 				
+				<p:dialog widgetVat="vetDialog" header="Wizyta weterynaryjna" showEffect="clip" hideEffect="clip">
+						<h:outputText value="Azyl:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
+				</p:dialog>
+			
 				<p:tab title= "Wizyty weterynaryjne">
-					
+					<p:dataTable id="visitTable" scrollable="true" scrollHeight="360" emptyMessage="Brak wizyt dla zwierzęcia"
+						var="visit" rowKey="#{visit.vetVisitId}" value="#{vetVisitMB.getVetVisitListForAnimal(animalMB.selectedAnimal.animalId)}">
+						<p:column headerText="Data wizyty">
+	                   		<h:outputText value="#{visit.vetVisitDate}"/>
+	           			</p:column>
+	           			<p:column headerText="Godzina wizyty">
+	                   		<h:outputText value="#{visit.vetVisitTime}"/>
+	           			</p:column>
+	           			<p:column headerText="Planowana">
+	                   		<p:graphicImage value="../pic/ok.png" rendered="#{visit.planned}"/>
+   							<p:graphicImage value="../pic/nope.png"  rendered="#{not visit.planned}"/>	
+	           			</p:column>
+	           			
+	           			<p:column headerText="Opis">
+				        	<h:outputText value="#{visit.details}"/>
+				       	</p:column>
+					</p:dataTable>
 				</p:tab>
 				
 				<p:tab title= "Dotacje">
@@ -132,7 +153,7 @@
 		
 		<!-- TABELA -->
         <p:dataTable  widhetVar="animalTable" id="animals"  selectionMode="single" selection="#{animalMB.selectedAnimal}" dblClickSelect="true"  onRowDblselectComplete="addDialog.show()"
-       					var="animal" rowKey="#{animal.animalName}" value="#{animalMB.animalList}" editable="true"
+       					var="animal" rowKey="#{animal.animalId}" value="#{animalMB.animalList}" editable="true"
        					paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rows="10">  
             <p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}" update=":mainForm:buttons, :mainForm:tabView"/> 
             <p:ajax event="rowUnselect" listener="#{animalMB.onUserRowUnselect}" update=":mainForm:buttons"/>

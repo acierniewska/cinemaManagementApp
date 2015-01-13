@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import pl.edu.wat.inz.hibernate.data.Breed;
 import pl.edu.wat.inz.hibernate.data.VetVisit;
 
 @Component
@@ -52,12 +51,12 @@ public class VetVisitDAO {
 		return list;
 	}
 
-	public List<Breed> getVetVisitForVetVisit(long vetVisitId) {
+	public List<VetVisit> getVetVisitForAnimal(long animalId) {
 		List list = getSessionFactory()
 				.getCurrentSession()
 				.createQuery(
-						"select v from VetVisit v where v.vetVisitId =:aId")
-				.setParameter("aId", vetVisitId).list();
+						"select v from VetVisit v join v.animal a where a.animalId =:aId")
+				.setParameter("aId", animalId).list();
 		return list;
 	}
 
