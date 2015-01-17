@@ -55,7 +55,7 @@ public class FinancialSupportDAO {
 		List list = getSessionFactory()
 				.getCurrentSession()
 				.createQuery(
-						"select v from FinancialSupport join v.animal a where a.animalId =:aId")
+						"select f from FinancialSupport f join f.animal a where a.animalId =:aId")
 				.setParameter("aId", animalId).list();
 		return list;
 	}

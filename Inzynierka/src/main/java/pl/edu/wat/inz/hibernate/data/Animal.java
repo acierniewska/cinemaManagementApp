@@ -74,6 +74,9 @@ public class Animal {
 	@Column(name = "IS_HANDICAPED", nullable = false)
 	private boolean isHandicapte;
 
+	@Column(name = "IS_CASTRATED", nullable = false)
+	private boolean isCastrated;
+
 	@Column(name = "PIC_PATH", nullable = false)
 	private String picPath;
 
@@ -115,6 +118,14 @@ public class Animal {
 
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+
+	public boolean isCastrated() {
+		return isCastrated;
+	}
+
+	public void setCastrated(boolean isCastrated) {
+		this.isCastrated = isCastrated;
 	}
 
 	public Fur getFur() {

@@ -31,6 +31,12 @@ public class FinancialSupport {
 	@Column(name = "AMOUNT", nullable = false)
 	private float amount;
 
+	@Column(name = "ACCOUNT_NR", nullable = false)
+	private String accountNr;
+
+	@Column(name = "TITLE", nullable = false)
+	private String title;
+
 	@Column(name = "IS_EXPORTED", nullable = true)
 	private Boolean isExported;
 
@@ -72,6 +78,22 @@ public class FinancialSupport {
 
 	public void setIsExported(Boolean isExported) {
 		this.isExported = isExported;
+	}
+
+	public String getAccountNr() {
+		return accountNr;
+	}
+
+	public void setAccountNr(String accountNr) {
+		this.accountNr = accountNr;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

@@ -1,38 +1,39 @@
 package pl.edu.wat.inz.hibernate.data;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "animal_feature")
-public class AnimalFeature implements Serializable {
-	private static final long serialVersionUID = 137328522749656439L;
+public class AnimalFeature {
 
+	@ManyToOne(targetEntity = Animal.class)
 	@Column(name = "ANIMAL_ID", nullable = false)
 	@Id
-	private long animalId;
+	private Animal animal;
 
+	@ManyToOne(targetEntity = Feature.class)
 	@Column(name = "FEATURE_ID", nullable = false)
 	@Id
-	private long featureId;
+	private Feature feature;
 
-	public long getAnimalId() {
-		return animalId;
+	public Animal getAnimal() {
+		return animal;
 	}
 
-	public void setAnimalId(long animalId) {
-		this.animalId = animalId;
+	public void setAnimal(Animal animal) {
+		this.animal = animal;
 	}
 
-	public long getFeatureId() {
-		return featureId;
+	public Feature getFeature() {
+		return feature;
 	}
 
-	public void setFeatureId(long featureId) {
-		this.featureId = featureId;
+	public void setFeature(Feature feature) {
+		this.feature = feature;
 	}
+
 }

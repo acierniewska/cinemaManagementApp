@@ -1,211 +1,323 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:sec="http://www.springframework.org/security/tags">
-      
-   
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+
 <h:head>
-    <link rel="stylesheet" href="../css/default.css" type="text/css" />
+	<link rel="stylesheet" href="../css/default.css" type="text/css" />
 </h:head>
 
 <h:body>
-    <ui:composition template="../template/template.xhtml">
+	<ui:composition template="../template/template.xhtml">
 		<ui:define name="content">
-		<h1>Ewidencja zwierząt - koty </h1>
-		
-		<h:form id="mainForm">
-	
-			<p:dialog widgetVar="addDialog" header="Edytuj zwierzę" showEffect="clip" resizable="false" hideEffect="clip" height="515" width="635">
-				<p:tabView id="tabView" style="margin-bottom:5px">
-					<p:tab title="Podstawowe">
-					<h:panelGrid id="pic" columns="2" cellpadding="5" cellspacing="3">
-						<h:graphicImage value="#{animalMB.selectedAnimal.picPath}" height="215" width="215"/>
-						
-						<h:panelGrid id="animalBasic" columns="2" style="text-align:left">
-	            			<h:outputText value="Imię:"/>
-	            			<p:inputText value="#{animalMB.selectedAnimal.animalName}" size="24"/>
-	            			
-	            			<h:outputText value="Specjalnej troski:"/>
-						    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isHandicapte}"/>
-						    
-						   <h:outputText value="Gatunek:"/>
-	            			<p:selectOneMenu id="speciesSelect" value="#{animalMB.selectedAnimal.breed.species.speciesId}" effect="fade" filter="true"  filterMatchMode="startsWith" style="width:195px">
-						     	<f:selectItems value="#{speciesMB.speciesList}" var="species" itemLabel="#{species.speciesName}" itemValue="#{species.speciesId}"/>
-						    </p:selectOneMenu>
-						    
-	            			<h:outputText value="Rasa:"/>
-	            			<p:selectOneMenu id="breedSelect" value="#{animalMB.selectedAnimal.breed.breedId}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:195px">
-						     	<f:selectItems value="#{breedMB.getBreedListForSpecies(1)}" var="breed" itemLabel="#{breed.breedName}" itemValue="#{breed.breedId}"/>
-						    </p:selectOneMenu>
-	            			
-	            			<h:outputText value="Kolor futra:"/>
-	            			<p:selectOneMenu id="furColourSelect" value="#{animalMB.selectedAnimal.fur.furColour}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:195px">
-						     	<f:selectItems value="#{furEB.colours}" var="fur" itemLabel="#{FurEnumBean.getColour(fur.intValue)}" itemValue="#{fur.intValue}"/>
-						    </p:selectOneMenu>
-						    
-						    <h:outputText value="Długość futra:"/>
-						    <p:selectOneMenu id="furLengthSelect" value="#{animalMB.selectedAnimal.fur.furLength}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:195px">
-						     	<f:selectItems value="#{furEB.lengths}" var="fur" itemLabel="#{FurEnumBean.getLength(fur.intValue)}" itemValue="#{fur.intValue}"/>
-						    </p:selectOneMenu>
-	            			
-	            			<h:outputText value="Data urodzenia:"/>
-	            			<p:calendar size="20" value="#{animalMB.selectedAnimal.animalBirthdayDay}" pattern="yyyy-MM-dd" mask="true" showOn="button"/>
-					 
-					 		<h:outputText value="W Fundacji od:"/>
-					        <p:calendar size="20" value="#{animalMB.selectedAnimal.animalRescueDate}" pattern="yyyy-MM-dd" mask="true" showOn="button"/>
-					        </h:panelGrid>
-					</h:panelGrid>
-					
-	            	<h:panelGrid id="animalBasicDetail" columns="2" style="text-align:left">
-	            			<h:outputText value="Osoba adoptująca:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
-	            			<p:selectOneMenu id="personSelect" value="#{animalMB.selectedAnimal.person.personId}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:307px">
-						     	<f:selectItem itemLabel="(puste)" itemValue=""/>
-						     	<f:selectItems value="#{personMB.personList}" var="person" itemLabel="#{person.personName} #{person.surname}" itemValue="#{person.personId}"/>
-						    </p:selectOneMenu>
-						    
-						    <h:outputText value="Osoba prowadząca Dom Tymczasowy:"/>
-	            			<p:selectOneMenu id="personTHSelect" value="#{animalMB.selectedAnimal.tempHousePerson.personId}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:307px">
-						     	<f:selectItem itemLabel="(puste)" itemValue=""/>
-						     	<f:selectItems value="#{personMB.personList}" var="person" itemLabel="#{person.personName} #{person.surname}" itemValue="#{person.personId}"/>
-						    </p:selectOneMenu>
-						    
-						    <h:outputText value="Osoba adoptująca wirtualnie:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
-	            			<p:selectOneMenu id="personVSelect" value="#{animalMB.selectedAnimal.virtualPerson.personId}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:307px">
-						     	<f:selectItem itemLabel="(puste)" itemValue=""/>
-						     	<f:selectItems value="#{personMB.personList}" var="person" itemLabel="#{person.personName} #{person.surname}" itemValue="#{person.personId}"/>
-						    </p:selectOneMenu>
-						    
-						    <h:outputText value="Azyl:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
-	            			<p:selectOneMenu id="asyliumSelect" value="#{animalMB.selectedAnimal.asylium.asyliumId}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:307px">
-						     	<f:selectItem itemLabel="(puste)" itemValue=""/>
-						     	<f:selectItems value="#{asyliumMB.asyliumList}" var="asylium" itemLabel="#{asylium.name}" itemValue="#{asylium.asyliumId}"/>
-						    </p:selectOneMenu>
-						    
-						    <h:outputText value="Przytulisko:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
-	            			<p:selectOneMenu id="animalRepo" value="#{animalMB.selectedAnimal.animalRepo.animalRepoId}"  effect="fade" filter="true"  filterMatchMode="startsWith" style="width:307px">
-						     	<f:selectItem itemLabel="(puste)" itemValue=""/>
-						     	<f:selectItems value="#{animalRepoMB.animalRepoList}" var="animalRepo" itemLabel="#{animalRepo.name}" itemValue="#{animalRepo.animalRepoId}"/>
-						    </p:selectOneMenu>
-				</h:panelGrid>
-				</p:tab>
-				
-				<p:dialog widgetVat="vetDialog" header="Wizyta weterynaryjna" showEffect="clip" hideEffect="clip">
-						<h:outputText value="Azyl:" title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie"/>
+			<h1>Ewidencja zwierząt - koty</h1>
+
+			<h:form id="mainForm">
+
+				<p:dialog widgetVar="addDialog" header="Edytuj zwierzę"
+					showEffect="clip" resizable="false" hideEffect="clip" height="515"
+					width="635" modal="true">
+					<p:tabView id="tabView" style="margin-bottom:5px">
+						<p:tab title="Podstawowe">
+							<h:panelGrid id="pic" columns="2" cellpadding="5" cellspacing="3">
+								<h:graphicImage value="#{animalMB.selectedAnimal.picPath}"
+									height="215" width="215" />
+								<h:panelGrid id="animalBasic" columns="2"
+									style="text-align:left">
+									<h:outputText value="Imię:" />
+									<p:inputText value="#{animalMB.selectedAnimal.animalName}"
+										size="24" />
+
+									<h:outputText value="Specjalnej troski:" />
+									<p:selectBooleanCheckbox
+										value="#{animalMB.selectedAnimal.isHandicapte}" />
+
+									<h:outputText value="Gatunek:" />
+									<p:selectOneMenu id="speciesSelect"
+										value="#{animalMB.selectedAnimal.breed.species.speciesId}"
+										effect="fade" filter="true" filterMatchMode="startsWith"
+										style="width:195px">
+										<f:selectItems value="#{speciesMB.speciesList}" var="species"
+											itemLabel="#{species.speciesName}"
+											itemValue="#{species.speciesId}" />
+									</p:selectOneMenu>
+
+									<h:outputText value="Rasa:" />
+									<p:selectOneMenu id="breedSelect"
+										value="#{animalMB.selectedAnimal.breed.breedId}" effect="fade"
+										filter="true" filterMatchMode="startsWith" style="width:195px">
+										<f:selectItems value="#{breedMB.getBreedListForSpecies(1)}"
+											var="breed" itemLabel="#{breed.breedName}"
+											itemValue="#{breed.breedId}" />
+									</p:selectOneMenu>
+
+									<h:outputText value="Kolor futra:" />
+									<p:selectOneMenu id="furColourSelect"
+										value="#{animalMB.selectedAnimal.fur.furColour}" effect="fade"
+										filter="true" filterMatchMode="startsWith" style="width:195px">
+										<f:selectItems value="#{furEB.colours}" var="fur"
+											itemLabel="#{FurEnumBean.getColour(fur.intValue)}"
+											itemValue="#{fur.intValue}" />
+									</p:selectOneMenu>
+
+									<h:outputText value="Długość futra:" />
+									<p:selectOneMenu id="furLengthSelect"
+										value="#{animalMB.selectedAnimal.fur.furLength}" effect="fade"
+										filter="true" filterMatchMode="startsWith" style="width:195px">
+										<f:selectItems value="#{furEB.lengths}" var="fur"
+											itemLabel="#{FurEnumBean.getLength(fur.intValue)}"
+											itemValue="#{fur.intValue}" />
+									</p:selectOneMenu>
+
+									<h:outputText value="Data urodzenia:" />
+									<p:calendar size="20"
+										value="#{animalMB.selectedAnimal.animalBirthdayDay}"
+										pattern="yyyy-MM-dd" mask="true" showOn="button" />
+
+									<h:outputText value="W Fundacji od:" />
+									<p:calendar size="20"
+										value="#{animalMB.selectedAnimal.animalRescueDate}"
+										pattern="yyyy-MM-dd" mask="true" showOn="button" />
+								</h:panelGrid>
+							</h:panelGrid>
+
+							<h:panelGrid id="animalBasicDetail" columns="2"
+								style="text-align:left">
+								<h:outputText value="Osoba adoptująca:"
+									title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie" />
+								<p:selectOneMenu id="personSelect"
+									value="#{animalMB.selectedAnimal.person.personId}"
+									effect="fade" filter="true" filterMatchMode="startsWith"
+									style="width:307px">
+									<f:selectItem itemLabel="(puste)" itemValue="" />
+									<f:selectItems value="#{personMB.personList}" var="person"
+										itemLabel="#{person.personName} #{person.surname}"
+										itemValue="#{person.personId}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Osoba prowadząca Dom Tymczasowy:" />
+								<p:selectOneMenu id="personTHSelect"
+									value="#{animalMB.selectedAnimal.tempHousePerson.personId}"
+									effect="fade" filter="true" filterMatchMode="startsWith"
+									style="width:307px">
+									<f:selectItem itemLabel="(puste)" itemValue="" />
+									<f:selectItems value="#{personMB.personList}" var="person"
+										itemLabel="#{person.personName} #{person.surname}"
+										itemValue="#{person.personId}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Osoba adoptująca wirtualnie:"
+									title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie" />
+								<p:selectOneMenu id="personVSelect"
+									value="#{animalMB.selectedAnimal.virtualPerson.personId}"
+									effect="fade" filter="true" filterMatchMode="startsWith"
+									style="width:307px">
+									<f:selectItem itemLabel="(puste)" itemValue="" />
+									<f:selectItems value="#{personMB.personList}" var="person"
+										itemLabel="#{person.personName} #{person.surname}"
+										itemValue="#{person.personId}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Azyl:"
+									title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie" />
+								<p:selectOneMenu id="asyliumSelect"
+									value="#{animalMB.selectedAnimal.asylium.asyliumId}"
+									effect="fade" filter="true" filterMatchMode="startsWith"
+									style="width:307px">
+									<f:selectItem itemLabel="(puste)" itemValue="" />
+									<f:selectItems value="#{asyliumMB.asyliumList}" var="asylium"
+										itemLabel="#{asylium.name}" itemValue="#{asylium.asyliumId}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Przytulisko:"
+									title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie" />
+								<p:selectOneMenu id="animalRepo"
+									value="#{animalMB.selectedAnimal.animalRepo.animalRepoId}"
+									effect="fade" filter="true" filterMatchMode="startsWith"
+									style="width:307px">
+									<f:selectItem itemLabel="(puste)" itemValue="" />
+									<f:selectItems value="#{animalRepoMB.animalRepoList}"
+										var="animalRepo" itemLabel="#{animalRepo.name}"
+										itemValue="#{animalRepo.animalRepoId}" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+						</p:tab>
+
+						<p:dialog widgetVat="vetDialog" header="Wizyta weterynaryjna"
+							showEffect="clip" hideEffect="clip">
+							<h:outputText value="Azyl:"
+								title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie" />
+						</p:dialog>
+
+						<p:tab title="Wizyty weterynaryjne">
+							<p:dataTable id="visitTable" scrollable="true" scrollHeight="365"
+								emptyMessage="Brak wizyt dla zwierzęcia" var="visit"
+								rowKey="#{visit.vetVisitId}"
+								value="#{vetVisitMB.getVetVisitListForAnimal(animalMB.selectedAnimal.animalId)}">
+								<p:column headerText="Data wizyty">
+									<h:outputText value="#{visit.vetVisitDate}" />
+								</p:column>
+								<p:column headerText="Godzina wizyty">
+									<h:outputText value="#{visit.vetVisitTime}" />
+								</p:column>
+								<p:column headerText="Planowana">
+									<p:graphicImage value="../pic/ok.png"
+										rendered="#{visit.planned}" />
+									<p:graphicImage value="../pic/nope.png"
+										rendered="#{not visit.planned}" />
+								</p:column>
+
+								<p:column headerText="Opis">
+									<h:outputText value="#{visit.details}" />
+								</p:column>
+							</p:dataTable>
+						</p:tab>
+
+						<p:tab title="Dotacje">
+							<p:dataTable id="supportTable" scrollable="true"
+								scrollHeight="365" emptyMessage="Brak dotacji dla zwierzęcia"
+								var="support" rowKey="#{support.vetVisitId}"
+								value="#{financialSupportMB.getFinancialSupportListForAnimal(animalMB.selectedAnimal.animalId)}">
+								<p:column headerText="Tytuł">
+									<h:outputText value="#{support.title}" />
+								</p:column>
+								<p:column headerText="Kwota">
+									<h:outputText value="#{support.amount}" />
+								</p:column>
+								<p:column headerText="Wykonana">
+									<p:graphicImage value="../pic/ok.png"
+										rendered="#{support.exported}" />
+									<p:graphicImage value="../pic/nope.png"
+										rendered="#{not support.exported}" />
+								</p:column>
+							</p:dataTable>
+						</p:tab>
+
+						<p:tab title="Inne">
+							<h:panelGrid id="animalOtherDetail" columns="2"
+								style="text-align:left">
+								<h:outputText value="Zdjęcie:" />
+								<h:inputText value="#{animalMB.selectedAnimal.picPath}" />
+
+								<p:pickList id="animalFeatures" value="#{featurePickListMB.features}" 
+									var="theme" itemValue="#{feature.featureId}"
+									itemLabel="#{feature.featureName}" showCheckbox="true"
+									showSourceFilter="true" showTargetFilter="true"
+									filterMatchMode="contains">
+
+									<f:facet name="sourceCaption">Dostępne cechy</f:facet>
+									<f:facet name="targetCaption">Cechy kota</f:facet>
+
+									<p:ajax event="transfer" listener="#{featurePickListMB.onTransfer}"
+										update="msg" />
+
+									
+								</p:pickList>
+							</h:panelGrid>
+						</p:tab>
+					</p:tabView>
+
+					<p:panel style="text-align:right">
+						<p:button value="Ok" style="width:40px" />
+						<p:button value="Anuluj" />
+					</p:panel>
 				</p:dialog>
-			
-				<p:tab title= "Wizyty weterynaryjne">
-					<p:dataTable id="visitTable" scrollable="true" scrollHeight="360" emptyMessage="Brak wizyt dla zwierzęcia"
-						var="visit" rowKey="#{visit.vetVisitId}" value="#{vetVisitMB.getVetVisitListForAnimal(animalMB.selectedAnimal.animalId)}">
-						<p:column headerText="Data wizyty">
-	                   		<h:outputText value="#{visit.vetVisitDate}"/>
-	           			</p:column>
-	           			<p:column headerText="Godzina wizyty">
-	                   		<h:outputText value="#{visit.vetVisitTime}"/>
-	           			</p:column>
-	           			<p:column headerText="Planowana">
-	                   		<p:graphicImage value="../pic/ok.png" rendered="#{visit.planned}"/>
-   							<p:graphicImage value="../pic/nope.png"  rendered="#{not visit.planned}"/>	
-	           			</p:column>
-	           			
-	           			<p:column headerText="Opis">
-				        	<h:outputText value="#{visit.details}"/>
-				       	</p:column>
-					</p:dataTable>
-				</p:tab>
-				
-				<p:tab title= "Dotacje">
-				</p:tab>
-				
-				<p:tab title="Inne">
-					<h:panelGrid id="animalOtherDetail" columns="2" style="text-align:left">
-						<h:outputText value="Zdjęcie:"/>
-		            	<h:inputText value="#{animalMB.selectedAnimal.picPath}"/>
-		            </h:panelGrid>
-				</p:tab>
-			</p:tabView>
-			
-			<p:panel style="text-align:right">
-				<p:button value="Ok" style="width:40px"/>
-				<p:button value="Anuluj"/>	
-			</p:panel>
-			</p:dialog> 		
-					  <!--   <h:outputText value="W Domu Tymczasowym:"/>
-					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isInTempHouse}" disabled="#{animalMB.selectedAnimal.person == null}" />
-					    
-					    <h:outputText value="Zaadoptowany:"/>
-					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isAdopted}" disabled="#{animalMB.selectedAnimal.person == null}" />
-					    
-					    <h:outputText value="Zaadoptowany wirtualnie:"/>
-					    <p:selectBooleanCheckbox value="#{animalMB.selectedAnimal.isVirtualAdopted}" disabled="#{animalMB.selectedAnimal.person == null}" />
- -->					    
-			
-			
-		
-		
-		<!-- Buttony -->
-		<h:panelGrid id="buttons" columns="3" style="text-align:left;margin-bottom:10px">
-			<p:commandButton id="add" update="animals" title="Dodaj pozycję" ajax="true" icon="ui-icon-plusthick" onclick="PF('addDialog').show();"/>
-			<p:commandButton id="modify" update="animals" title="Modyfikuj zaznaczoną pozycję" ajax="true" icon="ui-icon-pencil" disabled="#{animalMB.selectedAnimal == null}"/>
-			<p:commandButton id="delete" update="animals" title="Usuń zaznaczoną pozycję" ajax="true" icon="ui-icon-minusthick" disabled="#{animalMB.selectedAnimal == null}"/>
-		</h:panelGrid>
-		
-		<!-- TABELA -->
-        <p:dataTable  widhetVar="animalTable" id="animals"  selectionMode="single" selection="#{animalMB.selectedAnimal}" dblClickSelect="true"  onRowDblselectComplete="addDialog.show()"
-       					var="animal" rowKey="#{animal.animalId}" value="#{animalMB.animalList}" editable="true"
-       					paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rows="10">  
-            <p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}" update=":mainForm:buttons, :mainForm:tabView"/> 
-            <p:ajax event="rowUnselect" listener="#{animalMB.onUserRowUnselect}" update=":mainForm:buttons"/>
-           	<p:ajax event="rowDblselect" immediate="true" process="@this" oncomplete="PF('addDialog').show()" />
-            <p:column headerText="Imię">
-                   <h:outputText value="#{animal.animalName}"/>
-            </p:column>
-            <p:column headerText="Gatunek">
-                   <h:outputText value="#{animal.breed.species.speciesName}"/>
-            </p:column>
-            <p:column headerText="Specjalnej troski">
-		        <p:graphicImage value="../pic/ok.png" rendered="#{animal.isHandicapte}"/>
-   				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.isHandicapte}"/>
-		    </p:column>
-            <p:column headerText="Azyl">
-            	<h:outputText value="#{animal.asylium.asyliumName}"/>
-   				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.asylium.asyliumName.isEmpty()}"/>
-		    </p:column>
-		    <p:column headerText="Przytułek">
-		        <h:outputText value="#{animal.animalRepo.animalRepoName}"/>
-   				<p:graphicImage value="../pic/nope.png"  rendered="#{not animal.animalRepo.animalRepoName.isEmpty()}"/>
-		    </p:column>
-		     <p:column headerText="Dom Tymczasowy">
-		    	<p:graphicImage value="../pic/ok.png" rendered="#{animal.tempHousePerson.personId > 0}"/>
-   				<p:graphicImage value="../pic/nope.png"  rendered="#{animal.tempHousePerson.personId == 0}"/>
-   			</p:column>
-		    <p:column headerText="Zaadoptowany">
-		    	<p:graphicImage value="../pic/ok.png" rendered="#{animal.person.personId > 0}"/>
-   				<p:graphicImage value="../pic/nope.png"  rendered="#{animal.person.personId == 0}"/>
-		    </p:column>
-		    <p:column headerText="Zaadoptowany wirtualnie">
-		 		<p:graphicImage value="../pic/ok.png" rendered="#{animal.virtualPerson.personId > 0}"/>
-   				<p:graphicImage value="../pic/nope.png"  rendered="#{animal.virtualPerson.personId == 0}"/>
-		    </p:column>
-        </p:dataTable>
-        
-        </h:form>
-        
-        </ui:define>
-    </ui:composition>
-    
-	
+
+
+
+
+				<!-- Buttony -->
+				<h:panelGrid id="buttons" columns="3"
+					style="text-align:left;margin-bottom:10px">
+					<p:commandButton id="add" update="animals" title="Dodaj pozycję"
+						ajax="true" icon="ui-icon-plusthick"
+						onclick="PF('addDialog').show();" />
+					<p:commandButton id="modify" update="animals"
+						title="Modyfikuj zaznaczoną pozycję" ajax="true"
+						icon="ui-icon-pencil"
+						disabled="#{animalMB.selectedAnimal == null}" />
+					<p:commandButton id="delete" update="animals"
+						title="Usuń zaznaczoną pozycję" ajax="true"
+						icon="ui-icon-minusthick"
+						disabled="#{animalMB.selectedAnimal == null}" />
+				</h:panelGrid>
+
+				<!-- TABELA -->
+				<p:dataTable widhetVar="animalTable" id="animals"
+					selectionMode="single" selection="#{animalMB.selectedAnimal}"
+					dblClickSelect="true" onRowDblselectComplete="addDialog.show()"
+					var="animal" rowKey="#{animal.animalId}"
+					value="#{animalMB.animalList}" editable="true" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+					rows="10">
+					<p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}"
+						update=":mainForm:buttons, :mainForm:tabView" />
+					<p:ajax event="rowUnselect"
+						listener="#{animalMB.onUserRowUnselect}"
+						update=":mainForm:buttons" />
+					<p:ajax event="rowDblselect" immediate="true" process="@this"
+						oncomplete="PF('addDialog').show()" />
+					<p:column headerText="Imię">
+						<h:outputText value="#{animal.animalName}" />
+					</p:column>
+					<p:column headerText="Gatunek">
+						<h:outputText value="#{animal.breed.species.speciesName}" />
+					</p:column>
+					<p:column headerText="Specjalnej troski">
+						<p:graphicImage value="../pic/ok.png"
+							rendered="#{animal.isHandicapte}" />
+						<p:graphicImage value="../pic/nope.png"
+							rendered="#{not animal.isHandicapte}" />
+					</p:column>
+					<p:column headerText="Azyl">
+						<h:outputText value="#{animal.asylium.asyliumName}" />
+						<p:graphicImage value="../pic/nope.png"
+							rendered="#{not animal.asylium.asyliumName.isEmpty()}" />
+					</p:column>
+					<p:column headerText="Przytułek">
+						<h:outputText value="#{animal.animalRepo.animalRepoName}" />
+						<p:graphicImage value="../pic/nope.png"
+							rendered="#{not animal.animalRepo.animalRepoName.isEmpty()}" />
+					</p:column>
+					<p:column headerText="Dom Tymczasowy">
+						<p:graphicImage value="../pic/ok.png"
+							rendered="#{animal.tempHousePerson.personId > 0}" />
+						<p:graphicImage value="../pic/nope.png"
+							rendered="#{animal.tempHousePerson.personId == 0}" />
+					</p:column>
+					<p:column headerText="Zaadoptowany">
+						<p:graphicImage value="../pic/ok.png"
+							rendered="#{animal.person.personId > 0}" />
+						<p:graphicImage value="../pic/nope.png"
+							rendered="#{animal.person.personId == 0}" />
+					</p:column>
+					<p:column headerText="Zaadoptowany wirtualnie">
+						<p:graphicImage value="../pic/ok.png"
+							rendered="#{animal.virtualPerson.personId > 0}" />
+						<p:graphicImage value="../pic/nope.png"
+							rendered="#{animal.virtualPerson.personId == 0}" />
+					</p:column>
+				</p:dataTable>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+
 </h:body>
 </html>
 
-		
-            			<!-- 
-            			<h:outputText value="Kolor futra"/>
+
+<!-- 
+						<h:outputText value="Kolor futra"/>
 						<p:selectOneMenu id="furColourSelect" value="#{furEnumBean.colours}" var="furC" itemLabel="#{furC.colour}">
 							<f:selectItems value="#{furEnumBean.colours}" var="furCol" itemLabel="#{furCol.name}" itemValue="#{furCol}"/>
 							<p:column>
 								<h:outputText value="#{furC.name}" />
 							</p:column>
 						</p:selectOneMenu>
-						 -->      
+						 -->
