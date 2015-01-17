@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import pl.edu.wat.inz.hibernate.data.AnimalFeature;
+import pl.edu.wat.inz.hibernate.data.Feature;
 
 @Component
 public class AnimalFeatureDAO {
@@ -61,12 +62,12 @@ public class AnimalFeatureDAO {
 		return list;
 	}
 
-	public List<Long> getAnimalsFeaturesId(long animalId) {
+	public List<Feature> getAnimalsFeaturesId(long animalId) {
 		List list = getSessionFactory()
 				.getCurrentSession()
 				.createQuery(
-						"select af.featureId from AnimalFeature af left join af.animal a where a.animalId =:aId")
-				.setParameter("aId", animalId).list();
+						"select af.feature from AnimalFeature af left join af.animal a where a.animalId =:aId")
+				.setParameter("aId", 1l).list();
 		return list;
 	}
 }

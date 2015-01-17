@@ -18,13 +18,22 @@
 			<h:form id="mainForm">
 
 				<p:dialog widgetVar="addDialog" header="Edytuj zwierzę"
-					showEffect="clip" resizable="false" hideEffect="clip" height="515"
-					width="635" modal="true">
+					showEffect="clip" resizable="false" hideEffect="clip" height="535"
+					width="670" modal="true">
 					<p:tabView id="tabView" style="margin-bottom:5px">
 						<p:tab title="Podstawowe">
 							<h:panelGrid id="pic" columns="2" cellpadding="5" cellspacing="3">
-								<h:graphicImage value="#{animalMB.selectedAnimal.picPath}"
-									height="215" width="215" />
+
+								<h:panelGrid column="1">
+									<h:graphicImage value="#{animalMB.selectedAnimal.picPath}"
+										height="215" width="215" />
+									<h:panelGrid id="animalOtherDetail" columns="2"
+										style="text-align:left;margin-bottom:5px">
+										<h:outputText value="Zdjęcie:" />
+										<h:inputText value="#{animalMB.selectedAnimal.picPath}" />
+									</h:panelGrid>
+								</h:panelGrid>
+
 								<h:panelGrid id="animalBasic" columns="2"
 									style="text-align:left">
 									<h:outputText value="Imię:" />
@@ -34,7 +43,11 @@
 									<h:outputText value="Specjalnej troski:" />
 									<p:selectBooleanCheckbox
 										value="#{animalMB.selectedAnimal.isHandicapte}" />
-
+										
+									<h:outputText value="Wykastrowany:" />
+									<p:selectBooleanCheckbox
+										value="#{animalMB.selectedAnimal.isCastrated}" />
+										
 									<h:outputText value="Gatunek:" />
 									<p:selectOneMenu id="speciesSelect"
 										value="#{animalMB.selectedAnimal.breed.species.speciesId}"
@@ -153,7 +166,7 @@
 						</p:dialog>
 
 						<p:tab title="Wizyty weterynaryjne">
-							<p:dataTable id="visitTable" scrollable="true" scrollHeight="365"
+							<p:dataTable id="visitTable" scrollable="true" scrollHeight="395"
 								emptyMessage="Brak wizyt dla zwierzęcia" var="visit"
 								rowKey="#{visit.vetVisitId}"
 								value="#{vetVisitMB.getVetVisitListForAnimal(animalMB.selectedAnimal.animalId)}">
@@ -178,7 +191,7 @@
 
 						<p:tab title="Dotacje">
 							<p:dataTable id="supportTable" scrollable="true"
-								scrollHeight="365" emptyMessage="Brak dotacji dla zwierzęcia"
+								scrollHeight="395" emptyMessage="Brak dotacji dla zwierzęcia"
 								var="support" rowKey="#{support.vetVisitId}"
 								value="#{financialSupportMB.getFinancialSupportListForAnimal(animalMB.selectedAnimal.animalId)}">
 								<p:column headerText="Tytuł">
@@ -197,24 +210,19 @@
 						</p:tab>
 
 						<p:tab title="Inne">
-							<h:panelGrid id="animalOtherDetail" columns="2"
-								style="text-align:left">
-								<h:outputText value="Zdjęcie:" />
-								<h:inputText value="#{animalMB.selectedAnimal.picPath}" />
-
-								<p:pickList id="animalFeatures" value="#{featurePickListMB.features}" 
-									var="theme" itemValue="#{feature.featureId}"
+							<h:panelGrid id="animalFeaturesPanel" columns="1">
+								<p:pickList id="animalFeatures"
+									value="#{featurePickListMB.features}" var="feature"
+									itemValue="#{feature.featureId}"
 									itemLabel="#{feature.featureName}" showCheckbox="true"
 									showSourceFilter="true" showTargetFilter="true"
-									filterMatchMode="contains">
+									filterMatchMode="contains" style="text-align:left;height:400px">
 
 									<f:facet name="sourceCaption">Dostępne cechy</f:facet>
 									<f:facet name="targetCaption">Cechy kota</f:facet>
 
-									<p:ajax event="transfer" listener="#{featurePickListMB.onTransfer}"
-										update="msg" />
-
-									
+									<p:ajax event="transfer"
+										listener="#{featurePickListMB.onTransfer}" />
 								</p:pickList>
 							</h:panelGrid>
 						</p:tab>
@@ -310,14 +318,3 @@
 
 </h:body>
 </html>
-
-
-<!-- 
-						<h:outputText value="Kolor futra"/>
-						<p:selectOneMenu id="furColourSelect" value="#{furEnumBean.colours}" var="furC" itemLabel="#{furC.colour}">
-							<f:selectItems value="#{furEnumBean.colours}" var="furCol" itemLabel="#{furCol.name}" itemValue="#{furCol}"/>
-							<p:column>
-								<h:outputText value="#{furC.name}" />
-							</p:column>
-						</p:selectOneMenu>
-						 -->

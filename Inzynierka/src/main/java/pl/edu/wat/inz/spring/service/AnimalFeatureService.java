@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.edu.wat.inz.hibernate.data.AnimalFeature;
+import pl.edu.wat.inz.hibernate.data.Feature;
 import pl.edu.wat.inz.spring.dao.AnimalFeatureDAO;
 
 @Service("AnimalFeatureService")
@@ -43,7 +44,7 @@ public class AnimalFeatureService {
 		return getAnimalFeatureDAO().getAnimalsAnimalFeatures(animalId);
 	}
 
-	public List<Long> getAnimalsFeaturesId(long animalId) {
+	public List<Feature> getAnimalsFeaturesId(long animalId) {
 		return getAnimalFeatureDAO().getAnimalsFeaturesId(animalId);
 	}
 

@@ -1,128 +1,205 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"   
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-     
-    <body>
-	    <ui:composition>
-		
-			<div style="overflow: hidden;width:100%">
-				<div align="left" style="float:left;width:20%">
-					<p:graphicImage value="../pic/logo.png"/>
-				</div>
-			 	<div align="right" style="float:right;width:50%">
-			 		<p:outputLabel value="Zalogowany użytkownik: "/>
-		   			<p:outputLabel value="#{loginMgmtBean.getUserName()}" style="font-weight:bold"/> 
-			 	</div>
-	      	</div>
-		    <h:form>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<body>
+	<ui:composition>
+
+		<div style="overflow: hidden; width: 100%">
+			<div align="left" style="float: left; width: 20%">
+				<p:graphicImage value="../pic/logo.png" />
+			</div>
+			<div align="right" style="float: right; width: 50%">
+				<p:outputLabel value="Zalogowany użytkownik: " />
+				<p:outputLabel value="#{loginMgmtBean.getUserName()}"
+					style="font-weight:bold" />
+			</div>
+		</div>
+		<h:form>
 			<p:megaMenu activeIndex="#{naviBean.activeindex}">
-               <!-- EWIDENCJA -->
-               <p:submenu id="ewidencja" label= "Ewidencja" ajax="true" tabindex = "1" icon="ui-icon-person">
-               		<p:column>
-                            <p:submenu label= "Ewidencja zwierząt">
-                                   <p:menuitem value="Ewidencja kotów" action="#{naviBean.navigate(1)}"/>
-                                   <p:menuitem value= "Ewidencja pozostałych zwierząt" action="#{naviBean.navigate(2)}"/>
-                                    </p:submenu>
-                             </p:column>
-                             <p:column>
-                            <p:submenu label= "Ewidencja budynków i lokali" >
-                                   <p:menuitem value= "Ewidencja azyli" url ="../secure/list.xhtml" />
-                                   <p:menuitem value= "Ewidencja przytulisk" url ="../secure/list.xhtml" />
-                                   <p:menuitem value= "Ewidencja Domów Tymczasowych" url ="../secure/list.xhtml" />
-                            </p:submenu>
-                            </p:column>
-                             <p:column>
-                            <p:submenu label= "Ewidencja osób" >
-                                   <p:menuitem value= "Ewidencja Zarządu" url ="#" />
-                                   <p:menuitem value= "Ewidencja Rady" url ="#" />
-                                   <p:menuitem value= "Ewidencja pracowników" url ="#" />
-                                   <p:menuitem value= "Ewidencja wolontariuszy" url ="#" />
-                                   <p:menuitem value= "Ewidencja osób prowadzących Domy Tymczasowe" url= "#" />
-                                   <p:menuitem value= "Ewidencja osób adoptyujących" url ="#" />
-                                   <p:menuitem value= "Ewidencja osób adoptujących wirtualnie" url= "#"/>
-                            </p:submenu>
-					</p:column>                     
+				<!-- EWIDENCJA -->
+				<p:submenu id="ewidencja" label="Ewidencja" ajax="true" tabindex="1"
+					icon="ui-icon-person">
+					<p:column>
+						<p:submenu label="Ewidencja zwierząt">
+							<p:menuitem value="Ewidencja kotów"
+								action="#{naviBean.navigate(1)}" />
+							<p:menuitem value="Ewidencja pozostałych zwierząt"
+								action="#{naviBean.navigate(2)}" />
+						</p:submenu>
+					</p:column>
+					<p:column>
+						<p:submenu label="Ewidencja budynków i lokali">
+							<p:menuitem value="Ewidencja azyli" url="../secure/list.xhtml" />
+							<p:menuitem value="Ewidencja przytulisk"
+								url="../secure/list.xhtml" />
+							<p:menuitem value="Ewidencja Domów Tymczasowych"
+								url="../secure/list.xhtml" />
+						</p:submenu>
+					</p:column>
+					<p:column>
+						<p:submenu label="Ewidencja osób">
+							<p:menuitem value="Ewidencja Zarządu" url="#" />
+							<p:menuitem value="Ewidencja Rady" url="#" />
+							<p:menuitem value="Ewidencja pracowników" url="#" />
+							<p:menuitem value="Ewidencja wolontariuszy" url="#" />
+							<p:menuitem value="Ewidencja osób prowadzących Domy Tymczasowe"
+								url="#" />
+							<p:menuitem value="Ewidencja osób adoptyujących" url="#" />
+							<p:menuitem value="Ewidencja osób adoptujących wirtualnie"
+								url="#" />
+						</p:submenu>
+					</p:column>
 				</p:submenu>
-              
-               <!--ADOPCJA-->
-               <p:submenu label= "Adopcje" icon="ui-icon-heart">
-                      <p:submenu label= "Przeglądaj zwierzęta do adopcji" >
-                            <p:submenu label= "Koty" >
-                                   <p:menuitem value= "Koty młode" url = "#"/>
-                                   <p:menuitem value= "Koty dorosłe" url = "#"/>
-                                   <p:menuitem value= "Koty stare lub chore" url ="#" />
-                            </p:submenu>
-                            <p:submenu label= "Inne zwierzęta" >
-                                   <p:menuitem value= "Inne zwierzęta młode" url ="#" />
-                                   <p:menuitem value= "Inne zwierzęta dorosłe" url ="#" />
-                                   <p:menuitem value= "Inne zwierzęta stare lub chore" url= "#"/>
-                            </p:submenu>
-                      </p:submenu>
-                      <p:menuitem value= "Dopasuj zwierzę" url="#"/>
-               </p:submenu>
-                           
-               <!--E-wnioski-->
-               <p:submenu label= "E-wnioski" icon="ui-icon-folder-open">
-                      <p:menuitem value= "Złóż e-wniosek" url="#"/>
-                      <p:menuitem value= "Spis moich e-wniosków" url="#"/>
-                            <p:menuitem value= "Spis wszystkich e-wniosków" url="#"/>
-               </p:submenu>
-              
-               <!--Sprawozdania-->
-               <p:submenu label= "Sprawozdania" icon="ui-icon-document">
-                      <p:menuitem value= "Spis wszystkich sprawozdań" url="#"/>
-                            <p:menuitem value= "Generuj sprawozdanie" url="#"/>
-               </p:submenu>
-              
-               <!--Umowy-->
-               <p:submenu label= "Umowy" icon="ui-icon-contact">
-                      <p:menuitem value= "Spis moich umów" url="#"/>
-                      <p:menuitem value= "Spis wszystkich umów" url="#"/>
-                            <p:menuitem value= "Generuj umowę" url="#"/>
-               </p:submenu>
-              
-               <!--Wizyty wet-->
-                      <p:submenu label= "Wizyty weterynaryjne" icon="ui-icon-calendar">
-                            <p:menuitem value= "Spis wizyt odbytych" url="#"/>
-                            <p:menuitem value= "Spis wizyt zaplanowanych" url="#"/>
-                      </p:submenu>
-              
-               <!-- Moje zwierzęta -->
-               <p:submenu label= "Moje zwierzęta" icon="ui-icon-home">
-                      <p:menuitem value= "Spis zwierząt zaadoptowanych" url= "#"/>
-                      <p:menuitem value= "Spis zwierząt zaadoptowanych wirtualnie" url ="#" />
-                      <p:menuitem value= "Spis zwierząt w moich Domu Tymczasowym" url ="#" />
-               </p:submenu>
-               
-               <!-- Wiadomości -->
-               <p:submenu label= "Wiadomości" icon="ui-icon-mail-closed">
-                      <p:menuitem value= "Wiadomości odebrane" url= "#"/>
-                      <p:menuitem value= "Wiadomości wysłane" url= "#"/>
-               </p:submenu>
-              
-               <!-- Funkcje specjalne -->
-               <p:submenu label= "Funkcje specjalistyczne" icon="ui-icon-wrench">
-                            <p:menuitem value= "Eksport przelewów" url= "#"/>
-                            <p:menuitem value= "Import przelewów" url= "#"/>
-                            <p:menuitem value= "Spis aukcji" url = "#"/>
-                             <p:submenu label= "Funkcje administracyjne" >
-                    			  <p:menuitem value= "Modyfikuj profil" url = "#"/>
-                            <p:menuitem value= "Zarządzaj użytkownikami" url= "#"/>
-               </p:submenu>
-               </p:submenu>
-              
-               <f:facet name="options">
-          			<p:commandButton value="Wyloguj" id="logout" action="#{loginMgmtBean.logout}" icon="ui-icon-extlink"/>
-               </f:facet>
-        </p:megaMenu>
-		</h:form>		
-	    </ui:composition>
-    </body>
+
+				<!--ADOPCJA-->
+				<p:submenu label="Adopcje" icon="ui-icon-heart">
+					<p:column>
+						<p:submenu label="Koty do adopcji">
+							<p:menuitem value="Wszystkie koty" action="#{naviBean.navigate(3)}" />
+							<p:menuitem value="Koty młode" url="#" />
+							<p:menuitem value="Koty dorosłe" url="#" />
+							<p:menuitem value="Koty stare lub chore" url="#" />
+						</p:submenu>
+					</p:column>
+					<p:column>
+						<p:submenu label="Inne zwierzęta  do adopcji">
+							<p:menuitem value="Wszystkie inne zwierzęta" url="#" />
+							<p:menuitem value="Inne zwierzęta młode" url="#" />
+							<p:menuitem value="Inne zwierzęta dorosłe" url="#" />
+							<p:menuitem value="Inne zwierzęta stare lub chore" url="#" />
+						</p:submenu>
+					</p:column>
+				</p:submenu>
+
+				<!--E-wnioski-->
+				<p:submenu label="E-wnioski" icon="ui-icon-folder-open">
+					<p:column>
+						<p:submenu label="Spisy e-Wniosków">
+							<p:menuitem value="Spis wszystkich e-Wniosków" url="#" />
+							<p:menuitem value="Spis moich e-Wniosków" url="#" />
+						</p:submenu>
+					</p:column>
+
+					<p:column style="width:200px">
+						<p:submenu label="Obsługa e-Wniosków" style="width:150px">
+							<p:menuitem value="Złóż e-wniosek" url="#" />
+							<p:menuitem value="Rozpatrz e-wniosek" url="#" />
+						</p:submenu>
+					</p:column>
+
+				</p:submenu>
+
+				<!--Sprawozdania-->
+				<p:submenu label="Sprawozdania" icon="ui-icon-document">
+					<p:column>
+						<p:submenu label="Spisy sprawozdań">
+							<p:menuitem value="Spis wszystkich sprawozdań" url="#" />
+						</p:submenu>
+					</p:column>
+
+					<p:column style="width:200px">
+						<p:submenu label="Obsługa sprawozdań" style="width:150px">
+							<p:menuitem value="Generuj sprawozdanie" url="#" />
+						</p:submenu>
+					</p:column>
+
+				</p:submenu>
+
+				<!--Umowy-->
+				<p:submenu label="Umowy" icon="ui-icon-contact">
+					<p:column>
+						<p:submenu label="Spisy umów">
+							<p:menuitem value="Spis moich umów" url="#" />
+							<p:menuitem value="Spis wszystkich umów" url="#" />
+							<p:menuitem value="Spis wszystkich umów - pracownicy" url="#" />
+							<p:menuitem value="Spis wszystkich umów - zwierzęta" url="#" />
+						</p:submenu>
+					</p:column>
+
+					<p:column style="width:200px">
+						<p:submenu label="Obsługa umów" style="width:150px">
+							<p:menuitem value="Generuj umowę" url="#" />
+						</p:submenu>
+					</p:column>
+				</p:submenu>
+
+				<!--Wizyty wet-->
+				<p:submenu label="Wizyty weterynaryjne" icon="ui-icon-calendar">
+					<p:column>
+						<p:submenu label="Spisy wizyt">
+							<p:menuitem value="Spis wizyt odbytych" url="#" />
+							<p:menuitem value="Spis wizyt zaplanowanych" url="#" />
+						</p:submenu>
+					</p:column>
+				</p:submenu>
+
+				<!-- Moje zwierzęta -->
+				<p:submenu label="Moje zwierzęta" icon="ui-icon-home">
+					<p:column>
+						<p:submenu label="Spisy moich zwierząt">
+							<p:menuitem value="Spis zwierząt zaadoptowanych" url="#" />
+							<p:menuitem value="Spis zwierząt zaadoptowanych wirtualnie"
+								url="#" />
+							<p:menuitem value="Spis zwierząt w moich Domu Tymczasowym"
+								url="#" />
+						</p:submenu>
+					</p:column>
+				</p:submenu>
+
+				<!-- Funkcje specjalne -->
+				<p:submenu label="Funkcje specjalistyczne" icon="ui-icon-wrench">
+					<p:column>
+						<p:submenu label="Operacje specjalistyczne">
+							<p:menuitem value="Eksport przelewów" url="#" />
+							<p:menuitem value="Import przelewów" url="#" />
+						</p:submenu>
+					</p:column>
+
+					<p:column>
+						<p:submenu label="Aukcje Allegro">
+							<p:menuitem value="Spis aukcji" url="#" />
+						</p:submenu>
+					</p:column>
+
+					<p:column>
+						<p:submenu label="Funkcje administracyjne">
+							<p:menuitem value="Modyfikuj profil" url="#" />
+							<p:menuitem value="Zarządzaj użytkownikami" url="#" />
+						</p:submenu>
+					</p:column>
+				</p:submenu>
+
+				<!-- Wiadomości -->
+				<p:submenu label="Wiadomości" icon="ui-icon-mail-closed">
+					<p:column>
+						<p:submenu label="Wiadomości odebrane">
+							<p:menuitem value="Wiadomości odebranych" url="#" />
+						</p:submenu>
+					</p:column>
+					<p:column>
+						<p:submenu label="Wiadomości wysłane">
+							<p:menuitem value="Spis wiadomości wysłanych" url="#" />
+						</p:submenu>
+					</p:column>
+
+				</p:submenu>
+
+
+
+				<f:facet name="options">
+					<p:commandButton value="Wyloguj" id="logout"
+						action="#{loginMgmtBean.logout}" icon="ui-icon-extlink" />
+				</f:facet>
+			</p:megaMenu>
+		</h:form>
+	</ui:composition>
+</body>
 </html>
 
 

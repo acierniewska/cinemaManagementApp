@@ -1,7 +1,6 @@
 package pl.edu.wat.inz.basic.enums;
 
 public enum ApplicationType {
-	// TODO dodaæ resztê wniosków
 	ADOPTION(0, "Wniosek o adopcjê"), VIRTUAL_ADOPTION(1,
 			"Wniosek o adopcjê wirtualn¹");
 

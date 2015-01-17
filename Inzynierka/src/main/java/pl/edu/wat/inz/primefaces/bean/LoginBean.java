@@ -63,7 +63,9 @@ public class LoginBean {
 				userName = name;
 			}
 		}
+
 		return userName;
+
 	}
 
 	public void setUserName(String userName) {

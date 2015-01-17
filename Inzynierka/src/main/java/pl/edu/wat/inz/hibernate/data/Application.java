@@ -35,6 +35,9 @@ public class Application {
 	@Column(name = "APPLICATION_TYPE", nullable = false, length = 11)
 	private int applicationType;
 
+	@Column(name = "APPLICATION_DESC", nullable = false, length = 255)
+	private String applicationDesc;
+
 	public long getApplicationId() {
 		return applicationId;
 	}
@@ -73,5 +76,13 @@ public class Application {
 
 	public void setAnimalContractType(ApplicationType at) {
 		this.applicationType = at.getIntValue();
+	}
+
+	public String getApplicationDesc() {
+		return applicationDesc;
+	}
+
+	public void setApplicationDesc(String applicationDesc) {
+		this.applicationDesc = applicationDesc;
 	}
 }

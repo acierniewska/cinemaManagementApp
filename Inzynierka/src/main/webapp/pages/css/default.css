@@ -1,67 +1,75 @@
 .ui-widget, .ui-widget .ui-widget {
-     font-size: 12px;
+	font-size: 12px;
 }
 
-#page{
+#page {
 	margin: 0 auto;
 }
 
-#header{
+#header {
 	margin-bottom: 16px;
 }
 
-#wrapper{
+#wrapper {
 	width: 100%;
-	overflow: hidden; 
-}
-
-#content{
-	float: left;
-	width: 74%;
-	text-align: center;
-}
-
-#right{
-	float: right;
-	width: 25%;
 	overflow: hidden;
 }
 
-#footter{
+#content {
+	float: left;
+	width: 74%;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+#right {
+	float: right;
+	width: 25%;
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+
+#footter {
 	height: 15%;
 	width: 100%
 }
 
-h1{
+h1 {
 	font-family: Open sans;
 	color: #2e90bd;
 }
 
-.emp1 .fc-event-inner  {
-    background: #2e90bd;
-    border-color: ##2e90bd;
+.emp1 .fc-event-inner {
+	background: #2e90bd;
+	border-color: ##2e90bd;
 }
-.emp2 .fc-event-inner  {
-   background: #91c05f;
-   border-color: #91c05f;
- }
- .emp3 .fc-event-inner  {
-    background: #72b9d7;
-    border-color: #72b9d7;
+
+.emp2 .fc-event-inner {
+	background: #91c05f;
+	border-color: #91c05f;
 }
-.emp4 .fc-event-inner  {
-   background: orange;
-   border-color: orange;
- }
- .emp5 .fc-event-inner  {
-   background: green;
-   border-color: Yellow;
- }
- .emp6 .fc-event-inner  {
-    background: red;
-    border-color: Yellow;
+
+.emp3 .fc-event-inner {
+	background: #72b9d7;
+	border-color: #72b9d7;
 }
-.emp7 .fc-event-inner  {
-   background: green;
-   border-color: Yellow;
- }
+
+.emp4 .fc-event-inner {
+	background: orange;
+	border-color: orange;
+}
+
+.emp5 .fc-event-inner {
+	background: green;
+	border-color: Yellow;
+}
+
+.emp6 .fc-event-inner {
+	background: red;
+	border-color: Yellow;
+}
+
+.emp7 .fc-event-inner {
+	background: green;
+	border-color: Yellow;
+}

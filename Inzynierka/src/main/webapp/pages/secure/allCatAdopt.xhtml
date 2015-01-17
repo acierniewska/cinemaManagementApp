@@ -1,0 +1,115 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		<ui:define name="content">
+
+			<h:form id="mainForm">
+
+				<p:dialog widgetVar="animalDialog"
+					header="Podgląd danych zwierzęcia" showEffect="clip"
+					resizable="false" hideEffect="clip" modal="true">
+					<h:panelGrid id="button" columns="1" width="545">
+						<p:commandButton id="adoptButton" value="Złóż wniosek o adopcję"
+							icon="ui-icon-arrowreturnthick-1-e"
+							style="float:right;" />
+					</h:panelGrid>
+
+					<h:panelGrid id="pic" columns="2" cellpadding="5" cellspacing="3">
+						<h:graphicImage value="#{animalMB.selectedAnimal.picPath}"
+							height="215" width="215" />
+
+						<h:panelGrid id="animalBasic" columns="2" style="text-align:left">
+							<h:outputText value="Imię:" />
+							<p:inputText value="#{animalMB.selectedAnimal.animalName}"
+								size="24" disabled="true" />
+
+							<h:outputText value="Specjalnej troski:" />
+							<p:selectBooleanCheckbox
+								value="#{animalMB.selectedAnimal.isHandicapte}" disabled="true" />
+							<h:outputText value="Wykastrowany:" />
+							<p:selectBooleanCheckbox
+								value="#{animalMB.selectedAnimal.isCastrated}" disabled="true" />
+							<h:outputText value="Gatunek:" />
+							<p:selectOneMenu id="speciesSelect" disabled="true"
+								value="#{animalMB.selectedAnimal.breed.species.speciesId}"
+								effect="fade" filter="true" filterMatchMode="startsWith"
+								style="width:195px">
+								<f:selectItems value="#{speciesMB.speciesList}" var="species"
+									itemLabel="#{species.speciesName}"
+									itemValue="#{species.speciesId}" />
+							</p:selectOneMenu>
+
+							<h:outputText value="Rasa:" />
+							<p:selectOneMenu id="breedSelect" disabled="true"
+								value="#{animalMB.selectedAnimal.breed.breedId}" effect="fade"
+								filter="true" filterMatchMode="startsWith" style="width:195px">
+								<f:selectItems value="#{breedMB.getBreedListForSpecies(1)}"
+									var="breed" itemLabel="#{breed.breedName}"
+									itemValue="#{breed.breedId}" />
+							</p:selectOneMenu>
+
+							
+
+							<h:outputText value="Długość futra:" />
+							<p:selectOneMenu id="furLengthSelect" disabled="true"
+								value="#{animalMB.selectedAnimal.fur.furLength}" effect="fade"
+								filter="true" filterMatchMode="startsWith" style="width:195px">
+								<f:selectItems value="#{furEB.lengths}" var="fur"
+									itemLabel="#{FurEnumBean.getLength(fur.intValue)}"
+									itemValue="#{fur.intValue}" />
+							</p:selectOneMenu>
+
+							<h:outputText value="Data urodzenia:" />
+							<p:calendar size="20"
+								value="#{animalMB.selectedAnimal.animalBirthdayDay}"
+								pattern="yyyy-MM-dd" mask="true" showOn="button" disabled="true" />
+
+							<h:outputText value="W Fundacji od:" />
+							<p:calendar size="20"
+								value="#{animalMB.selectedAnimal.animalRescueDate}"
+								pattern="yyyy-MM-dd" mask="true" showOn="button" disabled="true" />
+						</h:panelGrid>
+					</h:panelGrid>
+
+					<p:dataList value="#{featurePickListMB.features.target}"
+						var="feature" type="definition">
+						<f:facet name="header">Cechy kota</f:facet>
+									#{feature.featureName} -  #{feature.featureDesc}
+								</p:dataList>
+				</p:dialog>
+
+				<p:dataGrid var="animal" value="#{animalMB.animalList}" columns="3"
+					layout="grid" rows="12" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="6,12,16">
+
+					<f:facet name="header">Koty do adopcji</f:facet>
+
+					<p:panel header="#{animal.animalName}" style="text-align:center">
+						<h:panelGrid columns="1" style="width:100%">
+							<h:graphicImage value="#{animal.picPath}" height="215"
+								width="215" />
+							<p:commandLink update=":mainForm:pic"
+								oncomplete="PF('animalDialog').show()"
+								title="Wyświetl szczegóły">
+								<h:outputText styleClass="ui-icon ui-icon-search"
+									style="margin:0 auto;" />
+								<f:setPropertyActionListener value="#{animal}"
+									target="#{animalMB.selectedAnimal}" />
+							</p:commandLink>
+						</h:panelGrid>
+					</p:panel>
+
+				</p:dataGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

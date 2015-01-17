@@ -64,19 +64,19 @@ public class AllegroBean {
 	}
 
 	public long getItemId() {
-		return item.getItId();
+		return item == null ? 0 : item.getItId();
 	}
 
 	public String getItemName() {
-		return item.getItName();
+		return item == null ? "Brak" : item.getItName();
 	}
 
 	public String getThumbUrl() {
-		return item.getItThumbUrl();
+		return item == null ? "" : item.getItThumbUrl();
 	}
 
 	public float getPrice() {
-		return item.getItBuyNowPrice();
+		return item == null ? 0.0f : item.getItBuyNowPrice();
 	}
 
 	public void incrementUserNr() {

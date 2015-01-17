@@ -1,17 +1,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:sec="http://www.springframework.org/security/tags">
-   
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
 <h:body>
-    <ui:composition template="../template/template.xhtml">
+	<ui:composition template="../template/template.xhtml">
 		<ui:define name="content">
-				<h1>Witaj na stronie głównej systemu wspierającego działania Fundacji "Kociarnia"</h1>
-				<p:outputLabel value="Login to: #{loginMgmtBean.userName}" rendered="#{securityBean.isUserAdmin}" />
-    	</ui:define>
-    </ui:composition>
+			<h1>Witaj na stronie głównej systemu wspierającego działania
+				Fundacji "Kociarnia"</h1>
+			<p:outputLabel value="Login to: #{loginMgmtBean.userName}"
+				rendered="#{securityBean.isUserAdmin}" />
+		</ui:define>
+	</ui:composition>
 </h:body>
 
 </html>

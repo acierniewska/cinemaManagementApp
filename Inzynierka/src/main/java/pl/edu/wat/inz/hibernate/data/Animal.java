@@ -120,11 +120,11 @@ public class Animal {
 		this.person = person;
 	}
 
-	public boolean isCastrated() {
+	public boolean getIsCastrated() {
 		return isCastrated;
 	}
 
-	public void setCastrated(boolean isCastrated) {
+	public void setIsCastrated(boolean isCastrated) {
 		this.isCastrated = isCastrated;
 	}
 

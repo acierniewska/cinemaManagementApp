@@ -63,7 +63,7 @@ public class TestAllegro {
 			Long userId = new Long(loginResponse.getUserId());
 
 			DoGetUserItemsRequest userItems = new DoGetUserItemsRequest(
-					39800168, webkey, country_code, null, null);
+					40760228, webkey, country_code, null, null);
 
 			DoGetUserItemsResponse userItemResponse = proxy
 					.doGetUserItems(userItems);
