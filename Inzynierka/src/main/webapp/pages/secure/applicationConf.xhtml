@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		<ui:define name="content">
+
+			<h1>Wniosek został złożony.</h1>
+			<h:form id="mainForm">
+				<p:dataTable var="app" value="#{applicationMB.applications}">
+				
+					<p:column headerText="Typ wniosku">
+						<h:outputText  value="#{appTypeEB.getType(app.applicationType)}" />
+					</p:column>
+				
+					<p:column headerText="Osoba składająca">
+						<h:outputText value="#{app.person.personName} #{app.person.surname}" />
+					</p:column>
+
+					<p:column headerText="Zwierzę, którego dotyczy">
+						<h:outputText value="#{app.animal.animalName}" />
+					</p:column>
+
+					<p:column headerText="Powód">
+						<h:outputText value="#{app.applicationDesc}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

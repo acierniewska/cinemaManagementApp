@@ -26,6 +26,12 @@ public class Event {
 	@Column(name = "TIME_START", nullable = false)
 	private java.sql.Time timeStart;
 
+	@Column(name = "DATE_END", nullable = false)
+	@Temporal(TemporalType.DATE)
+	private java.util.Date dateEnd;
+
+	@Column(name = "TIME_END", nullable = false)
+	private java.sql.Time timeEnd;
 	@Column(name = "EVENT_NAME", nullable = false, length = 32)
 	private String eventName;
 

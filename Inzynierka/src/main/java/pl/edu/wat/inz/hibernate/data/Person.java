@@ -86,6 +86,9 @@ public class Person {
 	@Column(name = "IS_VOULOUNTEER", nullable = true)
 	private Boolean isVolounteer;
 
+	@Column(name = "ACCOUNT_NR", nullable = false)
+	private String accountNr;
+
 	public long getPersonId() {
 		return personId;
 	}
@@ -246,9 +249,25 @@ public class Person {
 		this.isVolounteer = isVolounteer;
 	}
 
+	public String getAdress() {
+		return "";
+	}
+
+	public void setAdress(String adres) {
+		;
+	}
+
 	@Override
 	public String toString() {
 		return getPersonName() + " " + getSurname();
+	}
+
+	public void setAccountNr(String accountNr) {
+		this.accountNr = accountNr;
+	}
+
+	public String getAccountNr() {
+		return this.accountNr;
 	}
 
 }

@@ -10,44 +10,56 @@
 		<ui:define name="content">
 
 			<h1>Złóż wniosek</h1>
-			<h:form>
-				<h:panelGrid>
-					<h:outputText value="Typ wniosku:" />
-					<p:selectOneMenu id="appTypeSelect" disabled="true" value="#{1}"
-						effect="fade" filter="true" filterMatchMode="startsWith"
-						style="width:195px">
-						<f:selectItems value="#{appTypeEB.types}" var="type"
-							itemLabel="#{appTypeEB.getType(type.intValue)}"
-							itemValue="#{type.intValue}" />
-					</p:selectOneMenu>
-				</h:panelGrid>
+			<h:form id="mainForm">
+					<h:panelGrid id="mainPanel" columns="2"
+						style="text-align:left; margin-left:210px; margin-bottom:20px"
+						cellpadding="5" cellspacing="3">
 
-				<h:outputText value="Osoba składająca wniosek" />
-				<p:selectOneMenu id="personSelect" value="1" effect="fade"
-					filter="true" filterMatchMode="startsWith" style="width:307px">
-					<f:selectItem itemLabel="(puste)" itemValue="" />
-					<f:selectItems value="#{personMB.personList}" var="person"
-						itemLabel="#{person.personName} #{person.surname}"
-						itemValue="#{person.personId}" />
-				</p:selectOneMenu>
+						<h:outputText value="Typ wniosku:" />
+						<p:selectOneMenu id="appTypeSelect" value="#{1}" effect="fade"
+							filter="true" filterMatchMode="startsWith" style="width:307px">
+							<f:selectItems value="#{appTypeEB.types}" var="type"
+								itemLabel="#{appTypeEB.getType(type.intValue)}"
+								itemValue="#{type.intValue}" />
+						</p:selectOneMenu>
 
-				<h:outputText value="Zwierzę, którego dotyczy wniosek" />
-				<p:selectOneMenu id="personSelect" value="1" effect="fade"
-					filter="true" filterMatchMode="startsWith" style="width:307px">
-					<f:selectItem itemLabel="(puste)" itemValue="" />
-					<f:selectItems value="#{personMB.personList}" var="person"
-						itemLabel="#{person.personName} #{person.surname}"
-						itemValue="#{person.personId}" />
-				</p:selectOneMenu>
+						<h:outputText value="Osoba składająca wniosek" />
+						<p:selectOneMenu id="personSelect" value="1" effect="fade"
+							filter="true" filterMatchMode="startsWith" style="width:307px">
+							<f:selectItems value="#{personMB.personList}" var="person"
+								itemLabel="#{person.personName} #{person.surname}"
+								itemValue="#{person.personId}" />
+						</p:selectOneMenu>
 
-				<h:outputText value="Opis e-Wniosku"/>
-				<h:panelGrid column="1">
-					<p:inputTextarea rows="5" cols="30" counter="display"
-						maxlength="10" counterTemplate="Pozostało {0} znaków"
-						autoResize="false" />
-					<h:outputText id="display" />
-				</h:panelGrid>
-				
+						<h:outputText value="Zwierzę, którego dotyczy wniosek" />
+						<p:selectOneMenu id="animalSelect" value="1" effect="fade"
+							filter="true" filterMatchMode="startsWith" style="width:307px">
+							<f:selectItems value="#{animalMB.animalList}" var="animal"
+								itemLabel="#{animal.animalName}" itemValue="#{animal.animalId}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Powód" />
+						<h:panelGrid column="1">
+							<p:inputTextarea rows="5" cols="40" counter="display"
+								maxlength="256" counterTemplate="Pozostało {0} znaków"
+								autoResize="false" />
+							<h:outputText id="display" />
+						</h:panelGrid>
+					</h:panelGrid>
+
+					<p:commandButton id="adoptButton" value="Zatwierdź wniosek"
+						type="reset" update="" icon="ui-icon-arrowreturnthick-1-e"
+						oncomplete="PF('dlg').show()">
+						<p:confirm header="Potwiedzenie"
+							message="Czy napewno chcesz złożyć wniosek?" icon="ui-icon-alert" />
+					</p:commandButton>
+
+					<p:confirmDialog global="true" showEffect="clip" hideEffect="clip">
+						<p:commandButton value="Yes" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="No" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
 			</h:form>
 		</ui:define>
 	</ui:composition>

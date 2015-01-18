@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
@@ -22,7 +22,7 @@ import pl.edu.wat.inz.hibernate.data.FinancialSupport;
 import pl.edu.wat.inz.spring.service.FinancialSupportService;
 
 @ManagedBean(name = "financialSupportMB")
-@ViewScoped
+@ApplicationScoped
 public class FinancialSupportManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -39,6 +39,10 @@ public class FinancialSupportManagedBean implements Serializable {
 					.getFinancialSupports());
 		}
 		return financialSupportList;
+	}
+
+	public String prepareFinancialSupport() {
+		return "meh";
 	}
 
 	public FinancialSupport getSelectedFinancialSupport() {

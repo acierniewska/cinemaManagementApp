@@ -65,7 +65,12 @@
 			<to-view-id>/pages/secure/allCatAdopt.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
-		
+		<navigation-case>
+			<from-action>#{naviBean.navigate}</from-action>
+			<from-outcome>application</from-outcome>
+			<to-view-id>/pages/secure/application.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
 	</navigation-rule>
 
 
@@ -102,6 +107,12 @@
 			<to-view-id>/pages/secure/allCatAdopt.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
+		<navigation-case>
+			<from-action>#{naviBean.navigate}</from-action>
+			<from-outcome>application</from-outcome>
+			<to-view-id>/pages/secure/application.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
 	</navigation-rule>
 
 	<navigation-rule>
@@ -130,12 +141,57 @@
 			<to-view-id>/pages/secure/list.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
-	<navigation-case>
+		<navigation-case>
 			<from-action>#{naviBean.navigate}</from-action>
 			<from-outcome>allCatAdopt</from-outcome>
 			<to-view-id>/pages/secure/allCatAdopt.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
+		<navigation-case>
+			<from-action>#{naviBean.navigate}</from-action>
+			<from-outcome>application</from-outcome>
+			<to-view-id>/pages/secure/application.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
 	</navigation-rule>
-
+	
+		<navigation-rule>
+		<from-view-id>/pages/secure/*</from-view-id>
+		<navigation-case>
+			<from-action>#{loginMgmtBean.logout}</from-action>
+			<from-outcome>loggedout</from-outcome>
+			<to-view-id>/pages/unsecure/login.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{loginMgmtBean.logout}</from-action>
+			<from-outcome>loggedout</from-outcome>
+			<to-view-id>/pages/unsecure/login.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{naviBean.navigate}</from-action>
+			<from-outcome>index</from-outcome>
+			<to-view-id>/pages/secure/index.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{naviBean.navigate}</from-action>
+			<from-outcome>list</from-outcome>
+			<to-view-id>/pages/secure/list.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{naviBean.navigate}</from-action>
+			<from-outcome>allCatAdopt</from-outcome>
+			<to-view-id>/pages/secure/allCatAdopt.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{naviBean.navigate}</from-action>
+			<from-outcome>application</from-outcome>
+			<to-view-id>/pages/secure/application.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

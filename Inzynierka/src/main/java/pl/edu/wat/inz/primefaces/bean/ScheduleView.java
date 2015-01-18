@@ -33,15 +33,12 @@ public class ScheduleView implements Serializable {
 		if (eventModel != null)
 			return;
 		eventModel = new DefaultScheduleModel();
-		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match",
-				previousDay8Pm(), previousDay11Pm(), "emp1"));
-		eventModel.addEvent(new DefaultScheduleEvent("Birthday Party",
-				today1Pm(), today6Pm(), "emp2"));
-		eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys",
-				nextDay9Am(), nextDay11Am(), "emp3"));
 		eventModel.addEvent(new DefaultScheduleEvent(
-				"Plant the new garden stuff", theDayAfter3Pm(),
-				fourDaysLater3pm(), "emp4"));
+				"Weterynarz - szczepienie", previousDay8Pm(),
+				previousDay11Pm(), "emp1"));
+		eventModel.addEvent(new DefaultScheduleEvent("Spotkanie dot. akcji",
+				nextDay9Am(), nextDay11Am(), "emp3"));
+
 	}
 
 	public Date getRandomDate(Date base) {
@@ -92,31 +89,6 @@ public class ScheduleView implements Serializable {
 		return t.getTime();
 	}
 
-	private Date today1Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.HOUR, 1);
-
-		return t.getTime();
-	}
-
-	private Date theDayAfter3Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.DATE, t.get(Calendar.DATE) + 2);
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.HOUR, 3);
-
-		return t.getTime();
-	}
-
-	private Date today6Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.HOUR, 6);
-
-		return t.getTime();
-	}
-
 	private Date nextDay9Am() {
 		Calendar t = (Calendar) today().clone();
 		t.set(Calendar.AM_PM, Calendar.AM);
@@ -135,15 +107,6 @@ public class ScheduleView implements Serializable {
 		return t.getTime();
 	}
 
-	private Date fourDaysLater3pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.DATE, t.get(Calendar.DATE) + 4);
-		t.set(Calendar.HOUR, 3);
-
-		return t.getTime();
-	}
-
 	public ScheduleEvent getEvent() {
 		return event;
 	}
@@ -155,7 +118,6 @@ public class ScheduleView implements Serializable {
 	public void addEvent(ActionEvent actionEvent) {
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
-			System.out.println(event.getTitle());
 		} else
 			eventModel.updateEvent(event);
 
