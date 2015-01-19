@@ -28,9 +28,9 @@
 					<p:column>
 						<p:submenu label="Ewidencja zwierząt">
 							<p:menuitem value="Ewidencja kotów"
-								action="#{naviBean.navigate(1)}" />
-							<p:menuitem value="Ewidencja pozostałych zwierząt"
 								action="#{naviBean.navigate(2)}" />
+							<p:menuitem value="Ewidencja pozostałych zwierząt"
+								action="#{naviBean.navigate(1)}" />
 						</p:submenu>
 					</p:column>
 					<p:column>
@@ -81,7 +81,7 @@
 				<p:submenu label="E-wnioski" icon="ui-icon-folder-open">
 					<p:column>
 						<p:submenu label="Spisy e-Wniosków">
-							<p:menuitem value="Spis wszystkich e-Wniosków" url="#" />
+							<p:menuitem value="Spis wszystkich e-Wniosków" action="#{naviBean.navigate(5)}" />
 							<p:menuitem value="Spis moich e-Wniosków" url="#" />
 						</p:submenu>
 					</p:column>
@@ -89,7 +89,6 @@
 					<p:column style="width:200px">
 						<p:submenu label="Obsługa e-Wniosków" style="width:150px">
 							<p:menuitem value="Złóż e-wniosek" action="#{naviBean.navigate(4)}" />
-							<p:menuitem value="Rozpatrz e-wniosek" url="#" />
 						</p:submenu>
 					</p:column>
 

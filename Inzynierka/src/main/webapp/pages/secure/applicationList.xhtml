@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		<ui:define name="content">
+
+			<h:form id="mainForm">
+				<!-- Buttony -->
+				<h:panelGrid id="buttons" columns="1"
+					style="text-align:left;margin-bottom:10px">
+					<p:commandButton id="delete" value="Rozpatrz zaznaczony e-Wniosek"
+						ajax="true" icon="ui-icon-transferthick-e-w" disabled="not null #{applicationMB.selectedApplication}"/>
+				</h:panelGrid>
+
+				<!-- TABELA -->
+				<p:dataTable widhetVar="applications" id="app"
+					selectionMode="single"
+					selection="#{applicationMB.selectedApplication}"
+					emptyMessage="Brak wniosków" dblClickSelect="true"
+					onRowDblselectComplete="addDialog.show()" var="app"
+					rowKey="#{app.applicationId}"
+					value="#{applicationMB.applicationList}" editable="true"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+					rows="10">
+					<p:ajax event="rowSelect"
+						listener="#{applicationMB.onCompRowSelect}"
+						update=":mainForm:buttons" />
+					<p:ajax event="rowUnselect"
+						listener="#{applicationMB.onUserRowUnselect}"
+						update=":mainForm:buttons" />
+					<p:ajax event="rowDblselect" immediate="true" process="@this" />
+					<!-- 	oncomplete="PF('addDialog').show()" /> -->
+
+					<p:column headerText="Typ e-Wniosku">
+						<h:outputText value="#{appTypeEB.getType(app.applicationType)}" />
+					</p:column>
+					<p:column headerText="Osoba składająca">
+						<h:outputText
+							value="#{app.person.personName} #{app.person.surname}" />
+					</p:column>
+
+					<p:column headerText="Zwierzę, którego dotyczy">
+						<h:outputText value="#{app.animal.animalName}" />
+					</p:column>
+
+					<p:column headerText="Rozpatrzony">
+						<!-- <p:graphicImage value="../pic/ok.png"
+										rendered="#{visit.planned}" /> -->
+						<p:graphicImage value="../pic/nope.png" />
+					</p:column>
+					
+					<p:column headerText="Rozpatrzony przez użytkownika">
+						<!-- <p:graphicImage value="../pic/ok.png"
+										rendered="#{visit.planned}" /> -->
+						<p:graphicImage value="../pic/nope.png" />
+					</p:column>
+				</p:dataTable>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>
