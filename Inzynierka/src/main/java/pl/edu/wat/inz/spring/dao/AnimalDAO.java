@@ -5,10 +5,12 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import pl.edu.wat.inz.hibernate.data.Animal;
 
 @Component
+@Transactional
 public class AnimalDAO {
 
 	@Autowired
@@ -34,6 +36,7 @@ public class AnimalDAO {
 		sessionFactory.getCurrentSession().update(animal);
 	}
 
+	@Transactional
 	public void addAnimal(Animal animal) {
 		sessionFactory.getCurrentSession().save(animal);
 	}

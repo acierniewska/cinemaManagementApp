@@ -269,5 +269,4 @@ public class Person {
 	public String getAccountNr() {
 		return this.accountNr;
 	}
-
 }

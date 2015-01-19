@@ -1,5 +1,6 @@
 package pl.edu.wat.inz.primefaces.bean.managedBean;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -29,9 +30,12 @@ public class FeaturePickListManegedBean {
 	@PostConstruct
 	public void init() {
 		List<Feature> source = fService.getFeatures();
-		List<Feature> target = afService.getAnimalsFeaturesId(animalMB
-				.getSelectedAnimal().getAnimalId());
-		System.out.println(animalMB.getSelectedAnimal().getAnimalId());
+		List<Feature> target = Collections.emptyList();
+		if (animalMB.getSelectedAnimal() != null) {
+			target = afService.getAnimalsFeaturesId(animalMB
+					.getSelectedAnimal().getAnimalId());
+		}
+
 		source.removeAll(target);
 		features = new DualListModel<Feature>(source, target);
 	}

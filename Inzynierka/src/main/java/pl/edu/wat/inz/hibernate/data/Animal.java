@@ -1,5 +1,7 @@
 package pl.edu.wat.inz.hibernate.data;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +18,9 @@ import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "animal")
-public class Animal {
+public class Animal implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	public Animal() {
 	}
 
@@ -172,7 +176,7 @@ public class Animal {
 		return isHandicapte;
 	}
 
-	public void setHandicapte(boolean isHandicapte) {
+	public void setIsHandicapte(boolean isHandicapte) {
 		this.isHandicapte = isHandicapte;
 	}
 

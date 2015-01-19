@@ -45,7 +45,7 @@ public class AnimalManagedBean implements Serializable {
 	}
 
 	public void onUserRowUnselect(UnselectEvent event) {
-		setSelectedAnimal(null);
+		setSelectedAnimal(new Animal());
 	}
 
 	public void onCompRowSelect(SelectEvent event) {
@@ -54,10 +54,8 @@ public class AnimalManagedBean implements Serializable {
 
 	public String addAnimal() {
 		try {
-			Animal Animal = new Animal();
-			Animal.setAnimalName(getName());
-			getAnimalService().addAnimal(Animal);
-			reset();
+			// getAnimalService().addAnimal(newAnimal);
+			// reset();
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -96,11 +94,6 @@ public class AnimalManagedBean implements Serializable {
 	public void onCancel(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Item Cancelled");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
-
-	public void reset() {
-		this.setId(0);
-		this.setName("");
 	}
 
 	public List<Animal> getAnimalList() {

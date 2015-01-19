@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
@@ -21,8 +21,8 @@ import org.springframework.dao.DataAccessException;
 import pl.edu.wat.inz.hibernate.data.Person;
 import pl.edu.wat.inz.spring.service.PersonService;
 
-@ManagedBean(name = "personMB")
-@RequestScoped
+@ManagedBean(name = "personMB", eager = true)
+@ApplicationScoped
 public class PersonManagedBean implements Serializable {
 	private static final long serialVersionUID = 6388454038294869974L;
 
