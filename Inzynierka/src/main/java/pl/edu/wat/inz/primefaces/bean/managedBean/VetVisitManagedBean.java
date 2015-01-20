@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -31,6 +32,22 @@ public class VetVisitManagedBean implements Serializable {
 
 	List<VetVisit> vetVisitList;
 	private VetVisit selectedVetVisit = new VetVisit();
+
+	List<VetVisit> plannedVetVisitList;
+
+	List<VetVisit> completedVisitList;
+
+	@PostConstruct
+	public void init() {
+		List list = getVetVisitService().getVetVisits(false);
+		if (!list.isEmpty()) {
+			completedVisitList.addAll(list);
+		}
+	}
+
+	public List<VetVisit> getCompletedVisitList() {
+		return completedVisitList;
+	}
 
 	public List<VetVisit> getVetVisitList() {
 		if (vetVisitList == null) {
@@ -121,6 +138,18 @@ public class VetVisitManagedBean implements Serializable {
 
 	public void setVetVisitList(List<VetVisit> VetVisitList) {
 		this.vetVisitList = VetVisitList;
+	}
+
+	public List<VetVisit> getPlannedVetVisitList() {
+		return plannedVetVisitList;
+	}
+
+	public void setPlannedVetVisitList(List<VetVisit> plannedVetVisitList) {
+		this.plannedVetVisitList = plannedVetVisitList;
+	}
+
+	public void setCompletedVisitList(List<VetVisit> completedVisitList) {
+		this.completedVisitList = completedVisitList;
 	}
 
 }

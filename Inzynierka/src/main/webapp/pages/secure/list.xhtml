@@ -39,7 +39,7 @@
 					value="#{animalMB.animalList}" editable="true" paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 					rows="10">
-					<p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}"
+					<p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}" process="@this" immediate="true"
 						update=":mainForm, :showForm, :editForm" />
 					<p:ajax event="rowUnselect"
 						listener="#{animalMB.onUserRowUnselect}"
@@ -519,7 +519,7 @@
 						<p:tab title="Inne">
 							<h:panelGrid id="animalFeaturesPanel" columns="1">
 								<p:pickList id="animalFeatures"
-									value="#{featurePickListMB.features}" var="feature"
+									value="#{featurePickListMB.getFeaturesForAnimal(animalMB.selectedAnimal.animalId)}" var="feature"
 									itemValue="#{feature.featureId}"
 									itemLabel="#{feature.featureName}" showCheckbox="true"
 									showSourceFilter="true" showTargetFilter="true"
@@ -738,7 +738,7 @@
 						<p:tab title="Inne">
 							<h:panelGrid id="animalFeaturesPanel" columns="1">
 								<p:pickList id="animalFeatures" disabled="true"
-									value="#{featurePickListMB.features}" var="feature"
+									value="#{featurePickListMB.getFeaturesForAnimal(animalMB.selectedAnimal.animalId)}" var="feature"
 									itemValue="#{feature.featureId}"
 									itemLabel="#{feature.featureName}" showCheckbox="true"
 									showSourceFilter="true" showTargetFilter="true"

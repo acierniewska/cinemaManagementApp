@@ -72,6 +72,12 @@
 			<to-view-id>/pages/secure/application.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
+		<navigation-case>
+			<from-action>#{naviBean.navigate}</from-action>
+			<from-outcome>vetList</from-outcome>
+			<to-view-id>/pages/secure/vetList.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
 
 	</navigation-rule>
 </faces-config>

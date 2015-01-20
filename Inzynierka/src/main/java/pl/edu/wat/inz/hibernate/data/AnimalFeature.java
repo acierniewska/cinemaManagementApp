@@ -9,6 +9,8 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table(name = "animal_feature")
 public class AnimalFeature implements Serializable {
@@ -16,11 +18,13 @@ public class AnimalFeature implements Serializable {
 
 	@ManyToOne(targetEntity = Animal.class)
 	@JoinColumns({ @JoinColumn(name = "ANIMAL_ID", referencedColumnName = "ANIMAL_ID") })
+	@Cascade({ org.hibernate.annotations.CascadeType.LOCK })
 	@Id
 	private Animal animal;
 
 	@ManyToOne(targetEntity = Feature.class)
 	@JoinColumns({ @JoinColumn(name = "FEATURE_ID", referencedColumnName = "FEATURE_ID") })
+	@Cascade({ org.hibernate.annotations.CascadeType.LOCK })
 	@Id
 	private Feature feature;
 

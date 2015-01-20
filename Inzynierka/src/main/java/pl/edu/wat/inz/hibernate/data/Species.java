@@ -1,5 +1,7 @@
 package pl.edu.wat.inz.hibernate.data;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "species")
-public class Species {
+public class Species implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Column(name = "SPECIES_ID", nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

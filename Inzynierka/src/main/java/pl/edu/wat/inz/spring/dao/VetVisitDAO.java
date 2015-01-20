@@ -60,4 +60,11 @@ public class VetVisitDAO {
 		return list;
 	}
 
+	public List<VetVisit> getVetVisits(boolean planned) {
+		List list = getSessionFactory().getCurrentSession()
+				.createQuery("from VetVisit v where v.planned =:p")
+				.setParameter("p", planned).list();
+		return list;
+	}
+
 }

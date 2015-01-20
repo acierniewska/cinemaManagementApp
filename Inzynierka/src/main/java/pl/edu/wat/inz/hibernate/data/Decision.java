@@ -10,6 +10,8 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table(name = "desicion")
 public class Decision implements Serializable {
@@ -18,6 +20,7 @@ public class Decision implements Serializable {
 
 	@ManyToOne(targetEntity = Application.class)
 	@JoinColumns({ @JoinColumn(name = "APPLICATION_ID", referencedColumnName = "APPLICATION_ID") })
+	@Cascade({ org.hibernate.annotations.CascadeType.LOCK })
 	@Id
 	private Application application;
 

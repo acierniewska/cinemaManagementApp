@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		<ui:define name="content">
+			<h1>Wizyty odbyte</h1>
+			
+<p:dataTable id="visitTable" scrollable="true" scrollHeight="395"
+								emptyMessage="Brak wizyt dla zwierzęcia" var="visit"
+								rowKey="#{visit.vetVisitId}"
+								value="#{vetVisitMB.getCompletedVisitList()}">
+								<p:column headerText="Zwierzę">
+									<h:outputText value="#{visit.animal.animalName}" />
+								</p:column>
+								<p:column headerText="Data wizyty">
+									<h:outputText value="#{visit.vetVisitDate}" />
+								</p:column>
+								<p:column headerText="Godzina wizyty">
+									<h:outputText value="#{visit.vetVisitTime}" />
+								</p:column>
+								<p:column headerText="Koszt dla Fundacji">
+									<h:outputText value="#{visit.foundationPayment} zł" />
+								</p:column>
+								<p:column headerText="Opis">
+									<h:outputText value="#{visit.details}" />
+								</p:column>
+							</p:dataTable>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

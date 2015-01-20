@@ -43,6 +43,10 @@ public class VetVisitService {
 		return getVetVisitDAO().getVetVisitForAnimal(animalId);
 	}
 
+	public List<VetVisit> getVetVisits(boolean planned) {
+		return getVetVisitDAO().getVetVisits(planned);
+	}
+
 	public VetVisitDAO getVetVisitDAO() {
 		return vetVisitDAO;
 	}

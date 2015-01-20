@@ -37,6 +37,9 @@ public class NavigationBean implements Serializable {
 		} else if (pom == 5) {
 			val = "applicationList";
 			setActiveindex(2);
+		} else if (pom == 10) {
+			val = "vetList";
+			setActiveindex(5);
 		}
 
 		return val;

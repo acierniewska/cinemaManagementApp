@@ -42,16 +42,31 @@ public class FeaturePickListManegedBean {
 		this.afService = afService;
 	}
 
-	public DualListModel<Feature> getFeatures() {
+	public DualListModel<Feature> getFeaturesForAnimal(long animalId) {
 		List<Feature> source = fService.getFeatures();
 		List<Feature> target = new LinkedList<Feature>();
+
 		if (animalMB.getSelectedAnimal() != null) {
 			target = afService.getAnimalsFeaturesId(animalMB
 					.getSelectedAnimal().getAnimalId());
 		}
 
-		source.removeAll(target);
-		features = new DualListModel<Feature>(source, target);
+		List<Feature> removeFromSource = new LinkedList<Feature>();
+
+		for (Feature f : source) {
+			for (int i = 0; i < target.size(); i++) {
+				if (target.get(i).getFeatureId() == f.getFeatureId()) {
+					if (!removeFromSource.contains(f)) {
+						removeFromSource.add(f);
+					}
+				}
+			}
+		}
+		source.removeAll(removeFromSource);
+		return features = new DualListModel<Feature>(source, target);
+	}
+
+	public DualListModel<Feature> getFeatures() {
 		return features;
 	}
 
