@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -27,17 +28,20 @@ public class AnimalManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Animal selectedAnimal = new Animal();
-
 	@ManagedProperty(value = "#{AnimalService}")
 	private AnimalService animalService;
 
+	private Animal selectedAnimal = new Animal();
 	List<Animal> animalList;
-	private int id;
-	private String name;
 
 	public Animal getSelectedAnimal() {
 		return selectedAnimal;
+	}
+
+	@PostConstruct
+	public void init() {
+		animalList = new ArrayList<Animal>();
+		animalList.addAll(getAnimalService().getAnimals());
 	}
 
 	public void setSelectedAnimal(Animal selectedAnimal) {
@@ -52,10 +56,12 @@ public class AnimalManagedBean implements Serializable {
 		setSelectedAnimal((Animal) event.getObject());
 	}
 
-	public String addAnimal() {
+	public String updateAnimal(Animal animal) {
 		try {
-			// getAnimalService().addAnimal(newAnimal);
-			// reset();
+			getAnimalService().updateAnimal(animal);
+			updateAnimalList();
+			addMessage("Zmodyfikowano zwierzê o imieniu "
+					+ animal.getAnimalName());
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -63,21 +69,15 @@ public class AnimalManagedBean implements Serializable {
 		return ERROR;
 	}
 
-	public String updateAnimal(Animal Animal) {
+	public String deleteAnimal() {
 		try {
-			getAnimalService().updateAnimal(Animal);
-			return SUCCESS;
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-		return ERROR;
-	}
-
-	public String deleteAnimal(Animal animal) {
-		try {
-			getAnimalService().deleteAnimal(animal);
-			animalList = null;
-			getAnimalList();
+			getAnimalService().deleteAnimal(
+					getAnimalService().getAnimalById(
+							selectedAnimal.getAnimalId()));
+			updateAnimalList();
+			addMessage("Usuniêto zwierzê o imieniu "
+					+ selectedAnimal.getAnimalName());
+			selectedAnimal = new Animal();
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -97,14 +97,11 @@ public class AnimalManagedBean implements Serializable {
 	}
 
 	public List<Animal> getAnimalList() {
-		if (animalList == null) {
-			animalList = new ArrayList<Animal>();
-			animalList.addAll(getAnimalService().getAnimals());
-		}
 		return animalList;
 	}
 
 	public void updateAnimalList() {
+		animalList.clear();
 		animalList.addAll(getAnimalService().getAnimals());
 	}
 
@@ -120,19 +117,10 @@ public class AnimalManagedBean implements Serializable {
 		this.animalList = AnimalList;
 	}
 
-	public int getId() {
-		return id;
+	public void addMessage(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 }

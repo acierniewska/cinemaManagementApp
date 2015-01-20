@@ -5,9 +5,11 @@ import static pl.edu.wat.inz.basic.AppConst.SUCCESS;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.springframework.dao.DataAccessException;
 
@@ -28,6 +30,14 @@ public class AddAnimalManagedBean implements Serializable {
 	@ManagedProperty(value = "#{animalMB}")
 	private AnimalManagedBean animalMB;
 
+	public AnimalManagedBean getAnimalMB() {
+		return animalMB;
+	}
+
+	public void setAnimalMB(AnimalManagedBean animalMB) {
+		this.animalMB = animalMB;
+	}
+
 	@ManagedProperty(value = "#{FurService}")
 	private FurService furService;
 
@@ -44,6 +54,8 @@ public class AddAnimalManagedBean implements Serializable {
 			getAnimalService().addAnimal(newAnimal);
 			newAnimal = new Animal();
 			animalMB.updateAnimalList();
+			addMessage("Poprawnie dodano zwierzê o imieniu "
+					+ newAnimal.getAnimalName());
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -91,12 +103,10 @@ public class AddAnimalManagedBean implements Serializable {
 		this.furService = furService;
 	}
 
-	public AnimalManagedBean getAnimalMB() {
-		return animalMB;
-	}
-
-	public void setAnimalMB(AnimalManagedBean animalMB) {
-		this.animalMB = animalMB;
+	public void addMessage(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 }

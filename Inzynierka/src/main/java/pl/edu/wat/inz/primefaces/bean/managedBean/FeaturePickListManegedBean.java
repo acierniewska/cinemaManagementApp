@@ -1,12 +1,11 @@
 package pl.edu.wat.inz.primefaces.bean.managedBean;
 
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 import org.primefaces.event.TransferEvent;
 import org.primefaces.model.DualListModel;
@@ -16,29 +15,16 @@ import pl.edu.wat.inz.spring.service.AnimalFeatureService;
 import pl.edu.wat.inz.spring.service.FeatureService;
 
 @ManagedBean(name = "featurePickListMB")
-@ViewScoped
+@SessionScoped
 public class FeaturePickListManegedBean {
 
-	@ManagedProperty("#{FeatureService}")
+	@ManagedProperty(value = "#{FeatureService}")
 	private FeatureService fService;
-	@ManagedProperty("#{AnimalFeatureService}")
+	@ManagedProperty(value = "#{AnimalFeatureService}")
 	private AnimalFeatureService afService;
-	@ManagedProperty("#{animalMB}")
+	@ManagedProperty(value = "#{animalMB}")
 	private AnimalManagedBean animalMB;
 	private DualListModel<Feature> features;
-
-	@PostConstruct
-	public void init() {
-		List<Feature> source = fService.getFeatures();
-		List<Feature> target = Collections.emptyList();
-		if (animalMB.getSelectedAnimal() != null) {
-			target = afService.getAnimalsFeaturesId(animalMB
-					.getSelectedAnimal().getAnimalId());
-		}
-
-		source.removeAll(target);
-		features = new DualListModel<Feature>(source, target);
-	}
 
 	public DualListModel<Feature> getCities() {
 		return features;
@@ -57,6 +43,15 @@ public class FeaturePickListManegedBean {
 	}
 
 	public DualListModel<Feature> getFeatures() {
+		List<Feature> source = fService.getFeatures();
+		List<Feature> target = new LinkedList<Feature>();
+		if (animalMB.getSelectedAnimal() != null) {
+			target = afService.getAnimalsFeaturesId(animalMB
+					.getSelectedAnimal().getAnimalId());
+		}
+
+		source.removeAll(target);
+		features = new DualListModel<Feature>(source, target);
 		return features;
 	}
 

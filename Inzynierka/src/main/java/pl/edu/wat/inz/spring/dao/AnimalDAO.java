@@ -41,7 +41,7 @@ public class AnimalDAO {
 		sessionFactory.getCurrentSession().save(animal);
 	}
 
-	public Animal getAnimalById(int id) {
+	public Animal getAnimalById(long id) {
 		List list = getSessionFactory().getCurrentSession()
 				.createQuery("from Animal where id=?").setParameter(0, id)
 				.list();
@@ -50,7 +50,7 @@ public class AnimalDAO {
 
 	public List<Animal> getAnimals() {
 		List list = getSessionFactory().getCurrentSession()
-				.createQuery("from Animal").list();
+				.createQuery(" from Animal").list();
 		return list;
 	}
 

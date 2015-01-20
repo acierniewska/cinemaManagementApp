@@ -26,7 +26,7 @@ public class AnimalService {
 		getAnimalDAO().updateAnimal(animal);
 	}
 
-	public Animal getAnimalById(int id) {
+	public Animal getAnimalById(long id) {
 		return getAnimalDAO().getAnimalById(id);
 	}
 

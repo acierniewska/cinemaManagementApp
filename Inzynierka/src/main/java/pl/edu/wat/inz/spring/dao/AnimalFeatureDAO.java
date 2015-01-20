@@ -67,7 +67,7 @@ public class AnimalFeatureDAO {
 				.getCurrentSession()
 				.createQuery(
 						"select af.feature from AnimalFeature af left join af.animal a where a.animalId =:aId")
-				.setParameter("aId", 1l).list();
+				.setParameter("aId", animalId).list();
 		return list;
 	}
 }
