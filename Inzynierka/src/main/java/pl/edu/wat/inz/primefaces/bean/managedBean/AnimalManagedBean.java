@@ -104,6 +104,10 @@ public class AnimalManagedBean implements Serializable {
 		return animalList;
 	}
 
+	public void updateAnimalList() {
+		animalList.addAll(getAnimalService().getAnimals());
+	}
+
 	public AnimalService getAnimalService() {
 		return animalService;
 	}

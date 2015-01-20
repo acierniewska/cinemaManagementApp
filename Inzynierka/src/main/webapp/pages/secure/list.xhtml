@@ -345,18 +345,22 @@
 											itemValue="#{species.speciesId}" />
 									</p:selectOneMenu>
 
-									<h:outputText value="Rasa:" />
-									<p:selectOneMenu id="breedSelect"
-										value="#{addAnimalMB.newAnimal.breed.breedId}" effect="fade"
+								<h:outputText value="Rasa:" />
+									<p:selectOneMenu id="breedSelect" var="b"
+										value="#{addAnimalMB.newAnimal.breed}" effect="fade"
 										filter="true" filterMatchMode="startsWith" style="width:195px">
-										<f:selectItems value="#{breedMB.getBreedListForSpecies(1)}"
-											var="breed" itemLabel="#{breed.breedName}"
-											itemValue="#{breed.breedId}" />
+										<f:selectItems value="#{breedMB.breedList}" var="breed"
+											itemLabel="#{breed.breedName}"
+											itemValue="#{breed}" />
+										<p:column>
+										#{b.breedName}
+									</p:column>
+										<f:converter converterId="breedConverter" />
 									</p:selectOneMenu>
 
 									<h:outputText value="Kolor futra:" />
 									<p:selectOneMenu id="furColourSelect"
-										value="#{addAnimalMB.newAnimal.fur.furColour}" effect="fade"
+										value="#{addAnimalMB.furColour}" effect="fade"
 										filter="true" filterMatchMode="startsWith" style="width:195px">
 										<f:selectItems value="#{furEB.colours}" var="fur"
 											itemLabel="#{FurEnumBean.getColour(fur.intValue)}"
@@ -365,7 +369,7 @@
 
 									<h:outputText value="Długość futra:" />
 									<p:selectOneMenu id="furLengthSelect"
-										value="#{addAnimalMB.newAnimal.fur.furLength}" effect="fade"
+										value="#{addAnimalMB.furLen}" effect="fade"
 										filter="true" filterMatchMode="startsWith" style="width:195px">
 										<f:selectItems value="#{furEB.lengths}" var="fur"
 											itemLabel="#{FurEnumBean.getLength(fur.intValue)}"
@@ -388,24 +392,36 @@
 								style="text-align:left">
 								<h:outputText value="Osoba adoptująca:"
 									title="Właściciel zwierzęcia, osoba prowadząca Dom Tymczasowy lub osoba adoptująca wirtualnie" />
-								<p:selectOneMenu id="personSelect"
-									value="#{addAnimalMB.newAnimal.person.personId}" effect="fade"
+								<p:selectOneMenu id="personSelect" var="p"
+									value="#{addAnimalMB.newAnimal.person}" effect="fade"
 									filter="true" filterMatchMode="startsWith" style="width:307px">
 									<f:selectItem itemLabel="(puste)" itemValue="" />
 									<f:selectItems value="#{personMB.personList}" var="person"
 										itemLabel="#{person.personName} #{person.surname}"
-										itemValue="#{person.personId}" />
+										itemValue="#{person}" />
+									<p:column>
+										#{p.personName}
+									</p:column>
+									<p:column>
+										#{p.surname}
+									</p:column>
+									<f:converter converterId="personConverter" />
 								</p:selectOneMenu>
-
 								<h:outputText value="Osoba prowadząca Dom Tymczasowy:" />
-								<p:selectOneMenu id="personTHSelect"
-									value="#{addAnimalMB.newAnimal.tempHousePerson.personId}"
-									effect="fade" filter="true" filterMatchMode="startsWith"
-									style="width:307px">
+								<p:selectOneMenu id="personTHSelect" var="p"
+									value="#{addAnimalMB.newAnimal.tempHousePerson}" effect="fade"
+									filter="true" filterMatchMode="startsWith" style="width:307px">
 									<f:selectItem itemLabel="(puste)" itemValue="" />
 									<f:selectItems value="#{personMB.personList}" var="person"
 										itemLabel="#{person.personName} #{person.surname}"
-										itemValue="#{person.personId}" />
+										itemValue="#{person}" />
+									<p:column>
+										#{p.personName}
+									</p:column>
+									<p:column>
+										#{p.surname}
+									</p:column>
+									<f:converter converterId="personConverter" />
 								</p:selectOneMenu>
 
 								<h:outputText value="Osoba adoptująca wirtualnie:"
@@ -516,7 +532,7 @@
 					<p:panel style="text-align:right">
 						<p:commandButton id="addButtonThing"
 							action="#{addAnimalMB.addAnimal()}" value="Ok" style="width:40px"
-							update="buttonForm" />
+							update=":mainForm" oncomplete="PF('addDialog').hide()"/>
 						<p:commandButton value="Anuluj" />
 					</p:panel>
 				</h:form>

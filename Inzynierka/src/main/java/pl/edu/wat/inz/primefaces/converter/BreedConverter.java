@@ -10,11 +10,11 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import pl.edu.wat.inz.hibernate.data.Person;
-import pl.edu.wat.inz.primefaces.bean.managedBean.PersonManagedBean;
+import pl.edu.wat.inz.hibernate.data.Breed;
+import pl.edu.wat.inz.primefaces.bean.managedBean.BreedManagedBean;
 
-@FacesConverter("personConverter")
-public class PersonConverter implements Converter {
+@FacesConverter("breedConverter")
+public class BreedConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
@@ -22,12 +22,11 @@ public class PersonConverter implements Converter {
 			try {
 				Map<String, Object> map = fc.getExternalContext()
 						.getApplicationMap();
-				PersonManagedBean mb = (PersonManagedBean) map.get("personMB");
-				List<Person> personList = mb.getPersonList();
-				for (Person p : personList) {
-					if (((String) value).equals(p.getPersonName() + " "
-							+ p.getSurname())) {
-						return p;
+				BreedManagedBean mb = (BreedManagedBean) map.get("breedMB");
+				List<Breed> breedList = mb.getBreedList();
+				for (Breed b : breedList) {
+					if (((String) value).equals(b.getBreedName())) {
+						return b;
 					}
 				}
 				return null;
@@ -43,11 +42,11 @@ public class PersonConverter implements Converter {
 
 	@Override
 	public String getAsString(FacesContext fc, UIComponent uic, Object object) {
-		if (object instanceof Person && object != null) {
-			return ((Person) object).getPersonName() + " "
-					+ ((Person) object).getSurname();
+		if (object instanceof Breed && object != null) {
+			return ((Breed) object).getBreedName();
 		} else {
 			return null;
 		}
 	}
+
 }

@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
@@ -21,8 +21,8 @@ import org.springframework.dao.DataAccessException;
 import pl.edu.wat.inz.hibernate.data.Breed;
 import pl.edu.wat.inz.spring.service.BreedService;
 
-@ManagedBean(name = "breedMB")
-@ViewScoped
+@ManagedBean(name = "breedMB", eager = true)
+@ApplicationScoped
 public class BreedManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
