@@ -49,7 +49,7 @@ public class GenerateAnimalContractManagedBean implements Serializable {
 
 	private Person userPerson;
 
-	private String path = "E:/WAT/_in¿/git/Inzynierka/src/main/resources/doc/umowa_adopcyjna2.docx";
+	private String path = "E:/WAT/_in¿/git/Inzynierka/src/main/resources/doc/";
 	private AnimalContract contract = new AnimalContract();
 
 	@PostConstruct
@@ -70,7 +70,7 @@ public class GenerateAnimalContractManagedBean implements Serializable {
 			getAnimalContractService().updateAnimalContract(contract);
 
 			generateAnimalContract();
-			addMessage("Wygenerowano umowê.");
+			addMessage("Wygenerowano umowê. Lokalizacja pliku: " + path);
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -210,6 +210,8 @@ public class GenerateAnimalContractManagedBean implements Serializable {
 			run = paragraph.createRun();
 			run.setText("Podpis osoby przyjmuj¹cej zwierzê:						Podpis przedstawiciela Fundacji:");
 
+			path += contract.getContractDate() + "_umowaAdopcyjnaNr"
+					+ contract.getContractNr() + ".docx";
 			FileOutputStream out = new FileOutputStream(new File(path));
 			doc.write(out);
 			out.close();

@@ -90,13 +90,18 @@
 			<to-view-id>/pages/secure/applicationConf.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
-				<navigation-case>
+		<navigation-case>
 			<from-action>#{naviBean.navigate}</from-action>
 			<from-outcome>contractList</from-outcome>
 			<to-view-id>/pages/secure/contractList.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
-		
-		
+		<navigation-case>
+			<from-action>#{naviBean.navigate}</from-action>
+			<from-outcome>exportFinancialSupport</from-outcome>
+			<to-view-id>/pages/secure/exportFinancialSupport.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+
 	</navigation-rule>
 </faces-config>

@@ -57,7 +57,7 @@
 				</h:panelGrid>
 
 				<p:commandButton value="Dodaj umowę" id="adoptButton" update=":mainForm:growl"
-					actionListener="#{generateAnimalContractMB.addAnimalContract}"
+					actionListener="#{generateAnimalContractMB.addAnimalContract}" onclick="PrimeFaces.monitorDownload(start, stop);"
 					icon="ui-icon-arrowreturnthick-1-e">
 					<p:confirm header="Potwierdzenie"
 						message="Czy chcesz dodać nową umowę?" icon="ui-icon-alert" 

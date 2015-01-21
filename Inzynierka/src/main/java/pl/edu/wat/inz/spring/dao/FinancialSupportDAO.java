@@ -51,6 +51,13 @@ public class FinancialSupportDAO {
 		return list;
 	}
 
+	public List<FinancialSupport> getNotExportedFinancialSupports() {
+		List list = getSessionFactory().getCurrentSession()
+				.createQuery("from FinancialSupport f where isExported =?")
+				.setParameter(0, false).list();
+		return list;
+	}
+
 	public List<FinancialSupport> getFinancialSupportForAnimal(long animalId) {
 		List list = getSessionFactory()
 				.getCurrentSession()

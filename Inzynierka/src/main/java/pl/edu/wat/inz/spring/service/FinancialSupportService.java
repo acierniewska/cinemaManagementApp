@@ -39,6 +39,10 @@ public class FinancialSupportService {
 		return getFinancialSupportDAO().getFinancialSupports();
 	}
 
+	public List<FinancialSupport> getNotExportedFinancialSupports() {
+		return getFinancialSupportDAO().getNotExportedFinancialSupports();
+	}
+
 	public List<FinancialSupport> getFinancialSupportsForAnimal(long animalId) {
 		return getFinancialSupportDAO().getFinancialSupportForAnimal(animalId);
 	}

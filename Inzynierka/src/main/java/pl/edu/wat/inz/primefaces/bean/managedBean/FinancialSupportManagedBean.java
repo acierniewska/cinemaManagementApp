@@ -3,8 +3,14 @@ package pl.edu.wat.inz.primefaces.bean.managedBean;
 import static pl.edu.wat.inz.basic.AppConst.ERROR;
 import static pl.edu.wat.inz.basic.AppConst.SUCCESS;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -19,6 +25,7 @@ import org.primefaces.event.UnselectEvent;
 import org.springframework.dao.DataAccessException;
 
 import pl.edu.wat.inz.hibernate.data.FinancialSupport;
+import pl.edu.wat.inz.hibernate.data.Person;
 import pl.edu.wat.inz.spring.service.FinancialSupportService;
 
 @ManagedBean(name = "financialSupportMB")
@@ -29,7 +36,9 @@ public class FinancialSupportManagedBean implements Serializable {
 	@ManagedProperty(value = "#{FinancialSupportService}")
 	private FinancialSupportService financialSupportService;
 
-	List<FinancialSupport> financialSupportList;
+	private String path;
+	private List<FinancialSupport> toExportList = new ArrayList<FinancialSupport>();
+	private List<FinancialSupport> financialSupportList;
 	private FinancialSupport selectedFinancialSupport = new FinancialSupport();
 
 	public List<FinancialSupport> getFinancialSupportList() {
@@ -41,8 +50,66 @@ public class FinancialSupportManagedBean implements Serializable {
 		return financialSupportList;
 	}
 
+	public String export() {
+		try {
+			toExportList.addAll(getFinancialSupportService()
+					.getNotExportedFinancialSupports());
+
+			try {
+				File file = new File(path + "/wyciag"
+						+ new SimpleDateFormat("yyyyMMdd").format(new Date())
+						+ ".txt");
+				BufferedWriter output = new BufferedWriter(new FileWriter(file));
+				output.write(prepareFinancialSupport());
+				output.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			addMessage("Wyeksportowano " + toExportList.size() + " przelewów.");
+
+			return SUCCESS;
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return ERROR;
+	}
+
 	public String prepareFinancialSupport() {
-		return "meh";
+		StringBuilder sb = new StringBuilder();
+		for (FinancialSupport f : toExportList) {
+			sb.append(getExtractForFinancialSupport(f));
+
+			f.setIsExported(true);
+			getFinancialSupportService().updateFinancialSupport(f);
+		}
+
+		return sb.toString();
+	}
+
+	public String getExtractForFinancialSupport(FinancialSupport fs) {
+
+		String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
+		Person person = fs.getApplication().getPerson();
+		String personBankNr = person.getAccountNr();
+		String personNameSurnameAdres = person.getPersonName() + " "
+				+ person.getSurname() + "|" + person.getStreet() + " "
+				+ String.valueOf(person.getHouseNr()) + "/"
+				+ String.valueOf(person.getApartmentNr()) + "|"
+				+ person.getZipCode() + " " + person.getCity();
+		String title = "";
+
+		String txt = "110,"
+				+ date
+				+ ",10000,AAAAAAAA,0,\"CCAAAAAAAABBBBBBBBBBBBBBB\",\""
+				+ personBankNr
+				+ "\","
+				+ " \"Fundacja Kociarnia|ul. Pos³añców Kotów 15|123456 Warszawa\",\""
+				+ personNameSurnameAdres + "\",0,"
+				+ personBankNr.substring(2, 10) + ",\"" + title
+				+ "\",\"\",\"\",\"51\",\"REF:Referencje\"\r\n";
+		return txt;
+
 	}
 
 	public FinancialSupport getSelectedFinancialSupport() {
@@ -132,6 +199,28 @@ public class FinancialSupportManagedBean implements Serializable {
 	public void setFinancialSupportList(
 			List<FinancialSupport> FinancialSupportList) {
 		this.financialSupportList = FinancialSupportList;
+	}
+
+	public void addMessage(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public List<FinancialSupport> getToExportList() {
+		return toExportList;
+	}
+
+	public void setToExportList(List<FinancialSupport> toExportList) {
+		this.toExportList = toExportList;
 	}
 
 }
