@@ -2,7 +2,7 @@ package pl.edu.wat.inz.primefaces.bean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,7 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @ManagedBean(name = "loginMgmtBean")
-@RequestScoped
+@SessionScoped
 public class LoginBean {
 
 	private String userName = null;

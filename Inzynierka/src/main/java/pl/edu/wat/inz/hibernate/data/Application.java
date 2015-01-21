@@ -1,5 +1,7 @@
 package pl.edu.wat.inz.hibernate.data;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,8 @@ import pl.edu.wat.inz.basic.enums.ApplicationType;
 
 @Entity
 @Table(name = "application")
-public class Application {
+public class Application implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "APPLICATION_ID", nullable = false)
 	@Id

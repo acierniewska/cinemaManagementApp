@@ -250,7 +250,8 @@ public class Person {
 	}
 
 	public String getAdress() {
-		return "";
+		return street + " " + houseNr + "/" + apartmentNr + " " + zipCode
+				+ " poczta " + post + ", " + city;
 	}
 
 	public void setAdress(String adres) {

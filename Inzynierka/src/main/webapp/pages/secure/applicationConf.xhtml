@@ -11,22 +11,22 @@
 
 			<h1>Wniosek został złożony.</h1>
 			<h:form id="mainForm">
-				<p:dataTable var="app" value="#{applicationMB.applications}">
+				<p:dataTable var="app" value="#{addAppMB.newApplication}">
 				
 					<p:column headerText="Typ wniosku">
-						<h:outputText  value="#{appTypeEB.getType(app.applicationType)}" />
+						<h:outputText  value="#{appTypeEB.getType(addAppMB.newApplication.applicationType)}" />
 					</p:column>
 				
 					<p:column headerText="Osoba składająca">
-						<h:outputText value="#{app.person.personName} #{app.person.surname}" />
+						<h:outputText value="#{addAppMB.newApplication.person.personName} #{addAppMB.newApplication.person.surname}" />
 					</p:column>
 
 					<p:column headerText="Zwierzę, którego dotyczy">
-						<h:outputText value="#{app.animal.animalName}" />
+						<h:outputText value="#{addAppMB.newApplication.animal.animalName}" />
 					</p:column>
 
 					<p:column headerText="Powód">
-						<h:outputText value="#{app.applicationDesc}" />
+						<h:outputText value="#{addAppMB.newApplication.applicationDesc}" />
 					</p:column>
 				</p:dataTable>
 			</h:form>

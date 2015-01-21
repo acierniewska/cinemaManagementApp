@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14158286996330" configfile="/Inzynierka/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="pages/unsecure/login.xhtml" x="770" y="339" id="pf14179609457520" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" outlinks="pf14179609457532 pf141796121503913 pf142049682290219" inlinks="pf14179609457532 pf14216881937800 pf14216881937801" path="/pages/unsecure/login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/secure/list.xhtml" x="770" y="744" id="pf14179609457535" referenceLink="//@navigationRule.1/@navigationCase.3/@toViewId|" inlinks="pf14216881937803" path="/pages/secure/list.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/unsecure/register.xhtml" x="986" y="178" id="pf141796121504014" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf141796121503913" path="/pages/unsecure/register.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/secure/index.xhtml" x="554" y="541" id="pf142048584203615" referenceLink="//@navigationRule.1/@navigationCase.2/@toViewId|" inlinks="pf142049682290219 pf14216881937805" path="/pages/secure/index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/secure/allCatAdopt.xhtml" x="338" y="541" id="pf14215060715997" referenceLink="//@navigationRule.1/@navigationCase.4/@toViewId|" inlinks="pf14216881937807" path="/pages/secure/allCatAdopt.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/secure/application.xhtml" x="986" y="946" id="pf14216881937808" referenceLink="//@navigationRule.1/@navigationCase.6/@toViewId|" inlinks="pf14216881937809" path="/pages/secure/application.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/secure/*" x="122" y="764" id="pf142168819378010" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14216881937800 pf14216881937801 pf14216881937805 pf14216881937803 pf14216881937807 pf14216881937809 pf142168819378011" path="/pages/secure/*"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/secure/applicationList.xhtml" id="pf142168819378012" referenceLink="//@navigationRule.1/@navigationCase.5/@toViewId|" inlinks="pf142168819378011" path="/pages/secure/applicationList.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/unsecure/login.xhtml" x="338" y="562" id="pf14179609457520" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" outlinks="pf14179609457532 pf141796121503913 pf142049682290219" inlinks="pf14179609457532 pf14216881937800 pf14216881937801" path="/pages/unsecure/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/secure/list.xhtml" x="338" y="178" id="pf14179609457535" referenceLink="//@navigationRule.1/@navigationCase.3/@toViewId|" inlinks="pf14216881937803" path="/pages/secure/list.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/unsecure/register.xhtml" x="554" y="380" id="pf141796121504014" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf141796121503913" path="/pages/unsecure/register.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/secure/index.xhtml" x="554" y="764" id="pf142048584203615" referenceLink="//@navigationRule.1/@navigationCase.2/@toViewId|" inlinks="pf142049682290219 pf14216881937805" path="/pages/secure/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/secure/allCatAdopt.xhtml" x="338" y="967" id="pf14215060715997" referenceLink="//@navigationRule.1/@navigationCase.4/@toViewId|" inlinks="pf14216881937807" path="/pages/secure/allCatAdopt.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/secure/application.xhtml" x="338" y="1351" id="pf14216881937808" referenceLink="//@navigationRule.1/@navigationCase.9/@toViewId|" inlinks="pf14216881937809" path="/pages/secure/application.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/secure/*" x="122" y="764" id="pf142168819378010" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14216881937800 pf14216881937801 pf14216881937805 pf14216881937803 pf14216881937807 pf14216881937809 pf142168819378011 pf14217909800340 pf14217909800341 pf14218284962570" path="/pages/secure/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/secure/applicationList.xhtml" x="338" y="1735" id="pf142168819378012" referenceLink="//@navigationRule.1/@navigationCase.5/@toViewId|" inlinks="pf142168819378011" path="/pages/secure/applicationList.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/secure/vetList.xhtml" x="338" y="2119" id="pf14217909800342" referenceLink="//@navigationRule.1/@navigationCase.7/@toViewId|" inlinks="pf14217909800340" path="/pages/secure/vetList.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/secure/generateAnimalContract.xhtml" id="pf14217909800343" referenceLink="//@navigationRule.1/@navigationCase.9/@toViewId|" inlinks="pf14217909800341" path="/pages/secure/generateAnimalContract.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/secure/applicationConf.xhtml" id="pf14218284962571" referenceLink="//@navigationRule.1/@navigationCase.9/@toViewId|" inlinks="pf14218284962570" path="/pages/secure/applicationConf.xhtml"/>
   <links id="pf141796121503913" target="pf141796121504014" source="pf14179609457520" outcome="register" fromaction="#{loginMgmtBean.register}"/>
   <links id="pf142049682290219" target="pf142048584203615" source="pf14179609457520" outcome="correct" fromaction="#{loginMgmtBean.login}"/>
   <links id="pf14216881937800" target="pf14179609457520" source="pf142168819378010" outcome="loggedout" redirect="true" fromaction="#{loginMgmtBean.logout}"/>
@@ -15,11 +18,14 @@
   <links id="pf14216881937805" target="pf142048584203615" source="pf142168819378010" outcome="index" redirect="true" fromaction="#{naviBean.navigate}"/>
   <links id="pf14216881937803" target="pf14179609457535" source="pf142168819378010" outcome="list" redirect="true" fromaction="#{naviBean.navigate}"/>
   <links id="pf14216881937807" target="pf14215060715997" source="pf142168819378010" outcome="allCatAdopt" redirect="true" fromaction="#{naviBean.navigate}"/>
+  <links id="pf14216881937809" target="pf14216881937808" source="pf142168819378010" outcome="application" redirect="true" fromaction="#{naviBean.navigate}"/>
+  <links id="pf142168819378011" target="pf142168819378012" source="pf142168819378010" outcome="applicationList" redirect="true" fromaction="#{naviBean.navigate}"/>
+  <links id="pf14217909800340" target="pf14217909800342" source="pf142168819378010" outcome="vetList" redirect="true" fromaction="#{naviBean.navigate}"/>
   <links id="pf14179609457532" target="pf14179609457520" source="pf14179609457520" outcome="incorrect" fromaction="#{loginMgmtBean.login}">
     <bendPoints d1Height="-36" d2Height="-36"/>
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
-  <links id="pf14216881937809" target="pf14216881937808" source="pf142168819378010" outcome="application" redirect="true" fromaction="#{naviBean.navigate}"/>
-  <links id="pf142168819378011" target="pf142168819378012" source="pf142168819378010" outcome="applicationList" redirect="true" fromaction="#{naviBean.navigate}"/>
+  <links id="pf14217909800341" target="pf14217909800343" source="pf142168819378010" outcome="generateAnimalContract" redirect="true" fromaction="#{naviBean.navigate}"/>
+  <links id="pf14218284962570" target="pf14218284962571" source="pf142168819378010" outcome="success" redirect="true" fromaction="#{addAppMB.addApplication}"/>
 </pageflow:Pageflow>

@@ -34,12 +34,12 @@
 				<!-- TABELA -->
 				<p:dataTable widhetVar="animalTable" id="animals"
 					selectionMode="single" selection="#{animalMB.selectedAnimal}"
-					dblClickSelect="true" onRowDblselectComplete="showDialog.show()" process="@this" immediate="true"
-					var="animal" rowKey="#{animal.animalId}"
-					value="#{animalMB.animalList}" editable="true" paginator="true"
+					immediate="true" dblClickSelect="true" var="animal"
+					rowKey="#{animal.animalId}" value="#{animalMB.animalList}"
+					editable="true" paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 					rows="10">
-					<p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}" process="@this" immediate="true"
+					<p:ajax event="rowSelect" listener="#{animalMB.onCompRowSelect}"
 						update=":mainForm, :showForm, :editForm" />
 					<p:ajax event="rowUnselect"
 						listener="#{animalMB.onUserRowUnselect}"
@@ -117,7 +117,7 @@
 									style="text-align:left">
 									<h:outputText value="Imię:" />
 									<p:inputText value="#{addAnimalMB.newAnimal.animalName}"
-										size="24" />
+										required="true" size="24" />
 
 									<h:outputText value="Specjalnej troski:" />
 									<p:selectBooleanCheckbox
@@ -128,7 +128,7 @@
 										value="#{addAnimalMB.newAnimal.isCastrated}" />
 
 									<h:outputText value="Gatunek:" />
-									<p:selectOneMenu id="speciesSelect"
+									<p:selectOneMenu id="speciesSelect" required="true"
 										value="#{addAnimalMB.newAnimal.breed.species.speciesId}"
 										effect="fade" filter="true" filterMatchMode="startsWith"
 										style="width:195px">
@@ -138,7 +138,7 @@
 									</p:selectOneMenu>
 
 									<h:outputText value="Rasa:" />
-									<p:selectOneMenu id="breedSelect" var="b"
+									<p:selectOneMenu id="breedSelect" var="b" required="true"
 										value="#{addAnimalMB.newAnimal.breed}" effect="fade"
 										filter="true" filterMatchMode="startsWith" style="width:195px">
 										<f:selectItems value="#{breedMB.breedList}" var="breed"
@@ -150,7 +150,7 @@
 									</p:selectOneMenu>
 
 									<h:outputText value="Kolor futra:" />
-									<p:selectOneMenu id="furColourSelect"
+									<p:selectOneMenu id="furColourSelect" required="true"
 										value="#{addAnimalMB.furColour}" effect="fade" filter="true"
 										filterMatchMode="startsWith" style="width:195px">
 										<f:selectItems value="#{furEB.colours}" var="fur"
@@ -159,7 +159,7 @@
 									</p:selectOneMenu>
 
 									<h:outputText value="Długość futra:" />
-									<p:selectOneMenu id="furLengthSelect"
+									<p:selectOneMenu id="furLengthSelect" required="true"
 										value="#{addAnimalMB.furLen}" effect="fade" filter="true"
 										filterMatchMode="startsWith" style="width:195px">
 										<f:selectItems value="#{furEB.lengths}" var="fur"
@@ -168,12 +168,12 @@
 									</p:selectOneMenu>
 
 									<h:outputText value="Data urodzenia:" />
-									<p:calendar size="20"
+									<p:calendar size="20" required="true"
 										value="#{addAnimalMB.newAnimal.animalBirthdayDay}"
 										pattern="yyyy-MM-dd" mask="true" showOn="button" />
 
 									<h:outputText value="W Fundacji od:" />
-									<p:calendar size="20"
+									<p:calendar size="20" required="true"
 										value="#{addAnimalMB.newAnimal.animalRescueDate}"
 										pattern="yyyy-MM-dd" mask="true" showOn="button" />
 								</h:panelGrid>
@@ -330,10 +330,10 @@
 
 			<!-- EDIT DIALOG -->
 			<p:dialog widgetVar="editDialog" header="Edytuj zwierzę"
-				dynamic="true" showEffect="clip" resizable="false" hideEffect="clip"
-				height="535" width="670" modal="true">
+				showEffect="clip" resizable="false" hideEffect="clip" height="535"
+				width="670" modal="true">
 				<h:form id="editForm">
-					<p:tabView id="tabView" style="margin-bottom:5px">
+					<p:tabView id="tabView2" style="margin-bottom:5px">
 						<p:tab title="Podstawowe">
 							<h:panelGrid id="pic" columns="2" cellpadding="5" cellspacing="3">
 
@@ -519,15 +519,12 @@
 						<p:tab title="Inne">
 							<h:panelGrid id="animalFeaturesPanel" columns="1">
 								<p:pickList id="animalFeatures"
-									value="#{featurePickListMB.getFeaturesForAnimal(animalMB.selectedAnimal.animalId)}" var="feature"
+									value="#{featurePickListMB.features}" var="feature"
 									itemValue="#{feature.featureId}"
 									itemLabel="#{feature.featureName}" showCheckbox="true"
 									showSourceFilter="true" showTargetFilter="true"
-									filterMatchMode="contains" style="text-align:left;height:400px">
-
-									<f:facet name="sourceCaption">Dostępne cechy</f:facet>
+									filterMatchMode="contains" style="text-align:left">
 									<f:facet name="targetCaption">Cechy kota</f:facet>
-
 									<p:ajax event="transfer"
 										listener="#{featurePickListMB.onTransfer}" />
 								</p:pickList>
@@ -535,18 +532,19 @@
 						</p:tab>
 					</p:tabView>
 
-					<p:panel style="text-align:right">
+					<p:panel id="okbutton" style="text-align:right">
 						<p:commandButton id="addButtonThing"
-							action="#{animalMB.updateAnimal(animalMB.selectedAnimal)}" value="Zatwierdź zmiany"
-							update=":mainForm" oncomplete="PF('editDialog').hide()" />
+							action="#{animalMB.updateAnimal()}" value="Ok" style="width:40px"
+							ajax="false" process=":editForm"
+							oncomplete="PF('editDialog').hide()" />
 					</p:panel>
 				</h:form>
 			</p:dialog>
 
 			<!-- SHOW DIALOG -->
 			<p:dialog widgetVar="showDialog" header="Dane zwierzęcia"
-				showEffect="clip" resizable="false" hideEffect="clip"
-				height="535" width="670" modal="true">
+				showEffect="clip" resizable="false" hideEffect="clip" height="535"
+				width="670" modal="true">
 				<h:form id="showForm">
 					<p:tabView id="tabView" style="margin-bottom:5px">
 						<p:tab title="Podstawowe">
@@ -738,7 +736,7 @@
 						<p:tab title="Inne">
 							<h:panelGrid id="animalFeaturesPanel" columns="1">
 								<p:pickList id="animalFeatures" disabled="true"
-									value="#{featurePickListMB.getFeaturesForAnimal(animalMB.selectedAnimal.animalId)}" var="feature"
+									value="#{featurePickListMB.features}" var="feature"
 									itemValue="#{feature.featureId}"
 									itemLabel="#{feature.featureName}" showCheckbox="true"
 									showSourceFilter="true" showTargetFilter="true"
@@ -754,8 +752,9 @@
 						</p:tab>
 					</p:tabView>
 					<p:panel id="okbutton" style="text-align:right">
-						<p:button value="Ok" style="width:40px" update=":mainForm"
-							oncomplete="PF('showDialog').hide()" />
+
+						<p:commandButton value="Ok" style="width:40px" update=":mainForm"
+							oncomplete="PF('showDialog').hide()" ajax="true" />
 					</p:panel>
 				</h:form>
 			</p:dialog>

@@ -52,10 +52,10 @@ public class AddAnimalManagedBean implements Serializable {
 			}
 			newAnimal.setFur(fur);
 			getAnimalService().addAnimal(newAnimal);
-			newAnimal = new Animal();
-			animalMB.updateAnimalList();
 			addMessage("Poprawnie dodano zwierzê o imieniu "
 					+ newAnimal.getAnimalName());
+			newAnimal = new Animal();
+			animalMB.updateAnimalList();
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();

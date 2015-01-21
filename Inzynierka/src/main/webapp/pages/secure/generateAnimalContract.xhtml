@@ -2,32 +2,30 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags">
 
 <h:body>
 	<ui:composition template="../template/template.xhtml">
 		<ui:define name="content">
 
-			<h1>Złóż wniosek</h1>
+			<h1>Generuj umowę</h1>
 			<h:form id="mainForm">
-				<p:growl id="messages"></p:growl>
-				
 				<h:panelGrid id="mainPanel" columns="2"
 					style="text-align:left; margin-left:210px; margin-bottom:20px"
 					cellpadding="5" cellspacing="3">
 
-					<h:outputText value="Typ wniosku:" />
-					<p:selectOneMenu id="appTypeSelect"
-						value="#{addAppMB.newApplication.applicationType}" effect="fade"
+					<h:outputText value="Typ umowy:" />
+					<p:selectOneMenu id="aCTypeSelect" value="#{generateAnimalContractMB.contract.animalContractType}" effect="fade"
 						filter="true" filterMatchMode="startsWith" style="width:307px">
-						<f:selectItems value="#{appTypeEB.types}" var="type"
-							itemLabel="#{appTypeEB.getType(type.intValue)}"
+						<f:selectItems value="#{animalContractTypeEB.types}" var="type"
+							itemLabel="#{animalContractTypeEB.getType(type.intValue)}"
 							itemValue="#{type.intValue}" />
 					</p:selectOneMenu>
 
 					<h:outputText value="Osoba, której wniosek dotyczy:" />
 					<p:selectOneMenu id="personSelect" var="p"
-						value="#{addAppMB.newApplication.person}" effect="fade"
+						value="#{generateAnimalContractMB.contract.person}" effect="fade"
 						filter="true" filterMatchMode="startsWith" style="width:307px">
 						<f:selectItems value="#{personMB.personList}" var="person"
 							itemLabel="#{person.personName} #{person.surname}"
@@ -43,7 +41,7 @@
 
 					<h:outputText value="Zwierzę, którego dotyczy wniosek" />
 					<p:selectOneMenu id="animalSelect" var="a"
-						value="#{addAppMB.newApplication.animal}" effect="fade"
+						value="#{generateAnimalContractMB.contract.animal}" effect="fade"
 						filter="true" filterMatchMode="startsWith" style="width:307px">
 						<f:selectItems value="#{animalMB.animalList}" var="animal"
 							itemLabel="#{animal.animalName}" itemValue="#{animal}" />
@@ -52,24 +50,27 @@
 						</p:column>
 						<f:converter converterId="animalConverter" />
 					</p:selectOneMenu>
-
-					<h:outputText value="Powód" />
-					<h:panelGrid column="1">
-						<p:inputTextarea rows="5" cols="40" counter="display"
-							value="#{addAppMB.newApplication.applicationDesc}"
-							maxlength="256" counterTemplate="Pozostało {0} znaków"
-							autoResize="false" />
-						<h:outputText id="display" />
-					</h:panelGrid>
 				</h:panelGrid>
-
-				<p:commandButton label="Złóż e-Wniosek" id="adoptButton"
-					ajax="false" process=":mainForm"
-					action="#{addAppMB.addApplication}"
-					icon="ui-icon-arrowreturnthick-1-e">
+				
+				 
+				 <p:commandButton id="meh" value="Generuj umowęee"
+					con="ui-icon-arrowreturnthick-1-e" 
+					 action="#{generateAnimalContractMB.generateAnimalContract}"/>
+				
+				<p:commandButton id="adoptButton" value="Generuj umowę"
+					type="reset" update="" icon="ui-icon-arrowreturnthick-1-e" 
+					oncomplete="PF('dlg').show()">
+					<p:confirm header="Potwiedzenie"
+						message="Czy na pewno chcesz wygenerować umowę?" icon="ui-icon-alert" />
 				</p:commandButton>
-			</h:form>
 
+				<p:confirmDialog global="true" showEffect="clip" hideEffect="clip">
+					<p:commandButton value="Tak" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Nie" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </h:body>

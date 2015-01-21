@@ -78,6 +78,18 @@
 			<to-view-id>/pages/secure/vetList.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
-
+		<navigation-case>
+			<from-action>#{naviBean.navigate}</from-action>
+			<from-outcome>generateAnimalContract</from-outcome>
+			<to-view-id>/pages/secure/generateAnimalContract.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{addAppMB.addApplication}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/pages/secure/applicationConf.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
 	</navigation-rule>
 </faces-config>

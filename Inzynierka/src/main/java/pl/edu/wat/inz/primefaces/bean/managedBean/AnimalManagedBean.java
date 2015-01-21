@@ -9,9 +9,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
@@ -22,8 +22,8 @@ import org.springframework.dao.DataAccessException;
 import pl.edu.wat.inz.hibernate.data.Animal;
 import pl.edu.wat.inz.spring.service.AnimalService;
 
-@ManagedBean(name = "animalMB")
-@SessionScoped
+@ManagedBean(name = "animalMB", eager = true)
+@ApplicationScoped
 public class AnimalManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -62,6 +62,19 @@ public class AnimalManagedBean implements Serializable {
 			updateAnimalList();
 			addMessage("Zmodyfikowano zwierzê o imieniu "
 					+ animal.getAnimalName());
+			return SUCCESS;
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return ERROR;
+	}
+
+	public String updateAnimal() {
+		try {
+			getAnimalService().updateAnimal(selectedAnimal);
+			updateAnimalList();
+			addMessage("Zmodyfikowano zwierzê o imieniu "
+					+ selectedAnimal.getAnimalName());
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();

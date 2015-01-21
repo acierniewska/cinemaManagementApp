@@ -7,10 +7,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
@@ -22,7 +23,7 @@ import pl.edu.wat.inz.hibernate.data.Application;
 import pl.edu.wat.inz.spring.service.ApplicationService;
 
 @ManagedBean(name = "applicationMB")
-@SessionScoped
+@ViewScoped
 public class ApplicationManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -32,6 +33,11 @@ public class ApplicationManagedBean implements Serializable {
 
 	private List<Application> applicationList;
 	private Application selectedApplication;
+
+	@PostConstruct
+	public void init() {
+		selectedApplication = new Application();
+	}
 
 	public Application getSelectedApplication() {
 		return selectedApplication;
@@ -51,10 +57,7 @@ public class ApplicationManagedBean implements Serializable {
 
 	public String addApplication() {
 		try {
-			// Application Application = new Application();
-			// Animal.setAnimalName(getName());
-			// getAnimalService().addAnimal(Animal);
-			reset();
+			getApplicationService().addApplication(selectedApplication);
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -93,9 +96,6 @@ public class ApplicationManagedBean implements Serializable {
 	public void onCancel(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Item Cancelled");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
-
-	public void reset() {
 	}
 
 	public List<Application> getApplicationList() {

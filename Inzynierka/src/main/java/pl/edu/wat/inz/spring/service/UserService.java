@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.edu.wat.inz.hibernate.data.User;
 import pl.edu.wat.inz.spring.dao.UserDAO;
 
-@Service
+@Service("UserService")
 @Transactional
 public class UserService {
 
