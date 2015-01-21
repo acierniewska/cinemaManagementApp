@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -57,12 +60,17 @@ public class GenerateAnimalContractManagedBean implements Serializable {
 
 	public String addAnimalContract() {
 		try {
-			/*
-			 * getAnimalService().addAnimal(newAnimal); newAnimal = new
-			 * Animal(); animalMB.updateAnimalList();
-			 * addMessage("Poprawnie dodano zwierzê o imieniu " +
-			 * newAnimal.getAnimalName());
-			 */
+			contract.setContractDate(new Date());
+			contract.setContractNr(String.valueOf(contract
+					.getAnimalContractId()) + "/2015");
+			getAnimalContractService().addAnimalContract(contract);
+
+			contract.setContractNr(String.valueOf(contract
+					.getAnimalContractId()) + "/2015");
+			getAnimalContractService().updateAnimalContract(contract);
+
+			generateAnimalContract();
+			addMessage("Wygenerowano umowê.");
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -79,14 +87,16 @@ public class GenerateAnimalContractManagedBean implements Serializable {
 			XWPFParagraph paragraph = doc.createParagraph();
 			paragraph.setAlignment(ParagraphAlignment.RIGHT);
 			XWPFRun run = paragraph.createRun();
-			run.setText("Warszawa, " + contract.getContractDate());
+			DateFormat dateFormat = new SimpleDateFormat("dd MM yyyy");
+			run.setText("Warszawa, "
+					+ dateFormat.format(contract.getContractDate()));
 
 			paragraph = doc.createParagraph();
 			paragraph = doc.createParagraph();
 			paragraph.setAlignment(ParagraphAlignment.CENTER);
 			run = paragraph.createRun();
 			run.setBold(true);
-			run.setUnderline(UnderlinePatterns.DASH);
+			run.setUnderline(UnderlinePatterns.SINGLE);
 			run.setText("UMOWA ADOPCYJNA nr " + contract.getContractNr());
 
 			paragraph = doc.createParagraph();
@@ -120,7 +130,6 @@ public class GenerateAnimalContractManagedBean implements Serializable {
 
 			paragraph = doc.createParagraph();
 			paragraph = doc.createParagraph();
-			paragraph.setAlignment(ParagraphAlignment.CENTER);
 			run = paragraph.createRun();
 			run.setBold(true);
 			run.setText("Dane zwierzêcia");

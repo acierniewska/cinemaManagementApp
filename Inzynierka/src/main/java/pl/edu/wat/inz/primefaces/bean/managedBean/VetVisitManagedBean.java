@@ -5,6 +5,7 @@ import static pl.edu.wat.inz.basic.AppConst.SUCCESS;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -41,6 +42,7 @@ public class VetVisitManagedBean implements Serializable {
 	public void init() {
 		List list = getVetVisitService().getVetVisits(false);
 		if (!list.isEmpty()) {
+			completedVisitList = new LinkedList<VetVisit>();
 			completedVisitList.addAll(list);
 		}
 	}

@@ -11,13 +11,17 @@
 
 			<h1>Generuj umowę</h1>
 			<h:form id="mainForm">
+				<p:growl id="growl" life="2000" />
+
 				<h:panelGrid id="mainPanel" columns="2"
 					style="text-align:left; margin-left:210px; margin-bottom:20px"
 					cellpadding="5" cellspacing="3">
 
 					<h:outputText value="Typ umowy:" />
-					<p:selectOneMenu id="aCTypeSelect" value="#{generateAnimalContractMB.contract.animalContractType}" effect="fade"
-						filter="true" filterMatchMode="startsWith" style="width:307px">
+					<p:selectOneMenu id="aCTypeSelect"
+						value="#{generateAnimalContractMB.contract.animalContractType}"
+						effect="fade" filter="true" filterMatchMode="startsWith"
+						style="width:307px">
 						<f:selectItems value="#{animalContractTypeEB.types}" var="type"
 							itemLabel="#{animalContractTypeEB.getType(type.intValue)}"
 							itemValue="#{type.intValue}" />
@@ -51,26 +55,24 @@
 						<f:converter converterId="animalConverter" />
 					</p:selectOneMenu>
 				</h:panelGrid>
-				
-				 
-				 <p:commandButton id="meh" value="Generuj umowęee"
-					con="ui-icon-arrowreturnthick-1-e" 
-					 action="#{generateAnimalContractMB.generateAnimalContract}"/>
-				
-				<p:commandButton id="adoptButton" value="Generuj umowę"
-					type="reset" update="" icon="ui-icon-arrowreturnthick-1-e" 
-					oncomplete="PF('dlg').show()">
-					<p:confirm header="Potwiedzenie"
-						message="Czy na pewno chcesz wygenerować umowę?" icon="ui-icon-alert" />
-				</p:commandButton>
 
-				<p:confirmDialog global="true" showEffect="clip" hideEffect="clip">
+				<p:commandButton value="Dodaj umowę" id="adoptButton" update=":mainForm:growl"
+					actionListener="#{generateAnimalContractMB.addAnimalContract}"
+					icon="ui-icon-arrowreturnthick-1-e">
+					<p:confirm header="Potwierdzenie"
+						message="Czy chcesz dodać nową umowę?" icon="ui-icon-alert" 
+						/>
+				</p:commandButton>
+			</h:form>
+			<p:confirmDialog global="true" showEffect="clipe" hideEffect="clip">
+				<h:form>
 					<p:commandButton value="Tak" type="button"
 						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 					<p:commandButton value="Nie" type="button"
 						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-				</p:confirmDialog>
-			</h:form>
+				</h:form>
+			</p:confirmDialog>
+
 		</ui:define>
 	</ui:composition>
 </h:body>

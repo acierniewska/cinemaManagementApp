@@ -10,8 +10,6 @@
 
 			<h1>Złóż wniosek</h1>
 			<h:form id="mainForm">
-				<p:growl id="messages"></p:growl>
-
 				<h:panelGrid id="mainPanel" columns="2"
 					style="text-align:left; margin-left:210px; margin-bottom:20px"
 					cellpadding="5" cellspacing="3">
@@ -63,18 +61,18 @@
 					</h:panelGrid>
 				</h:panelGrid>
 
-				<p:commandButton label="Złóż e-Wniosek" id="adoptButton"
+				<p:commandButton value="Złóż e-Wniosek" id="adoptButton"
 					action="#{addAppMB.addApplication}"
 					icon="ui-icon-arrowreturnthick-1-e">
-					<p:confirm header="Confirmation" message="Are you sure?"
+					<p:confirm header="Potwierdzenie" message="Czy na pewno chcesz dodać wniosek?"
 						icon="ui-icon-alert" />
 				</p:commandButton>
 			</h:form>
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
 				<h:form>
-					<p:commandButton value="Yes" type="button"
+					<p:commandButton value="Tak" type="button"
 						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="No" type="button"
+					<p:commandButton value="Nie" type="button"
 						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 				</h:form>
 			</p:confirmDialog>

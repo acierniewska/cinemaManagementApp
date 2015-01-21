@@ -26,7 +26,7 @@ public class AllegroBean {
 	private UserItemList[] itemList;
 	private UserItemList item;
 	private long userId = -1;
-	private int itemNr;
+	private int itemNr = -1;
 
 	@PostConstruct
 	public void init() {
@@ -35,28 +35,25 @@ public class AllegroBean {
 			proxy = service.getProxy();
 			userId = service.getUserId();
 		}
-
-		if (itemList == null) {
-			DoGetUserItemsRequest userItems = new DoGetUserItemsRequest(
-					USER_ID, WEB_KEY, COUNTRY_CODE, null, null);
-			try {
-				DoGetUserItemsResponse userItemResponse = proxy
-						.doGetUserItems(userItems);
-				itemList = userItemResponse.getUserItemList();
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
+		DoGetUserItemsRequest userItems = new DoGetUserItemsRequest(USER_ID,
+				WEB_KEY, COUNTRY_CODE, null, null);
+		try {
+			DoGetUserItemsResponse userItemResponse = proxy
+					.doGetUserItems(userItems);
+			itemList = userItemResponse.getUserItemList();
+		} catch (RemoteException e) {
+			e.printStackTrace();
 		}
 
-		if (itemList.length > 0) {
+		if (itemList != null && itemList.length > 0) {
 			itemNr = 0;
 			item = itemList[itemNr];
 		}
 	}
 
 	public String getAllegroSandboxUrl() {
-		return "http://allegro.pl.webapisandbox.pl/i" + item.getItId()
-				+ ".html";
+		return item == null ? "" : "http://allegro.pl.webapisandbox.pl/i"
+				+ item.getItId() + ".html";
 	}
 
 	public long getUserId() {

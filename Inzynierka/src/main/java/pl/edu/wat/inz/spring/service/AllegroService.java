@@ -53,6 +53,8 @@ public class AllegroService {
 			e.printStackTrace();
 		} catch (ServiceException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

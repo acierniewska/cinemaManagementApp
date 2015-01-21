@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="content">
+			<h1>Spis wszystkich umów</h1>
+
+			<h:form id="mainForm">
+
+				<!-- TABELA -->
+				<p:dataTable widhetVar="animalContract" id="con"
+					selectionMode="single"
+					selection="#{animalContractMB.selectedAnimalContract}"
+					emptyMessage="Brak wniosków" dblClickSelect="true"
+					onRowDblselectComplete="addDialog.show()" var="con"
+					rowKey="#{con.animalContractId}"
+					value="#{animalContractMB.animalContractList}" editable="true"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+					rows="10">
+					<p:ajax event="rowSelect"
+						listener="#{animalContractMB.onCompRowSelect}" />
+					<p:ajax event="rowUnselect"
+						listener="#{animalContractMB.onUserRowUnselect}" />
+					<p:ajax event="rowDblselect" immediate="true" process="@this" />
+
+					<p:column headerText="Typ umowy">
+						<h:outputText
+							value="#{animalContractTypeEB.getType(con.animalContractType)}" />
+					</p:column>
+
+					<p:column headerText="Data zawarcia umowy">
+						<h:outputText value="#{con.contractDate}" />
+					</p:column>
+
+					<p:column headerText="Numer umowy">
+						<h:outputText value="#{con.contractNr}" />
+					</p:column>
+					<p:column headerText="Dotyczy osoby">
+						<h:outputText
+							value="#{con.person.personName} #{con.person.surname}" />
+					</p:column>
+
+					<p:column headerText="Dotyczy zwierzęcia">
+						<h:outputText value="#{con.animal.animalName}" />
+					</p:column>
+				</p:dataTable>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

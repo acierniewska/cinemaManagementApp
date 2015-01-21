@@ -9,27 +9,28 @@
 	<ui:composition template="../template/template.xhtml">
 		<ui:define name="content">
 			<h1>Wizyty odbyte</h1>
-			
-<p:dataTable id="visitTable" scrollable="true" scrollHeight="395"
-								emptyMessage="Brak wizyt odbytych" var="visit"
-								rowKey="#{visit.vetVisitId}"
-								value="#{vetVisitMB.getCompletedVisitList()}">
-								<p:column headerText="Zwierzę">
-									<h:outputText value="#{visit.animal.animalName}" />
-								</p:column>
-								<p:column headerText="Data wizyty">
-									<h:outputText value="#{visit.vetVisitDate}" />
-								</p:column>
-								<p:column headerText="Godzina wizyty">
-									<h:outputText value="#{visit.vetVisitTime}" />
-								</p:column>
-								<p:column headerText="Koszt dla Fundacji">
-									<h:outputText value="#{visit.foundationPayment} zł" />
-								</p:column>
-								<p:column headerText="Opis">
-									<h:outputText value="#{visit.details}" />
-								</p:column>
-							</p:dataTable>
+
+			<p:dataTable id="visitTable" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				rows="10" emptyMessage="Brak wizyt odbytych" var="visit"
+				rowKey="#{visit.vetVisitId}"
+				value="#{vetVisitMB.getCompletedVisitList()}">
+				<p:column headerText="Zwierzę">
+					<h:outputText value="#{visit.animal.animalName}" />
+				</p:column>
+				<p:column headerText="Data wizyty">
+					<h:outputText value="#{visit.vetVisitDate}" />
+				</p:column>
+				<p:column headerText="Godzina wizyty">
+					<h:outputText value="#{visit.vetVisitTime}" />
+				</p:column>
+				<p:column headerText="Koszt dla Fundacji">
+					<h:outputText value="#{visit.foundationPayment}" />
+				</p:column>
+				<p:column headerText="Opis">
+					<h:outputText value="#{visit.details}" />
+				</p:column>
+			</p:dataTable>
 
 		</ui:define>
 	</ui:composition>
