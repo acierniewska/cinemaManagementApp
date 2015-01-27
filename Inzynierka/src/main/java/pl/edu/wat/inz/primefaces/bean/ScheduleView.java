@@ -59,9 +59,11 @@ public class ScheduleView implements Serializable {
 		 */
 		List<Event> events = service.getEvents();
 		for (Event e : events) {
-			eventModel.addEvent(new DefaultScheduleEvent(e.getEventName(), e
-					.getDateStart(), e.getDateEnd(), e.getEventType()
-					.getStyleClass()));
+			DefaultScheduleEvent se = new DefaultScheduleEvent(
+					e.getEventName(), e.getDateStart(), e.getDateEnd(), e
+							.getEventType().getStyleClass());
+			se.setDescription(e.getEventDesc());
+			eventModel.addEvent(se);
 		}
 	}
 
@@ -147,7 +149,7 @@ public class ScheduleView implements Serializable {
 		e.setDateStart(event.getStartDate());
 		e.setTimeEnd(new Time(event.getEndDate().getTime()));
 		e.setDateEnd(event.getEndDate());
-		e.setEventDesc(desc);
+		e.setEventDesc(event.getDescription());
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
 			service.addEvent(e);
@@ -170,6 +172,7 @@ public class ScheduleView implements Serializable {
 	public void onDateSelect(SelectEvent selectEvent) {
 		event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(),
 				(Date) selectEvent.getObject());
+
 	}
 
 	public void onEventMove(ScheduleEntryMoveEvent event) {

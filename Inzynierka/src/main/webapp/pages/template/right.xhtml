@@ -47,7 +47,7 @@
 			<p:panel id="sch" header="Kalendarz" style="margin-bottom:10px;"
 				ajax="true">
 				<p:schedule id="myschedule" leftHeaderTemplate="prev"
-					rightHeaderTemplate="next" view="month" locale="pl"
+					rightHeaderTemplate="next" view="month" locale="pl" timeZone="GMT+1"
 					widgetVar="myschedule" value="#{scheduleView.eventModel}">
 					<p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}"
 						update="eventDetails" oncomplete="PF('eventDialog').show();" />
@@ -85,7 +85,7 @@
 						locale="pl" pattern="MM/dd/yyyy HH:mm:ss" />
 
 					<h:outputLabel value="Opis:" />
-					<p:inputTextarea rows="5" cols="20" maxlength="256" value="#{scheduleView.desc}"
+					<p:inputTextarea rows="5" cols="20" maxlength="256" value="#{scheduleView.event.description}"
 						autoResize="false" />
 
 					<h:outputLabel />
