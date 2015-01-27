@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		<ui:define name="content">
+
+			<h1>Dodaj aukcję Allegro</h1>
+			<h:form id="mainForm">
+			<p:growl id="growl" life="2000" />
+			
+			
+				<h:panelGrid id="mainPanel" columns="2"
+					style="text-align:left; margin-left:210px; margin-bottom:20px"
+					cellpadding="5" cellspacing="3">
+
+					<h:outputText value="Nazwa aukcji" />
+					<p:inputText value="#{allegroBean.newAllegroItem.name}" />
+
+					<h:outputText value="Cena za przedmiot" />
+					<p:inputText value="#{allegroBean.newAllegroItem.amount}" mask="999.99"/>
+
+					<h:outputText value="Liczba przedmiotów" />
+					<h:panelGrid columns="1" style="margin-bottom: 10px">
+						<p:inputText id="txt1"
+							value="#{allegroBean.newAllegroItem.numberOfItems}" />
+						<p:slider for="txt1" />
+					</h:panelGrid>
+
+					<h:outputText value="Opis aukcji" />
+					<h:panelGrid column="1">
+						<p:inputTextarea rows="5" cols="40" counter="display"
+							value="#{allegroBean.newAllegroItem.desciption}" maxlength="256"
+							counterTemplate="Pozostało {0} znaków" autoResize="false" />
+						<h:outputText id="display" />
+					</h:panelGrid>
+				</h:panelGrid>
+
+				<p:commandButton value="Złóż e-Wniosek" id="adoptButton"
+					action="#{allegroBean.addNewAllegroItem}"
+					icon="ui-icon-arrowreturnthick-1-e">
+				</p:commandButton>
+			</h:form>
+
+
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

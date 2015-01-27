@@ -27,6 +27,17 @@ public enum EventType {
 		return null;
 	}
 
+	public static EventType fromStyleClass(String styleClass) {
+		EventType[] types = EventType.values();
+		for (int i = 0; i < types.length; i++) {
+			if (types[i].styleClass.equals(styleClass)) {
+				return types[i];
+			}
+		}
+
+		return null;
+	}
+
 	@Override
 	public String toString() {
 		return name;

@@ -27,7 +27,7 @@
 							itemValue="#{type.intValue}" />
 					</p:selectOneMenu>
 
-					<h:outputText value="Osoba, której wniosek dotyczy:" />
+					<h:outputText value="Strona umowy:" />
 					<p:selectOneMenu id="personSelect" var="p"
 						value="#{generateAnimalContractMB.contract.person}" effect="fade"
 						filter="true" filterMatchMode="startsWith" style="width:307px">
@@ -43,7 +43,7 @@
 						<f:converter converterId="personConverter" />
 					</p:selectOneMenu>
 
-					<h:outputText value="Zwierzę, którego dotyczy wniosek" />
+					<h:outputText value="Zwierzę, którego dotyczy umowa" />
 					<p:selectOneMenu id="animalSelect" var="a"
 						value="#{generateAnimalContractMB.contract.animal}" effect="fade"
 						filter="true" filterMatchMode="startsWith" style="width:307px">
@@ -56,15 +56,16 @@
 					</p:selectOneMenu>
 				</h:panelGrid>
 
-				<p:commandButton value="Dodaj umowę" id="adoptButton" update=":mainForm:growl"
-					actionListener="#{generateAnimalContractMB.addAnimalContract}" onclick="PrimeFaces.monitorDownload(start, stop);"
+				<p:commandButton value="Dodaj umowę" id="adoptButton"
+					update=":mainForm:growl"
+					action="#{generateAnimalContractMB.addAnimalContract}"
 					icon="ui-icon-arrowreturnthick-1-e">
 					<p:confirm header="Potwierdzenie"
-						message="Czy chcesz dodać nową umowę?" icon="ui-icon-alert" 
-						/>
+						message="Czy chcesz dodać nową umowę?" icon="ui-icon-alert" />
 				</p:commandButton>
 			</h:form>
-			<p:confirmDialog global="true" showEffect="clipe" hideEffect="clip">
+		
+			<p:confirmDialog global="true" width="200" showEffect="clipe" hideEffect="clip">
 				<h:form>
 					<p:commandButton value="Tak" type="button"
 						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />

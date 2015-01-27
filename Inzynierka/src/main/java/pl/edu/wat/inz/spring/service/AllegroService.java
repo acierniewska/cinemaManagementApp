@@ -25,6 +25,7 @@ import SandboxWebApi.ServiceBindingStub;
 public class AllegroService {
 	private ServiceBindingStub proxy;
 	private long userId = -1;
+	private String sessionHandler;
 
 	public void logToAllegro() {
 		String urlS = "https://webapi.allegro.pl.webapisandbox.pl/service.php";
@@ -47,6 +48,8 @@ public class AllegroService {
 			DoLoginResponse loginResponse = proxy.doLogin(loginReq);
 
 			setUserId(new Long(loginResponse.getUserId()));
+			setSessionHandler(loginResponse.getSessionHandlePart());
+
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
@@ -72,5 +75,13 @@ public class AllegroService {
 
 	public void setProxy(ServiceBindingStub proxy) {
 		this.proxy = proxy;
+	}
+
+	public String getSessionHandler() {
+		return sessionHandler;
+	}
+
+	public void setSessionHandler(String sessionHandler) {
+		this.sessionHandler = sessionHandler;
 	}
 }

@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,8 +53,14 @@ public class FinancialSupportManagedBean implements Serializable {
 
 	public String export() {
 		try {
+			toExportList.clear();
 			toExportList.addAll(getFinancialSupportService()
 					.getNotExportedFinancialSupports());
+
+			if (toExportList.isEmpty()) {
+				addMessage("Brak przelewów do eksportu.");
+				return SUCCESS;
+			}
 
 			try {
 				File file = new File(path + "/wyciag"
@@ -97,11 +104,16 @@ public class FinancialSupportManagedBean implements Serializable {
 				+ String.valueOf(person.getHouseNr()) + "/"
 				+ String.valueOf(person.getApartmentNr()) + "|"
 				+ person.getZipCode() + " " + person.getCity();
-		String title = "";
+		String title = fs.getTitle();
+		BigDecimal a = BigDecimal.valueOf(fs.getAmount());
+		a = a.multiply(BigDecimal.valueOf(100.0));
+		String[] amount = a.toString().split("\\.");
 
 		String txt = "110,"
 				+ date
-				+ ",10000,AAAAAAAA,0,\"CCAAAAAAAABBBBBBBBBBBBBBB\",\""
+				+ ","
+				+ amount[0]
+				+ ",AAAAAAAA,0,\"CCAAAAAAAABBBBBBBBBBBBBBB\",\""
 				+ personBankNr
 				+ "\","
 				+ " \"Fundacja Kociarnia|ul. Pos³añców Kotów 15|123456 Warszawa\",\""

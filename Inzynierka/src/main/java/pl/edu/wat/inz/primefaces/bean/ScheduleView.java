@@ -19,6 +19,8 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
+import pl.edu.wat.inz.basic.enums.EventType;
+
 @ManagedBean(name = "scheduleView")
 @ApplicationScoped
 public class ScheduleView implements Serializable {
@@ -27,6 +29,8 @@ public class ScheduleView implements Serializable {
 	private ScheduleModel eventModel;
 
 	private ScheduleEvent event = new DefaultScheduleEvent();
+
+	private String desc;
 
 	@PostConstruct
 	public void init() {
@@ -117,6 +121,13 @@ public class ScheduleView implements Serializable {
 
 	public void addEvent(ActionEvent actionEvent) {
 		if (event.getId() == null) {
+			pl.edu.wat.inz.hibernate.data.Event e = new pl.edu.wat.inz.hibernate.data.Event();
+			e.setEventName(event.getTitle());
+			e.setEventType(EventType.fromStyleClass(event.getStyleClass()));
+			e.setDateStart(event.getStartDate());
+			e.setDateEnd(event.getEndDate());
+			e.setEventDesc(desc);
+
 			eventModel.addEvent(event);
 		} else
 			eventModel.updateEvent(event);
@@ -154,4 +165,13 @@ public class ScheduleView implements Serializable {
 	private void addMessage(FacesMessage message) {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
 }

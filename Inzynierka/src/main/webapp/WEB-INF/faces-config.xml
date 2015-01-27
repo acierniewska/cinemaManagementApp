@@ -102,6 +102,13 @@
 			<to-view-id>/pages/secure/exportFinancialSupport.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
+		<navigation-case>
+			<from-action>#{naviBean.navigate}</from-action>
+			<from-outcome>addAllegro</from-outcome>
+			<to-view-id>/pages/secure/addAllegro.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+
 
 	</navigation-rule>
 </faces-config>

@@ -97,4 +97,20 @@ public class Event {
 		this.eventDesc = eventDesc;
 	}
 
+	public java.util.Date getDateEnd() {
+		return dateEnd;
+	}
+
+	public void setDateEnd(java.util.Date dateEnd) {
+		this.dateEnd = dateEnd;
+	}
+
+	public java.sql.Time getTimeEnd() {
+		return timeEnd;
+	}
+
+	public void setTimeEnd(java.sql.Time timeEnd) {
+		this.timeEnd = timeEnd;
+	}
+
 }

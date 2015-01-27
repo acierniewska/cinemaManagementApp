@@ -49,6 +49,9 @@ public class NavigationBean implements Serializable {
 		} else if (pom == 12) {
 			val = "exportFinancialSupport";
 			setActiveindex(7);
+		} else if (pom == 13) {
+			val = "addAllegro";
+			setActiveindex(7);
 		}
 
 		return val;

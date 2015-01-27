@@ -3,7 +3,6 @@ package pl.edu.wat.inz.primefaces.bean;
 import static pl.edu.wat.inz.basic.AppConst.ERROR;
 import static pl.edu.wat.inz.basic.AppConst.SUCCESS;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -49,7 +48,7 @@ public class GenerateAnimalContractManagedBean implements Serializable {
 
 	private Person userPerson;
 
-	private String path = "E:/WAT/_in¿/git/Inzynierka/src/main/resources/doc/";
+	private String path = "E:/WAT/";
 	private AnimalContract contract = new AnimalContract();
 
 	@PostConstruct
@@ -210,9 +209,10 @@ public class GenerateAnimalContractManagedBean implements Serializable {
 			run = paragraph.createRun();
 			run.setText("Podpis osoby przyjmuj¹cej zwierzê:						Podpis przedstawiciela Fundacji:");
 
-			path += contract.getContractDate() + "_umowaAdopcyjnaNr"
-					+ contract.getContractNr() + ".docx";
-			FileOutputStream out = new FileOutputStream(new File(path));
+			FileOutputStream out = new FileOutputStream(path
+					+ new SimpleDateFormat("ddMMyyyy").format(contract
+							.getContractDate()) + "_umowaAdopcyjnaNr"
+					+ contract.getAnimalContractId() + ".docx");
 			doc.write(out);
 			out.close();
 
