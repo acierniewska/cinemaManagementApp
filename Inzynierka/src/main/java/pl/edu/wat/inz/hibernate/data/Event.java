@@ -1,5 +1,7 @@
 package pl.edu.wat.inz.hibernate.data;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,9 @@ import pl.edu.wat.inz.basic.enums.EventType;
 
 @Entity
 @Table(name = "event")
-public class Event {
+public class Event implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Column(name = "EVENT_ID", nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

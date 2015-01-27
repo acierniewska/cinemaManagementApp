@@ -1,13 +1,16 @@
 package pl.edu.wat.inz.primefaces.bean;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -20,29 +23,46 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import pl.edu.wat.inz.basic.enums.EventType;
+import pl.edu.wat.inz.hibernate.data.Event;
+import pl.edu.wat.inz.spring.service.EventService;
 
 @ManagedBean(name = "scheduleView")
 @ApplicationScoped
 public class ScheduleView implements Serializable {
 	private static final long serialVersionUID = -6788743225281253117L;
-
 	private ScheduleModel eventModel;
-
 	private ScheduleEvent event = new DefaultScheduleEvent();
-
 	private String desc;
+
+	@ManagedProperty("#{EventService}")
+	private EventService service;
+
+	public EventService getService() {
+		return service;
+	}
+
+	public void setService(EventService service) {
+		this.service = service;
+	}
 
 	@PostConstruct
 	public void init() {
 		if (eventModel != null)
 			return;
 		eventModel = new DefaultScheduleModel();
-		eventModel.addEvent(new DefaultScheduleEvent(
-				"Weterynarz - szczepienie", previousDay8Pm(),
-				previousDay11Pm(), "emp1"));
-		eventModel.addEvent(new DefaultScheduleEvent("Spotkanie dot. akcji",
-				nextDay9Am(), nextDay11Am(), "emp3"));
-
+		/*
+		 * eventModel.addEvent(new DefaultScheduleEvent(
+		 * "Weterynarz - szczepienie", previousDay8Pm(), previousDay11Pm(),
+		 * "emp1")); eventModel.addEvent(new
+		 * DefaultScheduleEvent("Spotkanie dot. akcji", nextDay9Am(),
+		 * nextDay11Am(), "emp3"));
+		 */
+		List<Event> events = service.getEvents();
+		for (Event e : events) {
+			eventModel.addEvent(new DefaultScheduleEvent(e.getEventName(), e
+					.getDateStart(), e.getDateEnd(), e.getEventType()
+					.getStyleClass()));
+		}
 	}
 
 	public Date getRandomDate(Date base) {
@@ -120,18 +140,24 @@ public class ScheduleView implements Serializable {
 	}
 
 	public void addEvent(ActionEvent actionEvent) {
+		pl.edu.wat.inz.hibernate.data.Event e = new pl.edu.wat.inz.hibernate.data.Event();
+		e.setEventName(event.getTitle());
+		e.setEventType(EventType.fromStyleClass(event.getStyleClass()));
+		e.setTimeStart(new Time(event.getStartDate().getTime()));
+		e.setDateStart(event.getStartDate());
+		e.setTimeEnd(new Time(event.getEndDate().getTime()));
+		e.setDateEnd(event.getEndDate());
+		e.setEventDesc(desc);
 		if (event.getId() == null) {
-			pl.edu.wat.inz.hibernate.data.Event e = new pl.edu.wat.inz.hibernate.data.Event();
-			e.setEventName(event.getTitle());
-			e.setEventType(EventType.fromStyleClass(event.getStyleClass()));
-			e.setDateStart(event.getStartDate());
-			e.setDateEnd(event.getEndDate());
-			e.setEventDesc(desc);
-
 			eventModel.addEvent(event);
-		} else
+			service.addEvent(e);
+		} else {
 			eventModel.updateEvent(event);
-
+			if (service.getEventById(e.getEventId()) == null)
+				service.addEvent(e);
+			else
+				service.updateEvent(e);
+		}
 		event = new DefaultScheduleEvent();
 
 		event.getDescription();
